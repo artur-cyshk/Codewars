@@ -1,15 +1,11 @@
-app.controller('HomeCtrl', [ '$scope', '$http', 'socket', function($scope,$http, socket) {
+app.controller('HomeCtrl', [ '$scope', '$http', 'socket','$state', function($scope,$http, socket,$state) {
 
     $scope.a = function(){
-        console.log('z');
-        socket.emit('like',111);
+        $http.get('/logout').success(function(){
+            $state.go('login');
+        }).error(function(){
+            //todo modal error
+        })
     };
-    $http.get('/types').error(function(data){
-        console.log(data);
-    });
-    socket.on('like', function (data) {
-        console.log(data);
 
-        //data.userId=socket.request.session.user;
-    });
 }]);

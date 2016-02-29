@@ -6,5 +6,11 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                 templateUrl: '../content/home/homeTemplate.html',
                 controller : 'HomeCtrl'
             })
+            .state('login', {
+                url: '/login',
+                templateUrl: '../content/login/loginTemplate.html',
+                controller : 'LoginCtrl'
+            });
     }
+
 ]);
