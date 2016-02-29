@@ -1,5 +1,12 @@
-app.controller('HomeCtrl', [ '$scope', '$uibModal', 'socket', function($scope, $uibModal, socket) {
-    socket.emit('like',111);
+app.controller('HomeCtrl', [ '$scope', '$http', 'socket', function($scope,$http, socket) {
+
+    $scope.a = function(){
+        console.log('z');
+        socket.emit('like',111);
+    };
+    $http.get('/types').error(function(){
+        console.log('z');
+    });
     socket.on('like', function (data) {
         console.log(data);
 

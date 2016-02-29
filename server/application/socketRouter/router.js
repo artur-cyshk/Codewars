@@ -1,6 +1,4 @@
-module.exports = function() {
-    var io = require('../../configuration/server/socket');
-
+module.exports = function(io) {
     io.on('connection',function(socket) {
 
         module.exports.socket = socket;

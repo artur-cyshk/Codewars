@@ -1,16 +1,14 @@
-var express = require('express');
+var express = require('express'),
+    morgan = require('morgan'),
+    bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    router = require('./application/router/router'),
+    errorHandler = require('./configuration/errorHandler'),
+    port = require('./configuration/config').port,
+    sessionMiddleware = require('./configuration/server/session'),
+    socketRouter = require('./application/socketRouter/router'),
+    app = express();
 
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-
-var sessionMiddleware = require('./configuration/server/session');
-var socketRouter = require('./application/socketRouter/router');
-var app = express();
-
-
-var router = require('./application/router/router');
-//var errorHandler = require('./server/config/errorHandler');
 app.use(express.static('client'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({'extended':'true'}));
@@ -18,11 +16,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(cookieParser());
 
+var server = app.listen(port, function() {
+    console.log('server listening on port 8000');
+});
+var io = require('socket.io').listen(server);
+
+io.use(function(socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next);
+});
+
 app.use(sessionMiddleware);
 
-//app.use(errorHandler.handler);
+socketRouter(io);
 
 app.use('/',router);
 
-module.exports.app = app;
-socketRouter();
+app.use(errorHandler.handler);

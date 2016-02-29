@@ -1,16 +1,25 @@
 var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var mongoose = require('mongoose');
+var database = require('../../configuration/config').database;
+var SessionStore = require('express-mysql-session');
+
+var options = {
+    host : database.host,
+    user : database.username,
+    password : database.password,
+    database : database.dbname
+};
+
+var sessionStore = new SessionStore(options);
 
 module.exports = session( {
-    key: 'codewars',
-    secret: 'codewars',
-    cookie:{
-        path:"/",
-        httpOnly:true,
-        maxAge:null
+    key : 'session_cookie_name',
+    secret : 'session_cookie_secret',
+    cookie : {
+        path : "/",
+        httpOnly : true,
+        maxAge : null
     },
-    resave: true,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    resave : true,
+    saveUninitialized : true,
+    store : sessionStore
 } );
