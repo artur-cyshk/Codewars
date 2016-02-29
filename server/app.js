@@ -19,16 +19,14 @@ app.use(cookieParser());
 var server = app.listen(port, function() {
     console.log('server listening on port 8000');
 });
-var io = require('socket.io').listen(server);
 
+var io = require('socket.io').listen(server);
 io.use(function(socket, next) {
     sessionMiddleware(socket.request, socket.request.res, next);
 });
 
-app.use(sessionMiddleware);
-
 socketRouter(io);
 
+app.use(sessionMiddleware);
 app.use('/',router);
-
 app.use(errorHandler.handler);
