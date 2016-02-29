@@ -5,7 +5,7 @@ var express = require('express'),
     router = require('./application/router/router'),
     errorHandler = require('./configuration/errorHandler'),
     port = require('./configuration/config').port,
-    sessionMiddleware = require('./configuration/server/session'),
+    sessionMiddleware = require('./configuration/session/session'),
     socketRouter = require('./application/socketRouter/router'),
     app = express();
 
