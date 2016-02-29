@@ -1,0 +1,29 @@
+{
+  "name": "codewars",
+  "homepage": "https://github.com/ogrefifas/codewars",
+  "authors": [
+    "artur.vechorko <artur.vechorko@mainsoft.by>"
+  ],
+  "description": "course work",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-socket-io": "^0.7.0",
+    "angular-bootstrap": "^1.1.2",
+    "bootstrap": "^3.3.6",
+    "angular-animate": "^1.5.0",
+    "lodash": "^4.5.1",
+    "angular-ui-router": "^0.2.18",
+    "restangular": "^1.5.2",
+    "socket.io-client": "^1.4.5"
+  }
+}
