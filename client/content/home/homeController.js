@@ -4,8 +4,8 @@ app.controller('HomeCtrl', [ '$scope', '$http', 'socket', function($scope,$http,
         console.log('z');
         socket.emit('like',111);
     };
-    $http.get('/types').error(function(){
-        console.log('z');
+    $http.get('/types').error(function(data){
+        console.log(data);
     });
     socket.on('like', function (data) {
         console.log(data);

@@ -1,3 +1,3 @@
 exports.handler = function (err, req, res, next) {
-    res.status(500).send(err);
+    res.status(err.status).send(err.data);
 }
