@@ -1,0 +1,23 @@
+.auth-panel{
+    float: none;
+    margin: 125px auto;
+    padding: 20px;
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.2) !important;
+}
+
+.auth-panel .btn {
+    background: #494949;
+}
+
+.auth-panel .btn:hover {
+    color: #B3B3B3;
+    background: #414141;
+}
+
+.auth-panel .btn:focus {
+    color: #B3B3B3;
+    outline-color: #414141;
+}

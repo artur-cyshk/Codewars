@@ -1,13 +1,10 @@
 app.controller('LoginCtrl', [ '$scope', '$http', 'socket','$state', function($scope,$http, socket, $state) {
-    $scope.click = function(){
-        $http.post('/login', {1:1}).success(function(){
-            $state.go('home');
+    $scope.login = function(){
+        $http.login('/login', $scope.user).success(function(){
+            console.log('success');
         }).error(function(){
-            //todo modal view
+            console.log('error');
         })
-    };
-    $scope.clock = function(){
-        $state.go('home');
     }
     console.log('login');
 }]);

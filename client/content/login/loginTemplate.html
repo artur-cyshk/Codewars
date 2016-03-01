@@ -1,2 +1,15 @@
-<button class="btn btn-primary" ng-click="click()">click</button>
-<button class="btn btn-primary" ng-click="clock()">clock</button>
+<link href="content/login/loginStyle.css" rel="stylesheet">
+<div class="col-sm-6 col-lg-3 col-md-4 auth-panel text-center">
+    <form ng-submit="login()">
+        <img src="content/images/logo.png" alt="">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" required ng-model="user.name" class="form-control" id="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" ng-model="user.password" required class="form-control" id="password" placeholder="Password">
+        </div>
+        <input class="btn btn-block" tabindex="3" type="submit" value="Sign in">
+    </form>
+</div>

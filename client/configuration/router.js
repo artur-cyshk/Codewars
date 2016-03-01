@@ -4,12 +4,14 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
             .state('home',{
                 url : '/home',
                 templateUrl: '../content/home/homeTemplate.html',
-                controller : 'HomeCtrl'
+                controller : 'HomeCtrl',
+                requiredAuthorization : true
             })
             .state('login', {
                 url: '/login',
                 templateUrl: '../content/login/loginTemplate.html',
-                controller : 'LoginCtrl'
+                controller : 'LoginCtrl',
+                requiredAuthorization : false
             });
     }
 
