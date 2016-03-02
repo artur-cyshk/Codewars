@@ -1,0 +1,84 @@
+.root .alerts{
+    position: absolute;
+    top : 30px;
+    left: 5px;
+    background: transparent;
+}
+
+.root .my-alert{
+    max-width: 220px;
+    min-width: 220px;
+    min-height: 38px;
+    border-bottom: 2px solid transparent;
+    border-radius: 5px;
+    margin-top: 5px;
+    /* border-left: 5px solid transparent; */
+    color: rgba(255, 255, 255, 0.74);
+    text-align: center;
+    padding-top: 6px;
+}
+
+.root .my-alert.success{
+    background: rgba(5, 101, 51, 0.72);
+    border-bottom: 2px solid rgba(38, 137, 84, 0.79);
+}
+
+.root .my-alert.error{
+    background: rgb(152, 49, 36);
+    border-bottom: 2px solid #A34E4E;
+}
+
+.root .my-alert i:hover {
+    color: #797878;
+}
+
+.root .menu{
+    width:100%;
+    background: black;
+    height:30px;
+}
+
+.root .alert {
+    padding : 0 !important;
+}
+
+.my-alert.ng-enter {
+    -webkit-transition: 1s linear all; /* Chrome */
+    transition: 0.5s linear all;
+    opacity: 0;
+}
+
+.my-alert.ng-enter,
+.my-alert.ng-leave
+{
+    -webkit-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+}
+
+.my-alert.ng-enter.ng-enter-active,
+.my-alert.ng-leave {
+
+    opacity: 1;
+    top: 0;
+    height: 30px;
+}
+
+.my-alert.ng-leave.ng-leave-active,
+.my-alert.ng-enter {
+    opacity: 0;
+    top: -50px;
+    height: 0px;
+}
+
+.my-alert i {
+    display:block;
+    position:absolute;
+    top:2px;
+    cursor: pointer;
+    right:2px;
+}

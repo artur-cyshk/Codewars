@@ -1,0 +1,28 @@
+.login.auth-panel{
+    float: none;
+    margin: 125px auto;
+    padding: 20px;
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 5px;
+    background-color: rgba(1, 48, 19, 0.2) !important;
+}
+
+.login.auth-panel .btn {
+    background: rgb(1, 38, 19);
+    border: none;
+    border-left: 6px solid transparent;
+}
+
+.login.auth-panel .btn:hover {
+    color: #B3B3B3;
+    outline-color: #035418;
+    border-left: 6px solid #035418;
+    background: #3B6C51;
+}
+
+.login.auth-panel .btn:focus {
+    color: #B3B3B3;
+    outline-color: #035418;
+    border-left: 6px solid #035418;
+}

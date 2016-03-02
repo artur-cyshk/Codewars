@@ -9,6 +9,7 @@ label{
 }
 .logo{
     background: url("../images/logo.png") no-repeat scroll center center;
+    height: 219px;
 }
 
 @font-face {

@@ -1,5 +1,22 @@
 var connection = require('../../../configuration/database/connection');
+var encrypt = require('../../encrypt');
 module.exports = function (req, res, next) {
-    req.session.authorized = true;
-    res.status(200).end();
+    var query = 'select user_id from users where name = "' + req.body.name +
+                '" and password = "' + encrypt(req.body.password) + '" limit 1';
+    connection.query(query, function(err, data) {
+        if(err) {
+            return next(true);
+        }
+        if(data[0]) {
+            req.session.authorized = true;
+            req.session.userId = data[0].user_id;
+            res.status(200).send(data[0].user_id.toString());
+        }else {
+            return next({
+                data: "not correct user data"
+            });
+        }
+
+    });
+
 };

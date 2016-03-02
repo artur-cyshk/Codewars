@@ -27,9 +27,19 @@
 	<script src="services/socketFactory.js"></script>
 	<script src="services/checkAccessFactory.js"></script>
 
-	<script src="content/home/homeController.js"></script>
+	<script src="content/components/alert/alertService.js"></script>
 
-	<script src="content/login/loginController.js"></script>
+	<link href="content/states/root/rootStyle.css" rel="stylesheet">
+	<script src="content/states/root/rootController.js"></script>
+
+	<link href="content/states/home/homeStyle.css" rel="stylesheet">
+	<script src="content/states/home/homeController.js"></script>
+
+	<link href="content/states/login/loginStyle.css" rel="stylesheet">
+	<script src="content/states/login/loginController.js"></script>
+
+	<link href="content/states/registration/registrationStyle.css" rel="stylesheet">
+	<script src="content/states/registration/registrationController.js"></script>
 </head>
 <body>
 	<ui-view></ui-view>

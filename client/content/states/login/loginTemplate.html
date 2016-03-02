@@ -1,0 +1,14 @@
+<div ng-if="!rootLoading" ng-cloak class="col-sm-6 col-lg-3 login auth-panel text-center">
+    <form ng-submit="login()">
+        <div class="logo"></div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" required ng-model="user.name" class="form-control" tabindex="1" id="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" ng-model="user.password" tabindex="2" required class="form-control" id="password" placeholder="Password">
+        </div>
+        <input class="btn btn-block" tabindex="3" type="submit" value="Sign in">
+    </form>
+</div>

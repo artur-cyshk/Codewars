@@ -1,16 +1,27 @@
 app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
         $urlRouterProvider.otherwise('/home');
         $stateProvider
-            .state('home',{
+            .state('root',{
+                abstract:true,
+                templateUrl:'../content/states/root/rootTemplate.html',
+                controller:'RootCtrl'
+            })
+            .state('root.home',{
                 url : '/home',
-                templateUrl: '../content/home/homeTemplate.html',
+                templateUrl: '../content/states/home/homeTemplate.html',
                 controller : 'HomeCtrl',
                 requiredAuthorization : true
             })
-            .state('login', {
+            .state('root.login', {
                 url: '/login',
-                templateUrl: '../content/login/loginTemplate.html',
+                templateUrl: '../content/states/login/loginTemplate.html',
                 controller : 'LoginCtrl',
+                requiredAuthorization : false
+            })
+            .state('root.registration', {
+                url: '/registration',
+                templateUrl: '../content/states/registration/registrationTemplate.html',
+                controller : 'RegistrationCtrl',
                 requiredAuthorization : false
             });
     }

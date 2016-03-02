@@ -1,0 +1,12 @@
+<div class="root">
+    <div class="alerts">
+        <uib-alert  ng-repeat="alert in alerts"  ng-class="alert.type"   template-url="content/components/alert/alertTemplate.html">
+            <i class="glyphicon glyphicon-remove"  ng-click="closeAlert($index)"></i>
+            {{alert.msg}}
+        </uib-alert>
+    </div>
+    <div class="menu">
+        <a ui-sref="root.login">sign in</a> / <a ui-sref="root.registration">sign up  // <a ng-click="signOut()">sign out</a>
+    </div>
+    <ui-view></ui-view>
+</div>

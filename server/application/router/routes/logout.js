@@ -1,4 +1,4 @@
 module.exports = function (req, res) {
     req.session.destroy();
-    res.redirect('/');
+    res.status(200).end();
 };

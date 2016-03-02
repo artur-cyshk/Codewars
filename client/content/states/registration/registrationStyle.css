@@ -1,0 +1,28 @@
+.registration.auth-panel{
+    float: none;
+    margin: 125px auto;
+    padding: 20px;
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 5px;
+    background-color: rgba(48, 1, 1, 0.2) !important;
+}
+
+.registration.auth-panel .btn {
+    background: rgb(38, 1, 1);
+    border: none;
+    border-left: 6px solid transparent;
+}
+
+.registration.auth-panel .btn:hover {
+    color: #B3B3B3;
+    outline-color: #540303;
+    border-left: 6px solid #540303;
+    background: #6C3B3B;
+}
+
+.registration.auth-panel .btn:focus {
+    color: #B3B3B3;
+    outline-color: #540303;
+    border-left: 6px solid #540303;
+}
