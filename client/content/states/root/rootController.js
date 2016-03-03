@@ -22,7 +22,7 @@ app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout','$http','alertSer
     $scope.signOut = function() {
         $http.get('/logout')
             .success(function() {
-                alertService.alert('logout success', 'success');
+                alertService.alert('sign out success', 'success');
                 $state.go('root.login');
             })
             .error(function() {
