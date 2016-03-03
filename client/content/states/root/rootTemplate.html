@@ -1,4 +1,4 @@
-<div class="root">
+<div class="root" ng-class="{'margin' : openedProfile}">
     <div class="alerts">
         <uib-alert  ng-repeat="alert in alerts"  ng-class="alert.type"   template-url="content/components/alert/alertTemplate.html">
             <i class="glyphicon glyphicon-remove"  ng-click="closeAlert($index)"></i>
@@ -6,7 +6,9 @@
         </uib-alert>
     </div>
     <div class="menu">
+        <button ng-click="openProfile()" style="float:right">MENU</button>
         <a ui-sref="root.login">sign in</a> / <a ui-sref="root.registration">sign up</a>  // <a ng-click="signOut()">sign out</a>
     </div>
     <ui-view></ui-view>
 </div>
+<profile></profile>

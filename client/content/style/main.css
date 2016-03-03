@@ -4,6 +4,10 @@ body{
     font-family: "Lato","Helvetica Neue","Helvetica", monospace;
 }
 
+body.hidden-scroll{
+    overflow-x: hidden;
+}
+
 label{
     font-weight: normal !important;
 }

@@ -1,10 +1,9 @@
-app.controller('LoginCtrl', [ '$scope', '$http', 'alertService','$rootScope','$state', function($scope, $http, alertService, $rootScope, $state) {
+app.controller('LoginCtrl', [ '$scope', '$http', 'alertService','$state', function($scope, $http, alertService, $state) {
     $scope.login = function() {
         $http.post('/login', $scope.user)
-            .success(function(id) {
-                $rootScope.userId = id;
+            .success(function() {
                 alertService.alert('success authorization', 'success');
-                $state.go('root.home');
+                $state.go($state.current.from || 'root.home');
             }).error(function(err) {
                 var text = err || 'server error, try later';
                 alertService.alert(text, 'error');

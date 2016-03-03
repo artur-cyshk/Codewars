@@ -1,7 +1,8 @@
 app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout','$http','alertService','$state', function($scope, $rootScope, $timeout, $http, alertService, $state) {
     $scope.alerts =[];
+
     $scope.closeAlert = function(index) {
-            $scope.alerts.splice(index, 1);
+        $scope.alerts.splice(index, 1);
     };
     $scope.$on('alert',function(event, info) {
         if($scope.timer) {
@@ -28,5 +29,21 @@ app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout','$http','alertSer
             .error(function() {
                 alertService.alert('server error, try later', 'error');
             })
-    }
+    };
+
+    $scope.openProfile = function() {
+        $scope.openedProfile = !$scope.openedProfile;
+    };
+
+    $scope.$watch('access', function(value) {
+        if(value) {
+            $http.get('/user')
+                .success(function(user) {
+                    $scope.user = user;
+                })
+                .error(function() {
+                    alertService.alert('server error, try later', 'error');
+                })
+        }
+    })
 }]);

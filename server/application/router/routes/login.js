@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
         if(data[0]) {
             req.session.authorized = true;
             req.session.userId = data[0].user_id;
-            res.status(200).send(data[0].user_id.toString());
+            res.status(200).end();
         }else {
             return next({
                 data: "not correct user data"

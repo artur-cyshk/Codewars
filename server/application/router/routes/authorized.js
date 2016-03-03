@@ -1,3 +1,8 @@
-module.exports = function (req, res) {
-	res.status(req.session.authorized ? 200 : 403).end();
+module.exports = function (req, res, next) {
+	if(!req.session.authorized) {
+		return next({
+			status: 403
+		})
+	}
+	res.status(200).send(req.session.userId.toString());
 };

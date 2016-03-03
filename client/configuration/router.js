@@ -23,7 +23,7 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                 templateUrl: '../content/states/registration/registrationTemplate.html',
                 controller : 'RegistrationCtrl',
                 requiredAuthorization : false
-            });
+            })
     }
 
 ]);
