@@ -1,4 +1,4 @@
-var app = angular.module('codewars', ['ui.router', 'ui.bootstrap', 'btford.socket-io', 'restangular', 'ngAnimate']);
+var app = angular.module('codewars', ['ui.router', 'ui.bootstrap', 'btford.socket-io', 'ngAnimate']);
 
 app.run(['checkAccessFactory','$rootScope', function(checkAccessFactory, $rootScope) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState) {
