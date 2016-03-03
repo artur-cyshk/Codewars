@@ -8,8 +8,8 @@
     transition:400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 .root.margin {
-    margin-right : 360px;
-    margin-left :  -360px;
+    margin-right : 30%;
+    margin-left :  -30%;
 }
 
 .root .my-alert{
@@ -19,12 +19,15 @@
     min-height: 38px;
     border-bottom: 2px solid transparent;
     border-radius: 5px;
-    margin-top: 5px;
+    margin-top: 10%;
     color: rgba(255, 255, 255, 0.74);
     text-align: center;
     padding-top: 6px;
 }
 
+.root .dropdown-menu{
+    margin: 2px -61px 0 !important;
+}
 .root .my-alert.success{
     background: rgba(5, 101, 51, 0.72);
     border-bottom: 2px solid rgba(38, 137, 84, 0.79);
@@ -41,8 +44,35 @@
 
 .root .menu{
     width:100%;
-    background: black;
-    height:30px;
+    background: rgba(0, 0, 0, 0.21);
+    height:50px;
+}
+
+.root .menu .sign{
+    display: inline-block;
+    width:50px;
+    margin-top:12px;
+    float:right;
+}
+.root .logo-min{
+    margin: 4px 4px 0 4px;
+    background: url("../../images/logoMin.png") no-repeat scroll center center;
+    background-size: 40px;
+    float:left;
+    height: 40px;
+    width: 40px;
+}
+.root .menu .my-drop-group{
+    float:right;
+    margin-top: 7px;
+    margin-right : 4px;
+}
+.root .menu i.glyphicon{
+    font-size: 30px;
+    padding: 7px 10px 0;
+    color: #B4B4B5;
+    float:right;
+    cursor: pointer;
 }
 
 .root .alert {

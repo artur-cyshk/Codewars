@@ -4,5 +4,5 @@ module.exports = function (req, res, next) {
 			status: 403
 		})
 	}
-	res.status(200).send(req.session.userId.toString());
+	res.status(200).end();
 };

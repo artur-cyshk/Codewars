@@ -4,7 +4,7 @@ angular.module('codewars').directive('profile', function ($rootScope) {
         restrict: 'E',
         scope: false,
         replace : true,
-        templateUrl: './content/states/menu/profileTemplate.html',
+        templateUrl: './content/states/profile/profileTemplate.html',
         controller: function ($scope) {
             $scope.$watch('openedProfile', function(value) {
                 if(value != undefined){

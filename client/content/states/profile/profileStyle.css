@@ -4,7 +4,7 @@
     top: 0;
     bottom: 0;
     right:0;
-    width: 360px;
+    width: 30%;
     background: rgba(0, 0, 0, 0.25);
 }
 
@@ -13,16 +13,16 @@
 
 }
 .profile.ng-enter{
-    width: 0;
+    margin-right: -30%;
 }
 
 .profile.ng-enter.ng-enter-active{
-    width:360px;
+    margin-right: 0;
 }
 
 .profile.ng-leave{
-    width: 360px;
+    margin-right: 0;
 }
 .profile.ng-leave.ng-leave-active{
-    width: 0;
+    margin-right: -30%;
 }
