@@ -1,5 +1,55 @@
-<div class="profile"
+<div class="profile text-center"
      ng-if="profileVisible && authorized"
 >
-    <a ng-click="signOut()">sign out</a>
+    <h1>Profile <a ng-click="signOut()">sign out</a></h1>
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <i class="glyphicon glyphicon-user" ng-mouseenter="changeColor(true)" ng-mouseleave="changeColor(false)" ng-click="status.openPanel = !status.openPanel"
+               tooltip-placement="top" uib-tooltip="Click to edit profile"></i>
+        </div>
+        <div class="col-md-6 text-center">
+            <span class="username"
+                  ng-style="{'color' : levels[currentUser.level].color.out}"
+                  >{{currentUser.user_name}}</span>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+    <div class="col-md-12 level">
+        <div class="col-md-7 info">
+            <div><span ng-style="{'color' : levels[currentUser.level].color.out}">{{levels[currentUser.level].levelNum}}</span> LEVEL</div>
+            <div><span ng-style="{'color' : levels[currentUser.level].color.out}">{{currentUser.honor}}</span> HONOR</div>
+        </div>
+        <div class="col-md-5 text-center">
+            <div class="progress-wrapper">
+                <div class="progress ng-cloak">{{ levels[currentUser.level].currHonor }}/{{ levels[currentUser.level].diffHonor }}</div>
+                <div
+                        round-progress
+                        max="levels[currentUser.level].diffHonor"
+                        current="levels[currentUser.level].currHonor"
+                        color="{{levels[currentUser.level].color.out}}"
+                        bgcolor="{{levels[currentUser.level].color.in}}"
+                        radius="100"
+                        rounded = "true"
+                        stroke="12"
+                        clockwise="clockwise"
+                        responsive="false"
+                        duration="1100"
+                        animation="easeInOutQuart"
+                        offset="0"
+                        animation-delay="0"
+                        on-render="showPreciseCurrent"
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+    <uib-accordion>
+        <uib-accordion-group is-open="status.openPanel">
+            <uib-accordion-heading>
+                Profile settings <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.openPanel, 'glyphicon-chevron-right': !status.openPanel}"></i>
+            </uib-accordion-heading>
+            This is just some content to illustrate fancy headings.
+        </uib-accordion-group>
+    </uib-accordion>
 </div>

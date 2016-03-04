@@ -10,7 +10,7 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                 url : '/home',
                 templateUrl: '../content/states/home/homeTemplate.html',
                 controller : 'HomeCtrl',
-                requiredAuthorization : true
+                requiredAuthorization : false
             })
             .state('root.login', {
                 url: '/login',
@@ -22,6 +22,12 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                 url: '/registration',
                 templateUrl: '../content/states/registration/registrationTemplate.html',
                 controller : 'RegistrationCtrl',
+                requiredAuthorization : false
+            })
+            .state('root.tasks', {
+                url: '/tasks',
+                templateUrl: '../content/states/tasks/tasksTemplate.html',
+                controller : 'TasksCtrl',
                 requiredAuthorization : false
             })
     }

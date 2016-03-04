@@ -6,6 +6,70 @@
     right:0;
     width: 30%;
     background: rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+}
+.profile h1 a{
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    right: 17px;
+    color: #B53939;
+}
+
+.profile .panel{
+    border : none !important;
+    background: rgba(106, 106, 106, 0.43) !important;
+}
+.profile *{
+    outline: none !important;
+    border : none !important;
+}
+.profile .panel .panel-heading{
+    color: #D5D5D5 !important;
+    background-color: #292A2B !important;
+    border-color: #292A2B !important;
+}
+.profile .progress-wrapper{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    float: none;
+    margin: 0 auto;
+}
+
+.profile .level{
+    background: rgba(59, 59, 59, 0.24);
+    padding: 20px 0;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.profile .level .info{
+    font-size: 32px;
+    line-height: 94px;
+}
+.profile .level .info div{
+    white-space: nowrap;
+}
+.profile .username{
+    display: inline-block;
+    font-size: 35px;
+}
+.profile .glyphicon.glyphicon-user{
+    font-size: 150px;
+    cursor: pointer;
+}
+
+.profile .progress-wrapper .progress{
+    top: 50%;
+    bottom: auto;
+    background: transparent;
+    left: 50%;
+    position: absolute;
+    transform: translateY(-50%) translateX(-50%);
+    font-size: 28.7143px;
+    height: 35px;
 }
 
 .profile.ng-enter, .profile.ng-leave{

@@ -29,17 +29,4 @@ app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout','$http','alertSer
                 alertService.alert('server error, try later', 'error');
             })
     };
-
-    $scope.$watch('authorized', function(value) {
-        $scope.openedProfile = false;
-        if(value) {
-            $http.get('/user')
-                .success(function(user) {
-                    $scope.currentUser = user;
-                })
-                .error(function() {
-                    alertService.alert('server error, try later', 'error');
-                })
-        }
-    })
 }]);

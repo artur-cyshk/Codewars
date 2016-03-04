@@ -1,4 +1,4 @@
-<div class="root" ng-class="{'margin' : openedProfile && authorized}">
+<div class="root" ng-show="firstLoadingFinish" ng-class="{'margin' : openedProfile && authorized}">
     <div class="alerts">
         <uib-alert  ng-repeat="alert in alerts"  ng-class="alert.type"   template-url="content/components/alert/alertTemplate.html">
             <i class="glyphicon glyphicon-remove"  ng-click="closeAlert($index)"></i>
@@ -12,17 +12,21 @@
                 Codewars <span class="caret"></span>
             </button>
             <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                <li role="menuitem"><a href="#">Tasks</a></li>
-                <li role="menuitem"><a href="#">Leaders</a></li>
+                <li role="menuitem"><a ui-sref="root.home">Home</a></li>
+                <li role="menuitem"><a ui-sref="root.tasks">Tasks</a></li>
+                <li role="menuitem"><a ui-sref="root.leaders">Leaders</a></li>
                 <li class="divider"></li>
                 <li role="menuitem"><a href="#">About</a></li>
             </ul>
         </div>
-        <a ng-if="!authorized" class="sign" ui-sref="root.registration">sign up</a>
+        <a ng-if="!authorized " class="sign" ui-sref="root.registration">sign up</a>
         <a ng-if="!authorized" class="sign" ui-sref="root.login" >sign in</a>
-        <div class="logo-min"></div>
+        <a ui-sref="root.home" class="logo-min"></a>
         <div style="clear:both"></div>
     </div>
-    <ui-view ng-show="rootLoadingFinish"></ui-view>
+    <div class="content" ng-if="rootLoadingFinish">
+        <ui-view ></ui-view>
+    </div>
 </div>
+
 <profile></profile>
