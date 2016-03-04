@@ -1,13 +1,12 @@
 <div class="profile text-center"
-     ng-if="profileVisible && authorized"
+     ng-if="profileVisible && authorized && userDataLoaded"
 >
     <h1>Profile <a ng-click="signOut()">sign out</a></h1>
     <div class="col-md-12">
-        <div class="col-md-6">
-            <i class="glyphicon glyphicon-user" ng-mouseenter="changeColor(true)" ng-mouseleave="changeColor(false)" ng-click="status.openPanel = !status.openPanel"
-               tooltip-placement="top" uib-tooltip="Click to edit profile"></i>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <i class="glyphicon glyphicon-user"></i>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <span class="username"
                   ng-style="{'color' : levels[currentUser.level].color.out}"
                   >{{currentUser.user_name}}</span>

@@ -32,12 +32,15 @@
 }
 .profile .progress-wrapper{
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     float: none;
     margin: 0 auto;
 }
-
+.profile .progress-wrapper .round-progress{
+    width: 100% !important;
+    height: 100% !important;
+}
 .profile .level{
     background: rgba(59, 59, 59, 0.24);
     padding: 20px 0;
@@ -54,12 +57,10 @@
 }
 .profile .username{
     display: inline-block;
-    font-size: 55px;
+    font-size: 3em;
 }
 .profile .glyphicon.glyphicon-user{
     font-size: 150px;
-    cursor: pointer;
-    transition: 1s linear;
 }
 
 .profile .progress-wrapper .progress{

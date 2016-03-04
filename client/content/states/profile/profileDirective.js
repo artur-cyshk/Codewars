@@ -67,22 +67,19 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
                     $scope.profileVisible = value;
                 }
             });
-            $scope.changeColor = function(val) {
-                angular.element('.glyphicon.glyphicon-user').css({
-                    'color' : (val) ? $scope.levels[$scope.currentUser.level].color.out : '#B4B4B5'
-                })
-            };
             $scope.$on('changeState', function(){
                 $scope.openedProfile = false;
             });
 
             $scope.$watch('authorized', function(value) {
                 if(value) {
+                    $scope.userDataLoaded = false;
                     $http.get('/user')
                         .success(function(user) {
                             $scope.currentUser = user;
                             $scope.levels = self.levelObjectMapping(user.honor);
                             $scope.currentUser.level = self.getLevelByHonor($scope.levels, $scope.currentUser.honor);
+                            $scope.userDataLoaded = true;
                             console.log($scope);
                         })
                         .error(function() {
