@@ -59,6 +59,7 @@
 .profile .glyphicon.glyphicon-user{
     font-size: 150px;
     cursor: pointer;
+    transition: 1s linear;
 }
 
 .profile .progress-wrapper .progress{
