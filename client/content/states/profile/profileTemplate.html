@@ -7,18 +7,21 @@
             <i class="glyphicon glyphicon-user"></i>
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-            <span class="username"
+            <span class="username text-center"
                   ng-style="{'color' : levels[currentUser.level].color.out}"
                   >{{currentUser.user_name}}</span>
+             <span class="clan text-center"
+                   ng-style="{'color' : levels[currentUser.level].color.out}"
+             >{{currentUser.clan_name || 'no clan'}}</span>
         </div>
     </div>
     <div style="clear:both"></div>
-    <div class="col-md-12 level">
-        <div class="col-md-6 info">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 level text-center">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 info">
             <div><span ng-style="{'color' : levels[currentUser.level].color.out}">{{levels[currentUser.level].levelNum}}</span> LEVEL</div>
             <div><span ng-style="{'color' : levels[currentUser.level].color.out}">{{currentUser.honor}}</span> HONOR</div>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12  text-center">
             <div class="progress-wrapper">
                 <div class="progress ng-cloak">{{ levels[currentUser.level].currHonor }}/{{ levels[currentUser.level].diffHonor }}</div>
                 <div
@@ -27,9 +30,9 @@
                         current="levels[currentUser.level].currHonor"
                         color="{{levels[currentUser.level].color.out}}"
                         bgcolor="{{levels[currentUser.level].color.in}}"
-                        radius="100"
+                        radius="80"
                         rounded = "true"
-                        stroke="12"
+                        stroke="9"
                         clockwise="clockwise"
                         responsive="false"
                         duration="1100"
@@ -43,12 +46,5 @@
         </div>
     </div>
     <div style="clear:both"></div>
-    <uib-accordion>
-        <uib-accordion-group is-open="status.openPanel">
-            <uib-accordion-heading>
-                Profile settings <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.openPanel, 'glyphicon-chevron-right': !status.openPanel}"></i>
-            </uib-accordion-heading>
-            This is just some content to illustrate fancy headings.
-        </uib-accordion-group>
-    </uib-accordion>
+    <change-profile></change-profile>
 </div>

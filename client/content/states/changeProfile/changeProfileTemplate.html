@@ -1,0 +1,22 @@
+<div class="change-profile">
+<uib-accordion>
+    <uib-accordion-group is-open="status.openPanel">
+        <uib-accordion-heading>
+            Profile settings <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.openPanel, 'glyphicon-chevron-right': !status.openPanel}"></i>
+        </uib-accordion-heading>
+        <div class="auth-panel text-center">
+            <form ng-submit="login()">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                            <input type="text" required ng-model="user.name" class="form-control" tabindex="1" id="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" ng-model="user.password" tabindex="2" required class="form-control" id="password" placeholder="Password">
+                </div>
+                <input class="btn btn-block" tabindex="3" type="submit" value="Sign in">
+            </form>
+        </div>
+    </uib-accordion-group>
+</uib-accordion>
+</div>

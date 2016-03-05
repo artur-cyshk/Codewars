@@ -1,5 +1,7 @@
 app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout','$http','alertService','$state', function($scope, $rootScope, $timeout, $http, alertService, $state) {
-    $scope.alerts =[];
+    $scope.alerts = [];
+
+
     $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
     };

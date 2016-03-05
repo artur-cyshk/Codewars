@@ -17,10 +17,6 @@
     color: #B53939;
 }
 
-.profile .panel{
-    border : none !important;
-    background: rgba(106, 106, 106, 0.43) !important;
-}
 .profile *{
     outline: none !important;
     border : none !important;
@@ -32,15 +28,12 @@
 }
 .profile .progress-wrapper{
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 160px;
+    height: 160px;
     float: none;
     margin: 0 auto;
 }
-.profile .progress-wrapper .round-progress{
-    width: 100% !important;
-    height: 100% !important;
-}
+
 .profile .level{
     background: rgba(59, 59, 59, 0.24);
     padding: 20px 0;
@@ -50,14 +43,18 @@
 
 .profile .level .info{
     font-size: 32px;
-    line-height: 94px;
+    line-height: 77px;
 }
 .profile .level .info div{
     white-space: nowrap;
 }
 .profile .username{
-    display: inline-block;
+    display: block;
     font-size: 3em;
+}
+.profile .clan{
+    display: block;
+    font-size: 2em;
 }
 .profile .glyphicon.glyphicon-user{
     font-size: 150px;
