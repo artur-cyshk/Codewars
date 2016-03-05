@@ -55,10 +55,24 @@
 
 .root .menu .sign{
     display: inline-block;
-    width:50px;
-    margin-top:12px;
-    float:right;
+    width: 50px;
+    margin-top: 12px;
+    margin-right: 12px;
+    color: #FFFFFF;
+    float: right;
+    font-size: 16px;
 }
+.root .menu .signUp {
+    color: #FF9DA1;
+}
+
+.root .menu .profile-panel-button{
+    float:right;
+    position: relative;
+    width: 50px;
+    height: 44px;
+}
+
 .root .logo-min{
     display: block;
     margin: 4px 4px 0 4px;
@@ -77,7 +91,6 @@
     font-size: 30px;
     padding: 7px 10px 0;
     color: #B4B4B5;
-    float:right;
     cursor: pointer;
 }
 
