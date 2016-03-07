@@ -1,13 +1,13 @@
 'use strict';
-angular.module('codewars').directive('profile', function ($rootScope, $http, alertService, $interval) {
+angular.module('codewars').directive('profile', function ($rootScope, $http, alertService) {
     return {
         restrict: 'E',
         scope: false,
         replace : true,
         templateUrl: './content/states/profile/profileTemplate.html',
         controller: function ($scope) {
-
             var self = this;
+            $scope.status = {};
             self.mapColors = function(level) {
                 var color = {};
                 if(level <= 2) {
@@ -29,7 +29,6 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
                 }
                 return color;
             };
-
 
             self.levelObjectMapping = function(userHonor) {
                 var LEVEL_COUNT = 8;
@@ -89,6 +88,5 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
                 }
             })
         }
-
     };
 });
