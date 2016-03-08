@@ -7,7 +7,6 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
         templateUrl: './content/states/profile/profileTemplate.html',
         controller: function ($scope) {
             var self = this;
-            $scope.status = {};
             self.mapColors = function(level) {
                 var color = {};
                 if(level <= 2) {

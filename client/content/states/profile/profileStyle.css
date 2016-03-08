@@ -42,19 +42,30 @@
 }
 
 .profile .level .info{
-    font-size: 32px;
+    font-size: 34px;
     line-height: 77px;
 }
+
 .profile .level .info div{
     white-space: nowrap;
 }
+.profile .level .info .info-honor{
+   font-size: 25px;
+}
+
 .profile .username{
     display: block;
     font-size: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .profile .clan{
     display: block;
     font-size: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .profile .glyphicon.glyphicon-user{
     font-size: 150px;

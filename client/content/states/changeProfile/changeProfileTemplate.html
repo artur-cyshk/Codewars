@@ -5,16 +5,27 @@
             Profile settings <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.openPanel, 'glyphicon-chevron-right': !status.openPanel}"></i>
         </uib-accordion-heading>
         <div class="auth-panel text-center">
-            <form ng-submit="login()">
-                <div class="form-group">
+            <form>
+                <div class="change-button-div form-group col-md-12" ng-if="newUser.currState == 'name' || newUser.currState == 'clan' || newUser.currState == 'password'">
+                    <input class="change-input btn btn-block" ng-click="changeProfile(newUser.currState)" type="submit" ng-value="'Change '+ newUser.currState">
+                </div>
+                <div class="form-group col-md-6">
                     <label for="username">Username</label>
-                            <input type="text" required ng-model="user.name" class="form-control" tabindex="1" id="username" placeholder="Username">
+                    <input type="text" ng-model="newUser.name" ng-focus="newUser.currState='name'" class="form-control" id="username" placeholder="Username">
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" ng-model="user.password" tabindex="2" required class="form-control" id="password" placeholder="Password">
+                <div class="form-group col-md-6">
+                    <label for="clan">Clan</label>
+                    <input type="text" ng-model="newUser.clan" ng-focus="newUser.currState='clan';" class="form-control" id="clan" placeholder="Username">
                 </div>
-                <input class="btn btn-block" tabindex="3" type="submit" value="Sign in">
+                <div class="form-group password col-md-12">
+                     <label for="password">Password</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="password" ng-model="newUser.password" ng-focus="newUser.currState='password';" class="form-control" id="password" placeholder="Password">
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="password" ng-model="newUser.repeatedPassword" ng-focus="newUser.currState='password';" class="form-control" id="repeatedPassword" placeholder="Repeat password">
+                </div>
             </form>
         </div>
     </uib-accordion-group>
