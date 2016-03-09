@@ -1,0 +1,162 @@
+.home .welcome{
+    margin-top: 53px;
+    font-size: 2.5em;
+}
+
+.home .welcome span.app{
+    color:rgb(244, 104, 104);
+}
+.home .welcome span.username{
+    text-transform: capitalize;
+}
+.home .logos p{
+    font-size: 2em;
+}
+
+.home .js-logo{
+    background: url("../../images/js.png") no-repeat scroll center;
+    background-size : 200px 200px;
+    height: 220px;
+    animation: push linear 0.6s 0.6s ;
+}
+
+.home .task-logo{
+    background: url("../../images/task1.png") no-repeat scroll center;
+    background-size : 200px 200px;
+    height: 220px;
+    animation: push linear 0.6s 1.2s ;
+}
+
+.home .kick-logo{
+    background: url("../../images/kick.png") no-repeat scroll center;
+    background-size : 200px 200px;
+    height: 220px;
+    animation: push linear 0.6s ;
+}
+
+@keyframes push {
+    from{
+        background-size: 200px 200px;
+    }
+    50%{
+        background-size: 220px 220px;
+    }
+    to{
+        background-size: 200px 200px;
+    }
+}
+.home .kick-block{
+    color: rgba(255, 139, 139, 0.86);
+}
+
+.home .js-block{
+    color: rgba(255, 220, 139, 0.86);
+}
+
+.home .task-block{
+    color: rgba(139, 190, 255, 0.86);
+}
+.home .logos {
+    background: rgba(25, 25, 25, 0.23);
+    margin-top: 50px;
+    padding: 25px;
+}
+
+.home .level-honor-accrodion{
+    padding: 0;
+    font-size: 1em !important;
+}
+.home .level-honor-accrodion .panel-body{
+    padding: 0 !important;
+}
+.home .level-honor-accrodion .panel{
+    margin-top : 50px;
+    border : none !important;
+    background: rgba(84, 84, 84, 0.1) !important;
+}
+
+.home .level-honor-accrodion .panel .panel-heading{
+    color: #D5D5D5 !important;
+    background-color: #292A2B !important;
+    border-color: #292A2B !important;
+}
+
+.home .level-honor-accrodion .panel .panel-heading h4{
+    font-size: 1.8em;
+}
+
+.home .level-honor-accrodion *{
+    outline: none !important;
+    border : none !important;
+}
+
+.home .progress-wrapper .progress{
+    top: 50%;
+    bottom: auto;
+    background: transparent;
+    left: 50%;
+    position: absolute;
+    transform: translateY(-50%) translateX(-50%);
+    font-size: 28px;
+    height: 35px;
+}
+
+.home .progress-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    float: none;
+    margin: 10px auto;
+}
+
+.home .levelType{
+    font-size: 1.8em;
+    padding: 10px;
+}
+
+.home .levelNum{
+    font-size: 0.7em;
+}
+
+.home .levelType:first-child .levelNum{
+    color:rgb(104, 224, 244);
+}
+
+.home .levelType:nth-child(2) .levelNum{
+    color:rgb(106, 104, 244);
+}
+
+.home .levelType:nth-child(3) .levelNum{
+    color:rgb(244, 104, 104);
+}
+
+.home .levelType:last-child .levelNum{
+    color:rgb(132, 244, 104);
+}
+@media(max-width:767px){
+    .home .levelType{
+        border-bottom: 2px solid rgba(68, 68, 68, 0.3) !important;
+    }
+    .home .levelType:last-child{
+        border-bottom: none;
+    }
+}
+@media(min-width:768px){
+    .home .levelType:nth-child(2n+1){
+        border-right: 2px solid rgba(68, 68, 68, 0.3) !important;
+    }
+    .home .levelType:nth-child(1){
+        border-bottom: 2px solid rgba(68, 68, 68, 0.3) !important;
+    }
+    .home .levelType:nth-child(2){
+        border-bottom: 2px solid rgba(68, 68, 68, 0.3) !important;
+    }
+}
+@media(min-width:992px){
+    .home .levelType{
+        border-right: 2px solid rgba(68, 68, 68, 0.3) !important;
+    }
+    .home .levelType:last-child{
+        border : none !important;
+    }
+}

@@ -26,7 +26,7 @@
 }
 
 .root .dropdown-menu{
-    margin: 2px -61px 0 !important;
+    margin: 2px -89px 0 !important;
 }
 .root .my-alert.success{
     background: rgba(5, 101, 51, 0.72);
@@ -51,6 +51,7 @@
     width: 100%;
     background: rgba(0, 0, 0, 0.21);
     height:50px;
+    z-index: 1100;
 }
 
 .root .menu .sign{
@@ -109,7 +110,6 @@
 {
     -webkit-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     -moz-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -ms-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     -o-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     position: relative;

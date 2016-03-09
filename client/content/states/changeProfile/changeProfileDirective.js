@@ -6,8 +6,6 @@ angular.module('codewars').directive('changeProfile', function ($rootScope) {
         replace: true,
         templateUrl: './content/states/changeProfile/changeProfileTemplate.html',
         controller: function ($scope, $http, alertService, changeProfileService) {
-            $scope.status = {};
-
             if($scope.currentUser){
                 $scope.newUser = {};
                 $scope.newUser.name = $scope.currentUser.name;

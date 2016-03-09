@@ -21,6 +21,7 @@
     outline: none !important;
     border : none !important;
 }
+
 .profile .panel .panel-heading{
     color: #D5D5D5 !important;
     background-color: #292A2B !important;
@@ -78,7 +79,7 @@
     left: 50%;
     position: absolute;
     transform: translateY(-50%) translateX(-50%);
-    font-size: 28.7143px;
+    font-size: 28px;
     height: 35px;
 }
 

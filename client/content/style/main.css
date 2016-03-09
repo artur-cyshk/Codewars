@@ -12,7 +12,7 @@ label{
     font-weight: normal !important;
 }
 .logo{
-    background: url("../images/logo.png") no-repeat scroll center center;
+    background: url("../images/logo.png") no-repeat scroll center;
     height: 219px;
 }
 
