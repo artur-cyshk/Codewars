@@ -30,6 +30,24 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                 controller : 'TasksCtrl',
                 requiredAuthorization : false
             })
+            .state('root.leaders', {
+                url: '/leaders',
+                templateUrl: '../content/states/leaders/leadersTemplate.html',
+                controller : 'LeadersCtrl',
+                requiredAuthorization : false
+            })
+            .state('root.task', {
+                url: '/task/{id}',
+                templateUrl: '../content/states/task/taskTemplate.html',
+                controller : 'TaskCtrl',
+                requiredAuthorization : false
+            })
+            .state('root.taskSolution', {
+                url: '/task/{id}/taskSolution',
+                templateUrl: '../content/states/taskSolution/taskSolutionTemplate.html',
+                controller : 'TaskSolutionCtrl',
+                requiredAuthorization : true
+            })
     }
 
 ]);

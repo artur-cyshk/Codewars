@@ -1,5 +1,6 @@
 .root .alerts{
     position: fixed;
+    z-index: 1100;
     top : 50px;
     left: 5px;
     background: transparent;
@@ -14,7 +15,6 @@
 
 .root .my-alert{
     max-width: 220px;
-    z-index: 1000;
     min-width: 220px;
     min-height: 38px;
     border-bottom: 2px solid transparent;

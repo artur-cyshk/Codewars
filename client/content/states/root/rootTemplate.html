@@ -1,8 +1,8 @@
 <div class="root" ng-show="firstLoadingFinish" ng-class="{'margin' : openedProfile && authorized}">
 
     <div class="alerts">
-        <uib-alert  ng-repeat="alert in alerts"  ng-class="alert.type"   template-url="content/components/alert/alertTemplate.html">
-            <i class="glyphicon glyphicon-remove"  ng-click="closeAlert($index)"></i>
+        <uib-alert  ng-repeat="alert in alerts" ng-class="alert.type"   template-url="content/components/alert/alertTemplate.html">
+            <i class="glyphicon glyphicon-remove" ng-click="closeAlert($index)"></i>
             {{alert.msg}}
         </uib-alert>
     </div>

@@ -18,7 +18,7 @@ app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout','$http','alertSer
         );
         $scope.timer = $timeout(function() {
             _.remove($scope.alerts);
-        }, 5000);
+        }, 3000);
 
     });
 
