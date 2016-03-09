@@ -1,6 +1,6 @@
 .root .alerts{
     position: fixed;
-    z-index: 1100;
+    z-index: 1;
     top : 50px;
     left: 5px;
     background: transparent;
@@ -29,8 +29,8 @@
     margin: 2px -89px 0 !important;
 }
 .root .my-alert.success{
-    background: rgba(5, 101, 51, 0.72);
-    border-bottom: 2px solid rgba(38, 137, 84, 0.79);
+    background: rgba(5, 101, 51, 0.9);
+    border-bottom: 2px solid rgba(38, 137, 84, 1);
 }
 
 .root .content{
@@ -51,7 +51,7 @@
     width: 100%;
     background: rgba(0, 0, 0, 0.21);
     height:50px;
-    z-index: 1100;
+    z-index: 1;
 }
 
 .root .menu .sign{

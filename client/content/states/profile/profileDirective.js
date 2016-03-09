@@ -1,5 +1,5 @@
 'use strict';
-angular.module('codewars').directive('profile', function ($rootScope, $http, alertService) {
+angular.module('codewars').directive('profile', function ($rootScope, $http, alertService, $state, $stateParams) {
     return {
         restrict: 'E',
         scope: false,
@@ -69,6 +69,17 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
             $scope.$on('changeState', function(){
                 $scope.openedProfile = false;
             });
+
+            $scope.signOut = function() {
+                $http.get('/logout')
+                    .success(function() {
+                        alertService.alert('sign out success', 'success');
+                        $state.go('root.login');
+                    })
+                    .error(function() {
+                        alertService.alert('server error, try later', 'error');
+                    })
+            };
 
             $scope.$watch('authorized', function(value) {
                 if(value) {
