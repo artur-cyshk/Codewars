@@ -54,19 +54,16 @@
    font-size: 25px;
 }
 
-.profile .username{
+.profile .username, .clan{
     display: block;
     font-size: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-transform: capitalize;
     white-space: nowrap;
 }
 .profile .clan{
-    display: block;
     font-size: 2em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 .profile .glyphicon.glyphicon-user{
     font-size: 150px;

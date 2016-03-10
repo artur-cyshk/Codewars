@@ -1,6 +1,6 @@
 angular.module('codewars').factory('checkAccessFactory', function($rootScope, $state, $http, alertService) {
     return {
-        checkAccess : function(event, toState, toParams, fromState) {
+        checkAccess : function(event, toState, toParams, fromState, fromParams) {
             $rootScope.$broadcast('changeState');
             var argLength = arguments.length;
             $rootScope.rootLoadingFinish = false;
@@ -25,7 +25,9 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
                         return;
                     }
                     if(toState.name == 'root.login' && fromState.requiredAuthorization){
+                        console.log(fromState);
                         toState.from = fromState.name;
+                        toState.paramsTo = fromParams;
                     }
                     if(toState.requiredAuthorization) {
                         alertService.alert('no access, login please', 'error');

@@ -2,7 +2,7 @@ var app = angular.module('codewars', ['ui.router', 'ui.bootstrap', 'btford.socke
 
 app.run(['checkAccessFactory','$rootScope','$http', function(checkAccessFactory, $rootScope) {
     checkAccessFactory.checkAccess();
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState) {
-        checkAccessFactory.checkAccess(event, toState, toParams, fromState);
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        checkAccessFactory.checkAccess(event, toState, toParams, fromState, fromParams);
     });
 }]);

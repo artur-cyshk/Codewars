@@ -1,0 +1,40 @@
+.leaders-main .next{
+    height: 30px;
+}
+.leaders-main h1{
+    font-size: 5em;
+}
+.leaders-main .table{
+    color: white !important;
+}
+.leaders-main .leaders{
+    float:none;
+    margin : 0 auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.leaders-main .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.leaders-main .table-hover>tbody>tr:hover {
+    background-color: rgba(245, 245, 245, 0.05);
+}
+
+.leaders-main .yourself{
+    background-color: black;
+}
+.leaders-main .table>tbody>tr>td:first-child{
+    border-left : 3px solid;
+}
+.leaders-main .table>tbody>tr>td{
+    border : none;
+    height : 60px;
+    vertical-align : middle;
+}
+.leaders-main .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    width: 30px;
+    overflow: hidden;
+    word-wrap: break-word;
+    max-width: 30px;
+}

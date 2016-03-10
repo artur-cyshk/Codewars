@@ -1,1 +1,26 @@
-LeadersCtrl
+<div ng-show="leaders" class="leaders-main">
+    <h1 class="text-center">LEADERS</h1>
+    <div class="leaders col-md-9 col-lg-6 col-sm-12 col-xs-12">
+        <table class="table table-striped table-hover text-center">
+            <thead>
+                <tr>
+                    <td>Pos</td>
+                    <td>User</td>
+                    <td>Clan</td>
+                    <td>Level</td>
+                    <td>Honor</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-style="{ background: checkYourself(currentUser.name, leader.name) && authorized ? levels[leader.level].color.out : 'auto'}" ng-repeat="leader in leaders">
+                    <td ng-style="{'border-left-color': levels[leader.level].color.out}" ># {{$index + 1}}</td>
+                    <td>{{leader.name}}</td>
+                    <td>{{leader.clan}}</td>
+                    <td>{{levels[leader.level].levelNum}} </td>
+                    <td>{{leader.honor}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-block btn-danger" ng-if="!noMoreUsers" ng-click="loadMoreUsers()">Load next</button>
+    </div>
+</div>
