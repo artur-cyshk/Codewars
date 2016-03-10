@@ -34,7 +34,7 @@ angular.module('codewars').factory('levelsFactory', function() {
         },
         levelObjectMapping : function(userHonor) {
             var LEVEL_COUNT = 8;
-            if(userHonor) {
+            if(arguments.length) {
                 var MAX_HONOR = 3600;
             }
             var levels = [];
@@ -47,7 +47,7 @@ angular.module('codewars').factory('levelsFactory', function() {
                 }
                 levels[i].honor = num * 100 + prevLevelHonor;
                 levels[i].levelNum = num;
-                if(userHonor){
+                if(arguments.length){
                     levels[i].diffHonor = (userHonor <= MAX_HONOR) ?levels[i].honor - prevLevelHonor : userHonor;
                     levels[i].currHonor = (userHonor <= MAX_HONOR) ? userHonor - prevLevelHonor : userHonor;
                 }

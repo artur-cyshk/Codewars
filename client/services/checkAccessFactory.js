@@ -11,12 +11,10 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
                         $rootScope.firstLoadingFinish = true;
                         return;
                     }
+                    $rootScope.rootLoadingFinish = true;
                     if(toState.name == 'root.login' || toState.name == 'root.registration') {
                         $state.go('root.home');
                     }
-                    $rootScope.rootLoadingFinish = true;
-
-
                 })
                 .error(function() {
                     $rootScope.authorized = false;
@@ -24,6 +22,7 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
                         $rootScope.firstLoadingFinish = true;
                         return;
                     }
+                    $rootScope.rootLoadingFinish = true;
                     if(toState.name == 'root.login' && fromState.requiredAuthorization){
                         console.log(fromState);
                         toState.from = fromState.name;
@@ -33,8 +32,6 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
                         alertService.alert('no access, login please', 'error');
                         $state.go('root.login');
                     }
-                    $rootScope.rootLoadingFinish = true;
-
             });
         }
     }
