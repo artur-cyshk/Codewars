@@ -1,5 +1,5 @@
 'use strict';
-angular.module('codewars').directive('profile', function ($rootScope, $http, alertService, $state, levelsFactory) {
+angular.module('codewars').directive('profile', function ($rootScope, $http, alertService, $state, levelsFactory, $stateParams) {
     return {
         restrict: 'E',
         scope: false,
@@ -18,9 +18,16 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
             $scope.signOut = function() {
                 $http.get('/logout')
                     .success(function() {
-                        alertService.alert('sign out success', 'success');
                         delete $scope.currentUser;
-                        $state.go('root.login');
+                        $state.go(
+                            $state.current,
+                            $stateParams,
+                            {
+                                reload: true,
+                                inherit: false,
+                                notify: true
+                            }
+                        );
                     })
                     .error(function() {
                         alertService.alert('server error, try later', 'error');
