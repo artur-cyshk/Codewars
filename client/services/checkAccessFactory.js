@@ -4,7 +4,6 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
             $rootScope.$broadcast('changeState');
             var argLength = arguments.length;
             $rootScope.rootLoadingFinish = false;
-            $rootScope.authorized = false;
             $http.get('/authorized')
                 .success(function() {
                     $rootScope.authorized = true;

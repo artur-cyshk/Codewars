@@ -19,6 +19,7 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
                 $http.get('/logout')
                     .success(function() {
                         delete $scope.currentUser;
+                        $rootScope.authorized = false;
                         $state.go(
                             $state.current,
                             $stateParams,
