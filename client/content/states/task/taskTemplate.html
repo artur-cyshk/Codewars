@@ -1,1 +1,9 @@
-task
+{{currentTask}}
+<div ng-show="currentTask">
+    <input type="text" ng-model = "comment.text">
+    <button ng-click="setComment()"></button>
+    <button ng-click="toDo('like')">{{currentTask.canLike}}</button>
+    <button ng-click="toDo('favorite')">{{currentTask.canFavorite}}</button>
+    <button ng-click="toDo('later')">{{currentTask.canLater}}</button>
+</div>
+<div ng-hide="currentTask">LOADING</div>

@@ -1,22 +1,13 @@
 module.exports = function(io) {
     io.on('connection',function(socket) {
-
-        module.exports.socket = socket;
-
-        socket.on('like', require('./routes/like').on);
-        /*socket.on('watch', function () {
+        socket.on('like', function(canLike) {
+            socket.broadcast.emit('like', canLike);
+        });
+        socket.on('watch', function() {
             socket.broadcast.emit('watch');
         });
-        socket.on('comment', function (data) {
-            socket.broadcast.emit('comment',data);
+        socket.on('comment', function(comment) {
+            socket.broadcast.emit('comment', comment);
         });
-        socket.on('favorites', function (data) {
-            data.userId=socket.request.session.user;
-            socket.broadcast.emit('favorites',data);
-        });
-        socket.on('username',function(data){
-            data.userId=socket.request.session.user;
-            socket.emit('username',data);
-        });*/
     });
 };
