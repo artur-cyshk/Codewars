@@ -5,6 +5,8 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
     self.loadTasksFromServer = function(page, filter) {
         if(page == 0) {
             $scope.tasksOffset = 0;
+            $scope.noMoreTasks = false;
+            delete $scope.loadedTasks;
         }
         tasksService.loadTasksWithPagination(page, filter)
             .then(
