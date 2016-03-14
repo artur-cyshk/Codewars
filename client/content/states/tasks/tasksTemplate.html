@@ -1,25 +1,18 @@
 <div ng-show="rootLoadingFinish">
-    <div class="filters">
-        <div>
-            <input type="radio" ng-model="filter.group" value="all">ALL
-            <input type="radio" ng-model="filter.group" value="own">OWN
-            <input type="radio" ng-model="filter.group" value="later">LATER
-            <input type="radio" ng-model="filter.group" value="favorite">FAVORITE
+    <tasks-filter></tasks-filter>
+    <div class="col-md-9 col-lg-9 col-xs-12 col-sm-6 tasks">
+        <div ng-show="loadedTasks && filter.filterProperties">
+            <div>
+                <input ng-model="filter.name" type="text" placeholder="search by name">
+            </div>
+            <div ng-repeat="task in loadedTasks | filter : filter.name">
+                {{task.name}}
+                {{task.level}}
+                {{task.language}}
+                {{task.add_date}}
+            </div>
+            <button ng-click="loadMoreTasks()" ng-hide="noMoreTasks">loadMoreTasks</button>
         </div>
-
-        <div>
-            <button ng-click="clearFilter()">clearFilter</button>
-            <input ng-model="filter.name" type="text">
-            <input ng-model="filter.type" type="text">
-            <input ng-model="filter.level" type="text">
-            <input ng-model="filter.sortBy" type="text">
-            <input ng-model="filter.sortOrder" type="text">
-        </div>
-
+        <div ng-show="loadedTasksEmpty">EMPTY</div>
     </div>
-    <div class="tasks"  ng-show="loadedTasks">
-        <div ng-repeat="task in loadedTasks">{{task}}</div>
-        <button ng-click="loadMoreTasks()" ng-hide="noMoreTasks">loadMoreTasks</button>
-    </div>
-    <div ng-if="_.isEmpty(loadedTasks)">EMPTY</div>
 </div>

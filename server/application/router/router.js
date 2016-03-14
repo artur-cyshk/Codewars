@@ -4,6 +4,7 @@ var router = express.Router();
 router.get('/logout', require('./routes/logout'));
 router.get('/authorized', require('./routes/authorized'));
 router.get('/user', require('./routes/user'));
+router.get('/types', require('./routes/types'));
 router.get('/leaders/:page', require('./routes/leaders'));
 router.get('/task/:task', require('./routes/task'));
 router.post('/tasks', require('./routes/tasks'));

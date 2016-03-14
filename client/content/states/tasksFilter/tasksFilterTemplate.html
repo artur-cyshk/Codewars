@@ -1,0 +1,43 @@
+<div class="filter col-md-3 col-lg-3 col-xs-12 col-sm-6" ng-show="filter.filterProperties">
+    <button ng-click="clearFilter()">clearFilter</button>
+    <div>
+        {{filter.filterProperties.groups}}
+        <label ng-repeat="group in filter.filterProperties.groups">
+            <input
+                type="radio"
+                ng-model="filter.filterModel.group"
+                ng-value ="group"
+                ng-change="updateTasksByFilter()"
+            />{{group}}
+        </label>
+
+    </div>
+
+    <div>
+        <label ng-repeat="type in filter.filterProperties.types">
+            <input
+                    type="checkbox"
+                    ng-change="updateTasksByFilter()"
+                    ng-model="filter.filterModel.types[type.name]"
+            />{{type.name}}
+        </label>
+    </div>
+
+    <div>
+        <ol multiple class="nya-bs-select" actions-box="true" ng-model="filter.filterModel.levels">
+            <li nya-bs-option="level in filter.filterProperties.levels">
+                <a>
+                    {{level}}
+                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                </a>
+            </li>
+        </ol>
+    </div>
+
+
+
+
+    <input ng-model="filter.level" type="text">
+    <input ng-model="filter.sortBy" type="text">
+    <input ng-model="filter.sortOrder" type="text">
+</div>

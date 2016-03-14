@@ -25,6 +25,7 @@
     "angular-ui-router": "^0.2.18",
     "socket.io-client": "^1.4.5",
     "angular-svg-round-progressbar": "^0.3.10",
-    "angular-spinner": "^0.8.1"
+    "angular-spinner": "^0.8.1",
+    "nya-bootstrap-select": "~2.1.3"
   }
 }

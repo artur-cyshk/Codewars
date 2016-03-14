@@ -15,10 +15,8 @@ angular.module('codewars').factory('tasksService', function($http , $q) {
                 };
                 $http.post('/tasks', data)
                     .success(function (tasks) {
-                        var noMoreTasks = false;
-                        if (_.isEmpty(tasks) || tasks.length <= TASKS_OFFSET) {
-                            noMoreTasks = true;
-                        } else {
+                        var noMoreTasks =(_.isEmpty(tasks) || tasks.length <= TASKS_OFFSET);
+                        if  (!noMoreTasks) {
                             tasks = tasks.splice(0, tasks.length - 1);
                         }
                         resolve({

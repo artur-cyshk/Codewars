@@ -25,7 +25,7 @@
     padding-top: 6px;
 }
 
-.root .dropdown-menu{
+.root .menu .dropdown-menu{
     margin: 2px -89px 0 !important;
 }
 .root .my-alert.success{

@@ -1,8 +1,6 @@
 app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertService', function($scope, $rootScope, tasksService, alertService) {
 
-    var self = this;
-
-    self.loadTasksFromServer = function(page, filter) {
+    $scope.loadTasksFromServer = function(page, filter) {
         $rootScope.loadingInformation = true;
         if(page == 0) {
             $scope.tasksOffset = 0;
@@ -11,10 +9,14 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
             .then(
                 function success(info) {
                     if(page == 0) {
-                        $scope.loadedTasks = [];
+                        $scope.loadedTasks = (_.isEmpty(info.tasks)) ? undefined : [] ;
+                        $scope.loadedTasksEmpty = !$scope.loadedTasks;
                     }
-                    $scope.loadedTasks = tasksService.concat($scope.loadedTasks, info.tasks);
-                    $scope.tasksOffset += info.offset;
+                    if($scope.loadedTasks) {
+                        $scope.loadedTasks = tasksService.concat($scope.loadedTasks, info.tasks);
+                        $scope.tasksOffset += info.offset;
+                    }
+
                     $scope.noMoreTasks = info.noMoreTasks;
                     $rootScope.loadingInformation = false;
                 },
@@ -25,20 +27,8 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
             )
     };
 
-    $scope.$watch('filter', function(filter) {
-        if(filter) {
-            self.loadTasksFromServer(0, filter);
-        }
-    }, true);
-
     $scope.loadMoreTasks = function() {
-        self.loadTasksFromServer($scope.tasksOffset || 0, $scope.filter);
+        $scope.loadTasksFromServer($scope.tasksOffset || 0, $scope.filter.getFilter() || null);
     };
 
-    self.init = function() {
-        $scope.filter = {};
-        $scope.filter.group = "all";
-    };
-
-    self.init();
 }]);
