@@ -3,8 +3,8 @@
         <div>
             <input type="radio" ng-model="filter.group" value="all">ALL
             <input type="radio" ng-model="filter.group" value="own">OWN
-            <input type="radio" ng-model="filter.group" value="later_tasks">LATER
-            <input type="radio" ng-model="filter.group" value="favorite_tasks">FAVORITE
+            <input type="radio" ng-model="filter.group" value="later">LATER
+            <input type="radio" ng-model="filter.group" value="favorite">FAVORITE
         </div>
 
         <div>
@@ -18,7 +18,8 @@
 
     </div>
     <div class="tasks"  ng-show="loadedTasks">
-        {{loadedTasks}}
-        <button ng-click="loadMoreTasks()" ng-if="!noMoreTasks">loadMoreTasks</button>
+        <div ng-repeat="task in loadedTasks">{{task}}</div>
+        <button ng-click="loadMoreTasks()" ng-hide="noMoreTasks">loadMoreTasks</button>
     </div>
+    <div ng-if="_.isEmpty(loadedTasks)">EMPTY</div>
 </div>

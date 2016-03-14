@@ -6,21 +6,16 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
         $rootScope.loadingInformation = true;
         if(page == 0) {
             $scope.tasksOffset = 0;
-            $scope.noMoreTasks = false;
         }
         tasksService.loadTasksWithPagination(page, filter)
             .then(
                 function success(info) {
-                    if(!_.isEmpty(info.tasks)) {
-                        if(page == 0) {
-                            $scope.loadedTasks = [];
-                        }
-                        $scope.loadedTasks = tasksService.concat($scope.loadedTasks, info.tasks);
-                        $scope.tasksOffset += info.offset;
+                    if(page == 0) {
+                        $scope.loadedTasks = [];
                     }
-                    if(info.noMoreTasks) {
-                        $scope.noMoreTasks = info.noMoreTasks;
-                    }
+                    $scope.loadedTasks = tasksService.concat($scope.loadedTasks, info.tasks);
+                    $scope.tasksOffset += info.offset;
+                    $scope.noMoreTasks = info.noMoreTasks;
                     $rootScope.loadingInformation = false;
                 },
                 function error(msg) {
@@ -37,11 +32,12 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
     }, true);
 
     $scope.loadMoreTasks = function() {
-        self.loadTasksFromServer($scope.tasksOffset, $scope.filter);
+        self.loadTasksFromServer($scope.tasksOffset || 0, $scope.filter);
     };
 
     self.init = function() {
-        self.loadTasksFromServer(0);
+        $scope.filter = {};
+        $scope.filter.group = "all";
     };
 
     self.init();
