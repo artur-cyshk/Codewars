@@ -1,4 +1,4 @@
-app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','alertService','$state', function($scope, $rootScope, levelsFactory, $http, alertService, $state) {
+app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','alertService', function($scope, $rootScope, levelsFactory, $http, alertService) {
     var self = this;
 
     self.setInfo = function(leaders, levels) {
@@ -14,24 +14,24 @@ app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','
 
     self.getLeadersHandler = function() {
         var LEADERS_OFFSET = 20;
-        if(!$scope.fromPage) {
-            $scope.fromPage = 0;
+        if(!$scope.lidersOffset) {
+            $scope.lidersOffset = 0;
         }
-        $http.get('/leaders/'+ $scope.fromPage)
+        $http.get('/leaders/'+ $scope.lidersOffset)
             .success(function(users) {
-                if($scope.fromPage == 0) {
+                if($scope.lidersOffset == 0) {
                     $scope.leaders = [];
                 }
                 if(!_.isEmpty(users)) {
                     if(users.length <= LEADERS_OFFSET) {
                         $scope.noMoreUsers = true;
-                    }else{
+                    }else {
                         users = users.splice(0, users.length - 1);
                     }
                     $scope.leaders = self.concat($scope.leaders, users);
                     $scope.leaders = self.setInfo($scope.leaders, $scope.levels);
                 }
-                $scope.fromPage += LEADERS_OFFSET;
+                $scope.lidersOffset += LEADERS_OFFSET;
             })
             .error(function(){
                 alertService.alert('server error, try later', 'error');

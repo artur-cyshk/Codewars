@@ -1,3 +1,20 @@
 <div ng-show="rootLoadingFinish">
-    tasks
+    <div>
+        <input type="radio" ng-model="filter.group" value="all">ALL
+        <input type="radio" ng-model="filter.group" value="own">OWN
+        <input type="radio" ng-model="filter.group" value="later_tasks">LATER
+        <input type="radio" ng-model="filter.group" value="favorite_tasks">FAVORITE
+    </div>
+
+    <div>
+        <button ng-click="clearFilter()">clearFilter</button>
+        <input ng-model="filter.name" type="text">
+        <input ng-model="filter.type" type="text">
+        <input ng-model="filter.level" type="text">
+        <input ng-model="filter.sortBy" type="text">
+        <input ng-model="filter.sortOrder" type="text">
+    </div>
+
+    {{loadedTasks}}
+    <button ng-click="loadMoreTasks()" ng-if="!noMoreTasks">loadMoreTasks</button>
 </div>
