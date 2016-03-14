@@ -3,10 +3,10 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
     var self = this;
 
     self.loadTasksFromServer = function(page, filter) {
+        $rootScope.loadingInformation = true;
         if(page == 0) {
             $scope.tasksOffset = 0;
             $scope.noMoreTasks = false;
-            delete $scope.loadedTasks;
         }
         tasksService.loadTasksWithPagination(page, filter)
             .then(
@@ -21,9 +21,11 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
                     if(info.noMoreTasks) {
                         $scope.noMoreTasks = info.noMoreTasks;
                     }
+                    $rootScope.loadingInformation = false;
                 },
                 function error(msg) {
                     alertService.alert(msg, 'error');
+                    $rootScope.loadingInformation = false;
                 }
             )
     };

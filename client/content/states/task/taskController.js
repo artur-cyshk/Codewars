@@ -18,16 +18,19 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','aler
     });
 
     self.getTaskInformation = function(id){
+        $rootScope.loadingInformation = true;
         $http.get('/task/' + id)
             .success(function(task) {
                 $scope.currentTask = task;
                 if(task.watchCountUp) {
                     socket.emit('watch');
                 }
+                $rootScope.loadingInformation = false;
             })
             .error(function(err) {
                 var text = err || 'server error, try later';
                 alertService.alert(text, 'error');
+                $rootScope.loadingInformation = false;
             })
     };
 
@@ -88,7 +91,7 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','aler
             .success(function() {
                 $scope.currentTask[key] = !$scope.currentTask[key];
                 if(type == 'likes') {
-                    if(($scope.currentTask[key])){
+                    if(($scope.currentTask[key])) {
                         $scope.currentTask.likesCount--;
                     }else{
                         $scope.currentTask.likesCount++;

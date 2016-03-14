@@ -17,6 +17,7 @@ app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','
         if(!$scope.lidersOffset) {
             $scope.lidersOffset = 0;
         }
+        $rootScope.loadingInformation = true;
         $http.get('/leaders/'+ $scope.lidersOffset)
             .success(function(users) {
                 if($scope.lidersOffset == 0) {
@@ -32,9 +33,11 @@ app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','
                     $scope.leaders = self.setInfo($scope.leaders, $scope.levels);
                 }
                 $scope.lidersOffset += LEADERS_OFFSET;
+                $rootScope.loadingInformation = false;
             })
             .error(function(){
                 alertService.alert('server error, try later', 'error');
+                $rootScope.loadingInformation = false;
             });
     };
 
