@@ -9,7 +9,6 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
             .state('root.home',{
                 url : '/home',
                 templateUrl: '../content/states/home/homeTemplate.html',
-                controller : 'HomeCtrl',
                 requiredAuthorization : false
             })
             .state('root.login', {

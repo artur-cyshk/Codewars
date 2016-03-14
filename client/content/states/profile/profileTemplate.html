@@ -1,5 +1,5 @@
 <div class="profile text-center"
-     ng-if="profileVisible && authorized && userDataLoaded"
+     ng-if="rootLoadingFinish && profileVisible && authorized && userDataLoaded"
 >
     <h1>Profile <a ng-click="signOut()">sign out</a></h1>
     <div class="col-md-12">

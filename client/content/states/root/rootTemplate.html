@@ -1,4 +1,4 @@
-<div class="root" ng-show="firstLoadingFinish" ng-class="{'margin' : openedProfile && authorized}">
+<div class="root" ng-show="firstLoadingFinish && rootLoadingFinish" ng-class="{'margin' : openedProfile && authorized}">
 
     <div class="alerts">
         <uib-alert  ng-repeat="alert in alerts" ng-class="alert.type"   template-url="content/components/alert/alertTemplate.html">
@@ -28,7 +28,7 @@
         <a ui-sref="root.home" class="logo-min"></a>
         <div style="clear:both"></div>
     </div>
-    <div class="content" ng-if="rootLoadingFinish">
+    <div class="content">
         <ui-view ></ui-view>
     </div>
 </div>

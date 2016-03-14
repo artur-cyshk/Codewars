@@ -1,10 +1,11 @@
-{{currentTask}}
-<div ng-show="currentTask">
-    <input type="text" ng-model = "comment.text">
-    <button ng-click="setComment()"></button>
-    <button ng-click="toDo('like')">{{currentTask.canLike}}</button>
-    <button ng-click="toDo('favorite')">{{currentTask.canFavorite}}</button>
-    <button ng-click="toDo('later')">{{currentTask.canLater}}</button>
+<div ng-show="rootLoadingFinish">
+    <div ng-show="currentTask ">
+        {{currentTask}}
+        <input type="text" ng-model = "comment.text">
+        <button ng-click="setComment()"></button>
+        <button ng-click="toDo('like')">{{currentTask.canLike}}</button>
+        <button ng-click="toDo('favorite')">{{currentTask.canFavorite}}</button>
+        <button ng-click="toDo('later')">{{currentTask.canLater}}</button>
+    </div>
+    <span ng-hide="currentTask" us-spinner="{color: 'white',radius:22,scale:2,lines:15, width:10,speed:2, length: 10, top:'50%'}"></span>
 </div>
-<span ng-hide="currentTask" us-spinner="{color: 'white',radius:22,scale:2,lines:15, width:10,speed:2, length: 10, top:'50%'}"></span>
-<div >LOADING</div>
