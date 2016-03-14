@@ -40,16 +40,17 @@ angular.module('codewars').directive('tasksFilter', function () {
 
             $scope.clearFilter = function() {
                 $scope.filter = $scope.filter.setDefaultFilter();
+                $scope.loadTasksFromServer(0, $scope.filter.getFilter());
+            };
+
+            $scope.updateTasksByFilter = function() {
+                $scope.loadTasksFromServer(0, $scope.filter.getFilter());
             };
 
             self.init = function() {
                 $scope.filter = new self.Filter();
                 $scope.filter = $scope.filter.setDefaultFilter();
                 $scope.filter.setChooseProperties();
-                $scope.loadTasksFromServer(0, $scope.filter.getFilter());
-            };
-
-            $scope.updateTasksByFilter = function() {
                 $scope.loadTasksFromServer(0, $scope.filter.getFilter());
             };
 

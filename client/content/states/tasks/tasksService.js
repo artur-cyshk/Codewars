@@ -6,9 +6,6 @@ angular.module('codewars').factory('tasksService', function($http , $q) {
         loadTasksWithPagination: function (from, filter) {
             return $q(function (resolve, reject) {
                 var TASKS_OFFSET = 20;
-                if (!filter || !_.some(filter)) {
-                    filter = null;
-                }
                 var data = {
                     fromItem: from,
                     filter: filter
