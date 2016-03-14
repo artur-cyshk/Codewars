@@ -20,9 +20,15 @@ app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','
         $rootScope.loadingInformation = true;
         $http.get('/leaders/'+ $scope.lidersOffset)
             .success(function(users) {
+
                 if($scope.lidersOffset == 0) {
-                    $scope.leaders = [];
+                    if(_.isEmpty(users)) {
+                        alertService.alert('there are no users', 'error');
+                    }else {
+                        $scope.leaders = [];
+                    }
                 }
+
                 if(!_.isEmpty(users)) {
                     if(users.length <= LEADERS_OFFSET) {
                         $scope.noMoreUsers = true;
@@ -31,9 +37,10 @@ app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','
                     }
                     $scope.leaders = self.concat($scope.leaders, users);
                     $scope.leaders = self.setInfo($scope.leaders, $scope.levels);
+                    $scope.lidersOffset += LEADERS_OFFSET;
                 }
-                $scope.lidersOffset += LEADERS_OFFSET;
                 $rootScope.loadingInformation = false;
+
             })
             .error(function(){
                 alertService.alert('server error, try later', 'error');

@@ -7,6 +7,11 @@
 .leaders-main .table{
     color: white !important;
 }
+
+.leaders .btn {
+    outline: none !important;
+}
+
 .leaders-main .leaders{
     float:none;
     margin : 0 auto;
