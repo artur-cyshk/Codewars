@@ -22,8 +22,11 @@ module.exports = function (req, res, next) {
                 break;
         }
     }
-    var query = 'SELECT tasks.name as name, level, description, language, add_date from tasks' + (join || ' ') +
+    console.log(req.body.filter.group);
+    var query = 'SELECT tasks.task_id as taskId, tasks.name as name, level, description, language, add_date as addDate' +
+        ' from tasks' + (join || ' ') +
         (where || ' ') +
+        ' ORDER BY addDate DESC' +
         ' LIMIT 21 OFFSET ' + req.body.fromItem + ' ';
     console.log(query);
     connection.query(query, function(err,data){

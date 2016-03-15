@@ -1,3 +1,99 @@
 .filter{
-    background: aliceblue;
+    background: rgba(0, 0, 0, 0.28);
+    padding: 0 !important;
+
+}
+
+
+.filter .head-title{
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.filter .head-title a{
+    font-size: 0.8em;
+    color:#B53939;
+}
+.filter .group-filter .btn-group{
+    width:100%;
+}
+
+.filter .group-filter .btn{
+    transition : 0.3s linear all;
+    width:25% !important;
+    color : rgb(213, 213, 213) !important;
+    background: rgba(0, 0, 0, 0);
+}
+
+.filter .level-filter .btn,.filter .type-filter .btn  {
+    background: #273543;
+    color: #D5D5D5;
+    height:37px;
+    border: none;
+}
+.filter .level-filter .btn:hover, .filter .type-filter .btn:hover{
+    background: #273543;
+    color: #D5D5D5;
+}
+
+.filter .level-filter .bs-deselect-all, .filter .type-filter .bs-deselect-all {
+    background: rgba(39, 53, 67, 0.71);
+}
+
+.filter .level-filter .bs-deselect-all:hover, .filter .type-filter .bs-deselect-all:hover{
+    background: rgba(39, 53, 67, 0.71);
+}
+.filter .group-filter .btn-default.active,.filter .group-filter .btn-default:hover, .filter .group-filter .btn-default:active,.filter .group-filter .open>.dropdown-toggle.btn-default {
+    background-color: rgb(39, 53, 67) !important;
+    z-index: 0;
+}
+
+.filter .level-filter .nya-bs-select, .filter .sort-filter .nya-bs-select, .filter .type-filter .nya-bs-select, .filter .sort-filter .nya-bs-select{
+    width:100% !important;
+}
+
+.filter .filter-item{
+    background: rgba(57, 57, 57, 0.15);
+    padding : 20px;
+    margin-top: 10px;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+.filter .filter-item * {
+    outline: none !important;
+    text-align: center !important;
+}
+.filter .filter-item .panel-group{
+    margin : 0;
+}
+
+.filter  .filter-item .panel .panel-heading{
+    color: #D5D5D5 !important;
+    background-color: #273543 !important;
+}
+.filter .filter-item .panel a{
+    font-size: 14px;
+}
+.filter .filter-item .panel{
+    border : none !important;
+    background: rgba(106, 106, 106, 0.43) !important;
+}
+.filter .filter-item .panel .panel-body {
+    background: rgba(0, 0, 0, 0.33) !important;
+}
+.filter .change-input{
+    background: rgb(107, 30, 30);
+}
+
+.filter .change-input:hover, .change-profile .change-input:focus{
+    color: #DCDADA !important;
+    background: rgb(162, 37, 37) !important;
+}
+
+.filter .filter-option{
+    text-transform: capitalize;
+}
+.sort-filter, .order-filter{
+    margin: 3px 0;
 }

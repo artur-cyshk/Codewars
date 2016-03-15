@@ -1,4 +1,14 @@
-var app = angular.module('codewars', ['ui.router', 'ui.bootstrap', 'btford.socket-io', 'ngAnimate', 'angular-svg-round-progress', 'angularSpinner', 'nya.bootstrap.select']);
+var app = angular.module('codewars',
+    [
+        'ui.router',
+        'ui.bootstrap',
+        'btford.socket-io',
+        'ngAnimate',
+        'angular-svg-round-progress',
+        'angularSpinner',
+        'nya.bootstrap.select',
+        'ui.checkbox'
+    ]);
 
 app.run(['checkAccessFactory','$rootScope','$http', function(checkAccessFactory, $rootScope) {
     checkAccessFactory.checkAccess();

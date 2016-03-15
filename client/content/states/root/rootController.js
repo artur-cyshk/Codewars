@@ -1,7 +1,6 @@
-app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout','$http','alertService','$state', function($scope, $rootScope, $timeout, $http, alertService, $state) {
-    $scope.alerts = [];
-    $scope.status = {};
-    $scope.status.levelPanelInHome = true;
+app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout', function($scope, $rootScope, $timeout) {
+
+    var self = this;
 
     $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
@@ -22,4 +21,12 @@ app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout','$http','alertSer
 
     });
 
+    self.init = function() {
+        $scope.alerts = [];
+        $scope.status = {};
+        $scope.status.levelPanelInHome = true;
+        $scope.status.openSortFilter = true;
+    };
+
+    self.init();
 }]);

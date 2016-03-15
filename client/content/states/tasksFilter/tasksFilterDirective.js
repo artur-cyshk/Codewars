@@ -1,5 +1,5 @@
 'use strict';
-angular.module('codewars').directive('tasksFilter', function () {
+angular.module('codewars').directive('tasksFilter', function ($rootScope) {
     return {
         restrict: 'E',
         scope: false,
@@ -16,7 +16,6 @@ angular.module('codewars').directive('tasksFilter', function () {
                 };
                 this.setDefaultFilter = function() {
                     this.filterModel = {};
-                    this.filterModel.types = {};
                     this.filterModel.group = 'all';
                     return this;
                 };
@@ -25,7 +24,7 @@ angular.module('codewars').directive('tasksFilter', function () {
                         .then(
                             function success(types) {
                                 var filterProperties = {};
-                                filterProperties.groups = ['all', 'own', 'later', 'favorite'];
+                                filterProperties.groups =(!$rootScope.authorized) ? ['all'] : ['all', 'own', 'later', 'favorite'];
                                 filterProperties.types = types;
                                 filterProperties.levels = Array.apply(null, {length: 8}).map(function(item, i) {return i + 1 });
                                 filterProperties.sortBy = ['level', 'date', 'name'];

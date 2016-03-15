@@ -1,15 +1,16 @@
 <div ng-show="rootLoadingFinish">
-    <tasks-filter></tasks-filter>
-    <div class="col-md-9 col-lg-9 col-xs-12 col-sm-6 tasks">
-        <div ng-show="loadedTasks && filter.filterProperties">
+    <tasks-filter> </tasks-filter>
+    <div class="col-md-8 col-lg-8 col-xs-12 col-sm-6 tasks">
+        <div ng-if="loadedTasks && filter.filterProperties">
             <div>
                 <input ng-model="filter.name" type="text" placeholder="search by name">
             </div>
             <div ng-repeat="task in loadedTasks | filter : filter.name">
+                {{task.taskId}}
                 {{task.name}}
                 {{task.level}}
                 {{task.language}}
-                {{task.add_date}}
+                {{task.addDate | date : 'yyyy-MM-dd HH:mm'}}
             </div>
             <button ng-click="loadMoreTasks()" ng-hide="noMoreTasks">loadMoreTasks</button>
         </div>
