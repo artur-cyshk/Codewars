@@ -1,19 +1,24 @@
-<div ng-show="rootLoadingFinish">
+<div ng-cloak ng-show="rootLoadingFinish">
     <tasks-filter> </tasks-filter>
-    <div class="col-md-8 col-lg-8 col-xs-12 col-sm-6 tasks">
-        <div ng-if="loadedTasks && filter.filterProperties">
-            <div>
-                <input ng-model="filter.name" type="text" placeholder="search by name">
+    <div ng-if="filter.filterProperties" class="col-md-8 col-lg-8 col-xs-12 col-sm-6 tasks-wrapper">
+        <div class="tasks" >
+            <div ng-if="loadedTasks">
+                <h1 class="text-center">Tasks</h1>
+                <div>
+                    <input class="form-control" ng-model="filter.name" type="text" placeholder="search by name">
+                </div>
+                <div class="one-task text-center" ng-style="{'border-left-color':mapColor(task.level).in}" ng-click="openTask(task.taskId)" ng-repeat="task in loadedTasks | filter : filter.name">
+                    <span class="name">{{task.name}}</span>
+                    <span class="level" ng-style="{'color':mapColor(task.level).out}">{{task.level}}</span>
+                    <span class="language" ng-style="{'color':mapColor(task.level).in}">{{task.language}}</span>
+                    <span class="add-date">{{task.addDate | date : 'dd MMMM yyyy'}}</span>
+                    <span class="add-date-time">{{task.addDate | date : 'HH:mm'}}</span>
+                </div>
+                <button class="load-more-tasks btn btn-danger btn-block" ng-click="loadMoreTasks()" ng-hide="noMoreTasks">Load more tasks</button>
             </div>
-            <div ng-repeat="task in loadedTasks | filter : filter.name">
-                {{task.taskId}}
-                {{task.name}}
-                {{task.level}}
-                {{task.language}}
-                {{task.addDate | date : 'yyyy-MM-dd HH:mm'}}
-            </div>
-            <button ng-click="loadMoreTasks()" ng-hide="noMoreTasks">loadMoreTasks</button>
+            <h1 class="text-center no-tasks" ng-show="loadedTasksEmpty">
+                There are no tasks
+            </h1>
         </div>
-        <div ng-show="loadedTasksEmpty">EMPTY</div>
     </div>
 </div>

@@ -1,9 +1,8 @@
 .filter{
     background: rgba(0, 0, 0, 0.28);
     padding: 0 !important;
-
+    border-radius: 6px;
 }
-
 
 .filter .head-title{
     margin-bottom: 20px;
@@ -23,6 +22,10 @@
     width:25% !important;
     color : rgb(213, 213, 213) !important;
     background: rgba(0, 0, 0, 0);
+    margin : 0 auto;
+    float:none;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .filter .level-filter .btn,.filter .type-filter .btn  {
@@ -80,6 +83,7 @@
     background: rgba(106, 106, 106, 0.43) !important;
 }
 .filter .filter-item .panel .panel-body {
+    border: 0;
     background: rgba(0, 0, 0, 0.33) !important;
 }
 .filter .change-input{

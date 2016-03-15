@@ -1,0 +1,107 @@
+.tasks-wrapper{
+    padding: 0 15px 30px 15px;
+}
+.tasks{
+    background: #262628;
+    border-radius: 6px;
+    padding: 0 20px 20px 20px;
+}
+.tasks *{
+    outline: none !important;
+}
+
+.tasks h1{
+    padding: 5px;
+    color : #DB4949;
+}
+
+.tasks h1.no-tasks{
+    margin-bottom: -13px;
+}
+.tasks .one-task{
+    position: relative;
+    height: 80px;
+    /* float: none; */
+    border-left: 5px solid;
+    margin: 5px 0;
+    padding: 5px;
+    background: rgba(3, 3, 4, 0.24);
+    border-radius: 8px;
+    transition: background 0.3s linear ;
+}
+.tasks .one-task .name{
+    display: inline-block;
+    width: 50%;
+    text-transform: capitalize;
+    padding-left: 5px;
+    line-height: 62px;
+    font-size: 2em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.tasks .one-task .level{
+    position: absolute;
+    top: -22px;
+    left: 3px;
+    font-size: 6em;
+}
+.tasks{
+    overflow-y:hidden;
+}
+.tasks .one-task .add-date{
+    position: absolute;
+    top:5px;
+    right:5px;
+    color: #8A9393;
+}
+.tasks .one-task .add-date-time{
+    position: absolute;
+    top:20px;
+    color: #8A9393;
+    right:5px;
+}
+.tasks .one-task .language{
+    position: absolute;
+    top: 0;
+    text-transform: uppercase;
+    left: 50px;
+    font-size: 2em;
+}
+.tasks .one-task:hover{
+    background: rgba(9, 9, 9, 0.58);
+    cursor: pointer;
+}
+
+.tasks .load-more-tasks{
+    margin-top: 5px;
+}
+
+.one-task.ng-enter {
+    -webkit-transition: 1s linear all; /* Chrome */
+    transition: 0.5s linear all;
+    opacity: 0;
+}
+
+.one-task.ng-enter,
+.one-task.ng-leave
+{
+    -webkit-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+}
+
+.one-task.ng-enter.ng-enter-active,
+.one-task.ng-leave {
+    opacity: 1;
+    right: 0;
+}
+
+.one-task.ng-leave.ng-leave-active,
+.one-task.ng-enter {
+    opacity: 0;
+    right: -50px;
+}

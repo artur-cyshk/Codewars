@@ -1,4 +1,10 @@
-app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertService', function($scope, $rootScope, tasksService, alertService) {
+app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertService','$state','levelsFactory', function($scope, $rootScope, tasksService, alertService, $state, levelsFactory) {
+
+    var self = this;
+
+    $scope.openTask = function(taskId) {
+        $state.go('root.task',{id:taskId});
+    };
 
     $scope.loadTasksFromServer = function(page, filter) {
         $rootScope.loadingInformation = true;
@@ -28,7 +34,13 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
     };
 
     $scope.loadMoreTasks = function() {
+        $scope.filter.name = "";
         $scope.loadTasksFromServer($scope.tasksOffset || 0, $scope.filter.getFilter() || null);
     };
 
+    self.init = function() {
+        $scope.mapColor = levelsFactory.mapColors;
+    }
+
+    self.init();
 }]);
