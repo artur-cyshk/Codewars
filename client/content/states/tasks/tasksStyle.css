@@ -1,5 +1,6 @@
 .tasks-wrapper{
     padding: 0 15px 30px 15px;
+    overflow-x:hidden;
 }
 .tasks{
     background: #262628;
@@ -46,9 +47,7 @@
     left: 3px;
     font-size: 6em;
 }
-.tasks{
-    overflow-y:hidden;
-}
+
 .tasks .one-task .add-date{
     position: absolute;
     top:5px;
