@@ -29,6 +29,7 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
                                 notify: true
                             }
                         );
+                        $state.current.logout = true;
                     })
                     .error(function() {
                         alertService.alert('server error, try later', 'error');

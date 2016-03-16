@@ -47,6 +47,13 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                 controller : 'TaskSolutionCtrl',
                 requiredAuthorization : true
             })
+            .state('root.admin', {
+                url: '/admin',
+                templateUrl: '../content/states/admin/adminTemplate.html',
+                controller : 'AdminCtrl',
+                requiredAuthorization : true,
+                requiredRoot : true
+            })
     }
 
 ]);

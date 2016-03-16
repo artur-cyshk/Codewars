@@ -60,7 +60,7 @@ module.exports = function (req, res, next) {
         var query = 'SELECT tasks.task_id as taskId, tasks.name as name, level, description, language, add_date as addDate' +
             ' from tasks' + (filter.join || ' ') +
             (filter.where || ' ') + (filter.sortBy || ' ') + (filter.sort || ' ') +
-            ' LIMIT 21 OFFSET ' + (req.body.fromItem || 0) + ' ';
+            ' LIMIT 11 OFFSET ' + (req.body.fromItem || 0) + ' ';
 
         connection.query(query, function(err,data) {
             if(err) {

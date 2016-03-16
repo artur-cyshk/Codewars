@@ -8,15 +8,28 @@
     background: rgba(0, 0, 0, 0.25);
     overflow-y: auto;
 }
-.profile h1 a{
+.profile h1 .log-out{
+    font-size: 0.7em;
+    color: #884B4B;
+    cursor: pointer;
+}
+.profile h1 .profile-menu{
+    text-decoration: underline;
     font-size: 20px;
     cursor: pointer;
+    /* float: right; */
     position: absolute;
-    top: 2px;
-    right: 17px;
-    color: #B53939;
+    top: 0;
+    right: 15px;
+    text-transform: none;
+}
+.profile h1 .profile-menu a{
+    color:#AAAAAA;
 }
 
+.profile h1 .profile-menu a:hover{
+    color:white;
+}
 .profile *{
     outline: none !important;
     border : none !important;

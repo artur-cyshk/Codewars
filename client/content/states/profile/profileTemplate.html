@@ -1,7 +1,13 @@
 <div class="profile text-center"
      ng-if="rootLoadingFinish && profileVisible && authorized && userDataLoaded"
 >
-    <h1>Profile <a ng-click="signOut()">sign out</a></h1>
+    <h1>
+        Profile
+        <a class="log-out" ng-click="signOut()">sign out</a>
+        <span class="profile-menu">
+            <a ng-if="currentUser.type == 'admin'" ui-sref="root.admin">admininstrate</a>
+        </span>
+    </h1>
     <div class="col-md-12">
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <i class="glyphicon glyphicon-user"></i>

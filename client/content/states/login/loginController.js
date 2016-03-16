@@ -3,7 +3,7 @@ app.controller('LoginCtrl', [ '$scope', '$http', 'alertService','$state', functi
         $http.post('/login', $scope.user)
             .success(function() {
                 alertService.alert('success authorization', 'success');
-                $state.go($state.current.from || 'root.home',$state.current.paramsTo);
+                $state.go($state.current.from, $state.current.paramsTo);
             }).error(function(err) {
                 var text = err || 'server error, try later';
                 alertService.alert(text, 'error');

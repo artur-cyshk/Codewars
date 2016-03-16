@@ -11,7 +11,6 @@ app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','
     self.concat = function(before, to) {
         return before.concat(to);
     };
-
     self.getLeadersHandler = function() {
         var LEADERS_OFFSET = 20;
         if(!$scope.lidersOffset) {
@@ -30,9 +29,8 @@ app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','
                 }
 
                 if(!_.isEmpty(users)) {
-                    if(users.length <= LEADERS_OFFSET) {
-                        $scope.noMoreUsers = true;
-                    }else {
+                    $scope.moreUsers = (users.length > LEADERS_OFFSET);
+                    if($scope.moreUsers) {
                         users = users.splice(0, users.length - 1);
                     }
                     $scope.leaders = self.concat($scope.leaders, users);
