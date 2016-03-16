@@ -20,6 +20,7 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
                     .success(function() {
                         delete $scope.currentUser;
                         $rootScope.authorized = false;
+                        $rootScope.logout = true;
                         $state.go(
                             $state.current,
                             $stateParams,
@@ -29,7 +30,6 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
                                 notify: true
                             }
                         );
-                        $state.current.logout = true;
                     })
                     .error(function() {
                         alertService.alert('server error, try later', 'error');

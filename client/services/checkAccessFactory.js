@@ -1,10 +1,14 @@
 angular.module('codewars').factory('checkAccessFactory', function($rootScope, $state, $http, alertService) {
     var self = this;
-    self.loginStateFormating = function(toState, fromState, fromParams) {
-        console.log(fromState.logout);
-        var requireMemory = (fromState.name != 'root.registration' && !fromState.abstract && fromState.logout);
-        toState.from =(requireMemory) ? fromState.name : 'root.home';
-        toState.paramsTo =(requireMemory) ? fromParams : {};
+    self.loginStateFormating = function(toState, fromState, fromParams, logout) {
+        //todo
+        var requireMemory = (
+            fromState.name != 'root.registration'
+            && !fromState.abstract
+        );
+        toState.from = (requireMemory) ? fromState.name  : 'root.home' ;
+        toState.paramsTo = (requireMemory) ? fromParams : {} ;
+        console.log(toState);
         return {
             from : toState.from,
             paramsTo : toState.paramsTo
@@ -55,20 +59,20 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
                         return;
                     }
                     self.setRootScope(true, 'rootLoadingFinish');
-
                     if(toState.name == 'root.login') {
-                        var params = self.loginStateFormating(toState, fromState, fromParams);
+                        var params = self.loginStateFormating(toState, fromState, fromParams, $rootScope.logout);
+                        $rootScope.logout = false;
                         toState.from = params.from;
                         toState.paramsTo = params.paramsTo;
                     }
 
                     if(toState.requiredAuthorization) {
-                        if(!fromState.logout){
+                        if(!$rootScope.logout){
                             alertService.alert('no access, login please', 'error');
                         }
                         $state.go('root.login');
                     }
-                    fromState.logout = false;
+
             });
         }
     }
