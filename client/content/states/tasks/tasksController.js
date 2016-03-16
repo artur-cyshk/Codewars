@@ -28,6 +28,8 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
                 },
                 function error(msg) {
                     alertService.alert(msg, 'error');
+                    $scope.loadedTasks = undefined;
+                    $scope.loadedTasksEmpty = true;
                     $rootScope.loadingInformation = false;
                 }
             )

@@ -16,6 +16,8 @@ angular.module('codewars').directive('tasksFilter', function ($rootScope) {
                 };
                 this.setDefaultFilter = function() {
                     this.filterModel = {};
+                    this.filterModel.sortBy = 'date';
+                    this.filterModel.sortOrder = 'Z-A';
                     this.filterModel.group = 'all';
                     return this;
                 };

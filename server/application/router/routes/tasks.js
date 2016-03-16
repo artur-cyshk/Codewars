@@ -1,71 +1,75 @@
 var connection = require('../../../configuration/database/connection');
 var _ = require('lodash');
 module.exports = function (req, res, next) {
-    console.log(req.body);
-    var group = {};
-    var where = [];
-    var join = [];
-    var sort = "";
-    var sortBy = "";
-    var filter = req.body.filter;
-    if(req.session.authorized && req.body.filter) {
-        switch(filter.group){
-            case 'own':
-                where.push( ' tasks.user_id = "' + req.session.userId + '" ' );
-                break;
-            case 'favorite':
-                where.push( ' favorites_tasks.user_id = "' + req.session.userId + '" ');
-                join.push( ' join favorites_tasks using(task_id) ' );
-                break;
-            case 'later':
-                where.push(' later_tasks.user_id = "' + req.session.userId + '" ');
-                join.push(' join later_tasks using(task_id) ');
-                break;
-            default:
-                break;
-        }
-        if(!_.isEmpty(filter.levels)){
-            where.push(' level in (' + filter.levels.join(',') + ') ' );
-        }
-        if(filter.sortOrder) {
-            sort = (filter.sortOrder == 'Z-A') ? 'DESC' : 'ASC' ;
+
+    var checkFilter = function (filter) {
+        var selectOptionsFilter = {};
+        selectOptionsFilter.where = [];
+        selectOptionsFilter.join = [];
+        selectOptionsFilter.sort = "";
+        selectOptionsFilter.sortBy = "";
+
+        if(!filter) {
+            return selectOptionsFilter;
         }
 
-        console.log(filter.sortBy);
-        if(filter.sortBy){
-            if(filter.sortBy == 'date'){
-                sortBy = " order by add_date ";
-            }
-            if(filter.sortBy == 'name' || filter.sortBy == 'level'){
-                sortBy = " order by " + filter.sortBy + ' ';
+        if (req.session.authorized && filter.group) {
+            switch (filter.group) {
+                case 'own':
+                    selectOptionsFilter.where.push(' tasks.user_id = "' + req.session.userId + '" ');
+                    break;
+                case 'favorite':
+                    selectOptionsFilter.where.push(' favorites_tasks.user_id = "' + req.session.userId + '" ');
+                    selectOptionsFilter.join.push(' join favorites_tasks using(task_id) ');
+                    break;
+                case 'later':
+                    selectOptionsFilter.where.push(' later_tasks.user_id = "' + req.session.userId + '" ');
+                    selectOptionsFilter.join.push(' join later_tasks using(task_id) ');
+                    break;
+                default:
+                    break;
             }
         }
 
-        if(!_.isEmpty(filter.types)) {
-            join.push(' join tasks_types using (task_id) join types using(type_id) ');
+        if (!_.isEmpty(filter.levels)) {
+            selectOptionsFilter.where.push(' level in (' + filter.levels.join(',') + ') ');
+        }
+
+        if (!_.isEmpty(filter.types)) {
             filter.types = '"' + filter.types.join('","') + '"';
-            where.push(' types.type_name in (' + filter.types + ') ');
+            selectOptionsFilter.where.push(' types.type_name in (' + filter.types + ') ');
+            selectOptionsFilter.join.push(' join tasks_types using (task_id) join types using(type_id) ');
         }
 
-        if(_.isEmpty(where)){
-            where = "";
-        }else{
-            where.unshift('where ');
-            where = where.join(' ');
-        }
-        if(_.isEmpty(join)){
-            join = "";
-        }else{
-            join.join(' ');
-        }
-    }
-    var query = 'SELECT tasks.task_id as taskId, tasks.name as name, level, description, language, add_date as addDate' +
-        ' from tasks' + (join || ' ') +
-        (where || ' ') + (sortBy || ' ') + (sort || ' ') +
-        ' LIMIT 21 OFFSET ' + req.body.fromItem + ' ';
-    console.log(query);
-    connection.query(query, function(err,data){
 
-        res.status(200).send(data);
-    });
+        if (filter.sortBy) {
+            selectOptionsFilter.sortBy = (filter.sortBy == 'name' || filter.sortBy == 'level') ? filter.sortBy : 'add_date';
+            selectOptionsFilter.sortBy = ' order by ' + selectOptionsFilter.sortBy + ' ';
+        }
+
+        if (filter.sortOrder && filter.sortBy) {
+            selectOptionsFilter.sort = (filter.sortOrder == 'A-Z') ? 'ASC' : 'DESC';
+        }
+
+        selectOptionsFilter.where = (_.isEmpty(selectOptionsFilter.where)) ? " " :  "where " + selectOptionsFilter.where.join(' and ');
+        selectOptionsFilter.join = (_.isEmpty(selectOptionsFilter.join)) ? " " : selectOptionsFilter.join.join(' ');
+
+        return selectOptionsFilter;
+    };
+    var getTasksQuering = function(filter) {
+        var query = 'SELECT tasks.task_id as taskId, tasks.name as name, level, description, language, add_date as addDate' +
+            ' from tasks' + (filter.join || ' ') +
+            (filter.where || ' ') + (filter.sortBy || ' ') + (filter.sort || ' ') +
+            ' LIMIT 21 OFFSET ' + (req.body.fromItem || 0) + ' ';
+
+        connection.query(query, function(err,data) {
+            if(err) {
+                return next(true);
+            }
+            res.status(200).send(data);
+        });
+    };
+
+    getTasksQuering( checkFilter(req.body.filter) );
+
 };
