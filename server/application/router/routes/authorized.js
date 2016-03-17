@@ -2,7 +2,7 @@ var connection = require('../../../configuration/database/connection');
 module.exports = function (req, res, next) {
 	if(!req.session.authorized) {
 		return next({
-			status: 403
+			status: 401
 		})
 	}else {
 		var query = 'select user_id as userId, type from users where user_id = "' + req.session.userId + '"';
