@@ -20,8 +20,10 @@
             <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
                 <li role="menuitem"><a ui-sref="root.home">Home</a></li>
                 <li role="menuitem"><a ui-sref="root.tasks">Tasks</a></li>
+                <li role="menuitem" ng-if="adminRoot"><a ui-sref="root.leaders">Leaders</a></li>
                 <li class="divider"></li>
-                <li role="menuitem"><a ui-sref="root.leaders">Leaders</a></li>
+                <li role="menuitem" ng-if="adminRoot"><a ui-sref="root.admin">Admininstrate</a></li>
+                <li role="menuitem" ng-if="!adminRoot"><a ui-sref="root.leaders">Leaders</a></li>
             </ul>
         </div>
         <a ng-if="!authorized " class="sign signUp" ui-sref="root.registration">sign up</a>

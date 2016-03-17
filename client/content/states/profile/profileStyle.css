@@ -13,23 +13,7 @@
     color: #884B4B;
     cursor: pointer;
 }
-.profile h1 .profile-menu{
-    text-decoration: underline;
-    font-size: 20px;
-    cursor: pointer;
-    /* float: right; */
-    position: absolute;
-    top: 0;
-    right: 15px;
-    text-transform: none;
-}
-.profile h1 .profile-menu a{
-    color:#AAAAAA;
-}
 
-.profile h1 .profile-menu a:hover{
-    color:white;
-}
 .profile *{
     outline: none !important;
     border : none !important;

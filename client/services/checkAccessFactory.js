@@ -1,14 +1,20 @@
 angular.module('codewars').factory('checkAccessFactory', function($rootScope, $state, $http, alertService) {
     var self = this;
     self.loginStateFormating = function(toState, fromState, fromParams, logout) {
-        //todo
+
         var requireMemory = (
-            fromState.name != 'root.registration'
-            && !fromState.abstract
+            !fromState.abstract && fromState.name != 'root.registration' && !(logout)
         );
-        toState.from = (requireMemory) ? fromState.name  : 'root.home' ;
-        toState.paramsTo = (requireMemory) ? fromParams : {} ;
-        console.log(toState);
+
+        if(requireMemory){
+            toState.from = fromState.name ;
+            toState.paramsTo = fromParams;
+        }else{
+            if(logout) {
+                delete toState.from;
+                delete toState.paramsTo;
+            }
+        }
         return {
             from : toState.from,
             paramsTo : toState.paramsTo
@@ -41,10 +47,10 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
                         if(userData.type != 'admin') {
                             alertService.alert('no access, need root', 'error');
                             $state.go('root.home');
-                        }else{
-                            self.setRootScope(true, 'adminRoot');
                         }
                     }
+
+                    self.setRootScope((userData.type == 'admin' ), 'adminRoot');
 
                     if(toState.name == 'root.login' || toState.name == 'root.registration') {
                         $state.go('root.home');
