@@ -27,7 +27,6 @@
     margin: 5px 0;
     padding: 5px;
     background: rgba(3, 3, 4, 0.24);
-    border-radius: 8px;
     transition: background 0.3s linear ;
 }
 .tasks .one-task .name{

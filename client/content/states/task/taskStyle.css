@@ -1,0 +1,8 @@
+.current-task .task-main-panel, .current-task .task-tabs-panel{
+    margin: 15px 0;
+    background: #262728;
+}
+
+.current-task .task-main-panel{
+    border-left : 5px solid transparent;
+}

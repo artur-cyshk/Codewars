@@ -1,4 +1,4 @@
-app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','alertService','socket', function($scope, $rootScope, $stateParams, $http, alertService, socket) {
+app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','alertService','socket','levelsFactory', function($scope, $rootScope, $stateParams, $http, alertService, socket, levelsFactory) {
     var self = this;
 
     socket.on('watch',function() {
@@ -53,6 +53,7 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','aler
                         commentAuthor : $scope.currentUser.name
                     };
                     $scope.currentTask.comments.unshift(newComment);
+                    alertService.alert('comment successfully added', 'success');
                     socket.emit('comment', newComment);
                 }
             })
@@ -105,6 +106,8 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','aler
     };
     self.init = function() {
         self.getTaskInformation($stateParams.id);
+        $scope.comment = {text : ''};
+        $scope.mapColor = levelsFactory.mapColors;
     };
 
     self.init();
