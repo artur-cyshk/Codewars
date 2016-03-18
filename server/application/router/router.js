@@ -7,6 +7,7 @@ router.get('/user', require('./routes/user'));
 router.get('/types', require('./routes/types'));
 router.get('/leaders/:page', require('./routes/leaders'));
 router.get('/task/:task', require('./routes/task'));
+router.delete('/deleteCommit/:id', require('./routes/deleteCommit'));
 router.post('/tasks', require('./routes/tasks'));
 router.post('/login', require('./routes/login'));
 router.post('/commit', require('./routes/commit'));

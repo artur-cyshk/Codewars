@@ -41,12 +41,13 @@
 
                     <div ng-if="authorized" class="comment-add">
                         <form ng-submit="setComment()">
-                            <input type="text" class="form-control" ng-model="comment.text" placeholder="Write your comment">
+                            <input type="text" class="form-control comment-input" ng-model="comment.text" placeholder="Write your comment">
                         </form>
                     </div>
 
                     <div ng-repeat="comment in currentTask.comments">
                         {{comment}}
+                        <button ng-if ="comment.userId == currUserId" ng-click="removeCommit(comment.commentId)">rem</button>
                     </div>
 
 

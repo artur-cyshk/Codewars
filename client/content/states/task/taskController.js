@@ -1,4 +1,4 @@
-app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','alertService','socket','levelsFactory', function($scope, $rootScope, $stateParams, $http, alertService, socket, levelsFactory) {
+app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','taskService','alertService','socket','levelsFactory', function($scope, $rootScope, $stateParams, taskService, alertService, socket, levelsFactory) {
     var self = this;
 
     socket.on('watch',function() {
@@ -19,7 +19,7 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','aler
 
     self.getTaskInformation = function(id){
         $rootScope.loadingInformation = true;
-        $http.get('/task/' + id)
+        taskService.getTask(id)
             .success(function(task) {
                 $scope.currentTask = task;
                 if(task.watchCountUp) {
@@ -39,22 +39,18 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','aler
             alertService.alert('comment min length : 1', 'error');
             return;
         }
-        $http.post('/commit',
+        taskService.blurCommitInput();
+        taskService.addCommit(
                 {
-                'comment' : $scope.comment.text,
-                'task' : $stateParams.id
+                    'comment' : $scope.comment.text,
+                    'task' : $stateParams.id
                 })
-            .success(function() {
+            .success(function(comment) {
                 if($scope.currentTask.comments) {
-                    var currentDate = new Date;
-                    var newComment = {
-                        comment : $scope.comment.text,
-                        commentAddDate : currentDate.toLocaleString(),
-                        commentAuthor : $scope.currentUser.name
-                    };
-                    $scope.currentTask.comments.unshift(newComment);
+                    $scope.currentTask.comments.unshift(comment);
                     alertService.alert('comment successfully added', 'success');
-                    socket.emit('comment', newComment);
+                    socket.emit('comment', comment);
+                    $scope.comment.text = '';
                 }
             })
             .error(function() {
@@ -62,28 +58,25 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','aler
             })
     };
 
-    $scope.toDo = function(type){
+    $scope.removeCommit = function(id) {
+        taskService.removeCommit(id)
+            .success(function() {
+                if($scope.currentTask.comments) {
+                    $scope.currentTask.comments = taskService.filterCommentsById($scope.currentTask.comments, id);
+                }
+                alertService.alert('comment successfully removed', 'success');
+            })
+            .error(function(){
+                alertService.alert('server error, try later', 'error');
+            })
+    };
 
+    $scope.toDo = function(type){
         if(!type) {
             return;
         }
-
         var key = 'can' + type[0].toUpperCase() + type.substring(1, type.length);
-        switch(type) {
-            case 'like':
-                type = 'likes';
-                break;
-            case 'favorite':
-                type = 'favorites_tasks';
-                break;
-            case 'later':
-                type = 'later_tasks';
-                break;
-            default:
-                break;
-        }
-
-        $http.post('/toDoWithTask',
+        taskService.toDoWithTask(
             {
                 task : $stateParams.id,
                 stateName : type,
@@ -91,7 +84,7 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','$http','aler
             })
             .success(function() {
                 $scope.currentTask[key] = !$scope.currentTask[key];
-                if(type == 'likes') {
+                if(type == 'like') {
                     if(($scope.currentTask[key])) {
                         $scope.currentTask.likesCount--;
                     }else{

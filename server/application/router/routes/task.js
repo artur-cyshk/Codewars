@@ -55,7 +55,7 @@ module.exports = function (req, res, next) {
             })
         },
         function(task, callback){
-            var query = 'select comments.comment, comments.add_date as commentAddDate, users.name as commentAuthor from comments' +
+            var query = 'select comments.comment_id as commentId, comments.user_id as userId, comments.comment, comments.add_date as commentAddDate, users.name as commentAuthor from comments' +
                 ' join users using (user_id) where task_id = "' + req.params.task + '" order by comments.add_date DESC';
             connection.query(query, function(err, comments){
                 if(comments){
