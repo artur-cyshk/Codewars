@@ -1,5 +1,5 @@
-<div class="current-task" ng-show="rootLoadingFinish && currentTask">
-    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12" ng-show="currentTask ">
+<div class="current-task" ng-if="rootLoadingFinish && currentTask">
+    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
         <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-main-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
             {{currentTask.name}}
             {{currentTask.creator}}
@@ -11,19 +11,19 @@
 
             <div ng-if="authorized">
                 <div class="like" ng-click="toDo('like')">
-                    <i class="fa fa-thumbs-o-up" ng-if="currentTask.canLike"></i>
-                    <i class="fa fa-thumbs-up" ng-if="!currentTask.canLike"></i>
+                    <i class="fa fa-thumbs-o-up" ng-show="currentTask.canLike"></i>
+                    <i class="fa fa-thumbs-up" ng-hide="currentTask.canLike"></i>
                     {{currentTask.likesCount}}
                 </div>
 
                 <div class="favorite" ng-click="toDo('favorite')">
-                    <i class="fa fa-star-o" ng-if="currentTask.canFavorite"></i>
-                    <i class="fa fa-star" ng-if="!currentTask.canFavorite"></i>
+                    <i class="fa fa-star-o" ng-show="currentTask.canFavorite"></i>
+                    <i class="fa fa-star" ng-hide="currentTask.canFavorite"></i>
                 </div>
 
                 <div class="later" ng-click="toDo('later')">
-                    <i class="fa fa-thumb-tack" ng-if="currentTask.canLater"></i>
-                    <i class="fa fa-clock-o" ng-if="!currentTask.canLater"></i>
+                    <i class="fa fa-thumb-tack" ng-show="currentTask.canLater"></i>
+                    <i class="fa fa-clock-o" ng-hide="currentTask.canLater"></i>
                 </div>
             </div>
         </div>
@@ -38,21 +38,17 @@
                     {{currentTask.types}}
                 </uib-tab>
                 <uib-tab heading="DISCUSS" classes="btn-sm">
-
                     <div ng-if="authorized" class="comment-add">
                         <form ng-submit="setComment()">
                             <input type="text" class="form-control comment-input" ng-model="comment.text" placeholder="Write your comment">
                         </form>
                     </div>
-
                     <div ng-repeat="comment in currentTask.comments">
                         {{comment}}
                         <button ng-if ="comment.userId == currUserId" ng-click="removeCommit(comment.commentId)">rem</button>
                     </div>
-
-
                 </uib-tab>
-                <uib-tab ng-show="authorized && currentTask.solutions" heading="SOLUTIONS" classes="btn-sm">
+                <uib-tab ng-if="authorized && currentTask.solutions" heading="SOLUTIONS" classes="btn-sm">
                     <div ng-repeat="solution in currentTask.solutions">
                         {{solution}}
                     </div>
