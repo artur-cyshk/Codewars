@@ -19,7 +19,7 @@
 }
 
 .root .menu .dropdown-menu{
-    margin: 2px -89px 0 !important;
+    margin: 2px -1px 0 !important;
 }
 .root .my-alert.success{
     background: rgba(5, 101, 51, 0.9);
@@ -77,13 +77,17 @@
     width: 40px;
 }
 .root .menu .my-drop-group{
-    float:right;
+    float:left;
     margin-top: 7px;
     margin-right : 4px;
 }
-.root .menu i.glyphicon{
+.root .menu .my-drop-group .btn{
+    height: 38px;
+    margin-top: -1px;
+}
+.root .menu i.fa{
     font-size: 30px;
-    padding: 7px 10px 0;
+    padding: 9px 10px 0;
     color: #B4B4B5;
     cursor: pointer;
 }

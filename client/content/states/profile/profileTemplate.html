@@ -1,9 +1,10 @@
 <div class="profile col-md-4 col-xs-6 col-sm-6 col-lg-4 text-center"
      ng-if="rootLoadingFinish && profileVisible && authorized && userDataLoaded"
 >
+    <i class="close-profile fa fa-indent" ng-click="profile.openedProfile = false" ></i>
+    <i class="fa fa-sign-out log-out" ng-click="signOut()"></i>
     <h1>
         Profile
-        <a class="log-out" ng-click="signOut()">sign out</a>
     </h1>
     <div class="col-md-12">
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
