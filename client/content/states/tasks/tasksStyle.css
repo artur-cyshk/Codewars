@@ -42,12 +42,23 @@
     overflow: hidden;
 }
 .tasks .one-task .level{
+    display: block;
     position: absolute;
-    top: -22px;
+    top: 0;
+    line-height: 77px;
     left: 3px;
+    overflow: hidden;
+    bottom: 0;
     font-size: 6em;
 }
 
+.tasks .one-task .no-level{
+    position: absolute;
+    top: 36px;
+    text-transform: uppercase;
+    left: 2px;
+    font-size: 2em;
+}
 .tasks .one-task .add-date{
     position: absolute;
     top:5px;
@@ -67,6 +78,15 @@
     left: 50px;
     font-size: 2em;
 }
+
+.tasks .one-task .no-language{
+    position: absolute;
+    top: 0;
+    text-transform: uppercase;
+    left: 3px;
+    font-size: 2em;
+}
+
 .tasks .one-task:hover{
     background: rgba(9, 9, 9, 0.58);
     cursor: pointer;

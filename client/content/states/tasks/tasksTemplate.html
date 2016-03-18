@@ -9,8 +9,8 @@
                 </div>
                 <div class="one-task text-center" ng-style="{'border-left-color':mapColor(task.level).in}" ng-click="openTask(task.taskId)" ng-repeat="task in loadedTasks | filter : filter.name">
                     <span class="name">{{task.name}}</span>
-                    <span class="level" ng-style="{'color':mapColor(task.level).out}">{{task.level}}</span>
-                    <span class="language" ng-style="{'color':mapColor(task.level).in}">{{task.language}}</span>
+                    <span ng-class="task.level ? 'level' : 'no-level'" ng-style="{'color':mapColor(task.level).out}">{{task.level || 'NO LEVEL'}}</span>
+                    <span class="hidden-xs" ng-class="task.level ? 'language' : 'no-language'" ng-style="{'color':mapColor(task.level).in}">{{task.language}}</span>
                     <span class="add-date">{{task.addDate | date : 'dd MMMM yyyy'}}</span>
                     <span class="add-date-time">{{task.addDate | date : 'HH:mm'}}</span>
                 </div>

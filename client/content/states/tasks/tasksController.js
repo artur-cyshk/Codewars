@@ -42,7 +42,7 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
 
     self.init = function() {
         $scope.mapColor = levelsFactory.mapColors;
-    }
+    };
 
     self.init();
 }]);

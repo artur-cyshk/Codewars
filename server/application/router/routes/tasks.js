@@ -7,6 +7,7 @@ module.exports = function (req, res, next) {
         selectOptionsFilter.where = [];
         selectOptionsFilter.join = [];
         selectOptionsFilter.sort = "";
+        selectOptionsFilter.or = "";
         selectOptionsFilter.sortBy = "";
 
         if(!filter) {
@@ -32,7 +33,15 @@ module.exports = function (req, res, next) {
         }
 
         if (!_.isEmpty(filter.levels)) {
-            selectOptionsFilter.where.push(' level in (' + filter.levels.join(',') + ') ');
+            if( _.includes(filter.levels, 'without level') ) {
+                selectOptionsFilter.or = ' level is NULL ' ;
+                filter.levels = _.remove(filter.levels, function (level) {
+                    return level != 'without level';
+                });
+            }
+            if(filter.levels.length) {
+                selectOptionsFilter.where.push(' level in (' + filter.levels.join(',') + ') ');
+            }
         }
 
         if (!_.isEmpty(filter.types)) {
@@ -51,17 +60,22 @@ module.exports = function (req, res, next) {
             selectOptionsFilter.sort = (filter.sortOrder == 'A-Z') ? 'ASC' : 'DESC';
         }
 
-        selectOptionsFilter.where = (_.isEmpty(selectOptionsFilter.where)) ? " " :  "where " + selectOptionsFilter.where.join(' and ');
-        selectOptionsFilter.join = (_.isEmpty(selectOptionsFilter.join)) ? " " : selectOptionsFilter.join.join(' ');
+        selectOptionsFilter.where = (_.isEmpty(selectOptionsFilter.where)) ? "" :  selectOptionsFilter.where.join(' and ');
+        selectOptionsFilter.join = (_.isEmpty(selectOptionsFilter.join)) ? "" : selectOptionsFilter.join.join('');
+
+        selectOptionsFilter.whereWord = (selectOptionsFilter.where || selectOptionsFilter.or) ? ' where ' : ' ';
+
+        if(selectOptionsFilter.where &&  selectOptionsFilter.or) {
+            selectOptionsFilter.or = " OR " + selectOptionsFilter.or;
+        }
 
         return selectOptionsFilter;
     };
     var getTasksQuering = function(filter) {
         var query = 'SELECT tasks.task_id as taskId, tasks.name as name, level, description, language, add_date as addDate' +
-            ' from tasks' + (filter.join || ' ') +
-            (filter.where || ' ') + (filter.sortBy || ' ') + (filter.sort || ' ') +
+            ' from tasks' + (filter.join || ' ') + filter.whereWord +
+            (filter.where || ' ') + (filter.or || ' ') + (filter.sortBy || ' ') + (filter.sort || ' ') +
             ' LIMIT 11 OFFSET ' + (req.body.fromItem || 0) + ' ';
-
         connection.query(query, function(err,data) {
             if(err) {
                 return next(true);

@@ -29,6 +29,7 @@ angular.module('codewars').directive('tasksFilter', function ($rootScope) {
                                 filterProperties.groups =(!$rootScope.authorized) ? ['all'] : ['all', 'own', 'later', 'favorite'];
                                 filterProperties.types = types;
                                 filterProperties.levels = Array.apply(null, {length: 8}).map(function(item, i) {return i + 1 });
+                                filterProperties.levels.unshift('without level');
                                 filterProperties.sortBy = ['level', 'date', 'name'];
                                 filterProperties.sortOrder = ['A-Z', 'Z-A'];
                                 self.filterProperties = filterProperties;
