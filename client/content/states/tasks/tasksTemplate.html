@@ -14,7 +14,7 @@
                     <span class="add-date">{{task.addDate | date : 'dd MMMM yyyy'}}</span>
                     <span class="add-date-time">{{task.addDate | date : 'HH:mm'}}</span>
                 </div>
-                <button class="load-more-tasks btn btn-danger btn-block" ng-click="loadMoreTasks()" ng-hide="noMoreTasks">Load more tasks</button>
+                <button class="load-more-tasks btn btn-danger btn-block" ng-click="loadMoreTasks()" ng-hide="noMoreTasks || filter.name">Load more tasks</button>
             </div>
             <h1 class="text-center no-tasks" ng-show="loadedTasksEmpty">
                 There are no tasks

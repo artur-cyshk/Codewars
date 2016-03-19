@@ -35,7 +35,7 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
                 .success(function(userData) {
                     self.setRootScope(true,'authorized');
                     self.setRootScope(userData.userId, 'currUserId');
-
+                    self.setRootScope((userData.type == 'admin' ), 'adminRoot');
                     if(!argLength) {
                         self.setRootScope(true, 'firstLoadingFinish');
                         return;
@@ -50,7 +50,7 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
                         }
                     }
 
-                    self.setRootScope((userData.type == 'admin' ), 'adminRoot');
+
 
                     if(toState.name == 'root.login' || toState.name == 'root.registration') {
                         $state.go('root.home');
