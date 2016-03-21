@@ -43,7 +43,9 @@ angular.module('codewars').directive('changeProfile', function ($rootScope) {
 
             $scope.$watch('status.openPanel', function(value){
                 if(!value){
-                   delete $scope.newUser.currState;
+                    if($scope.newUser) {
+                        delete $scope.newUser.currState;
+                    }
                 }
             })
         }

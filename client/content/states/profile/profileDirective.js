@@ -6,13 +6,13 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
         replace : true,
         templateUrl: './content/states/profile/profileTemplate.html',
         controller: function ($scope) {
-            $scope.$watch('profile.openedProfile', function(value) {
-                if(value != undefined){
+            $scope.$watch('status.openedProfile', function(value) {
+                if(value != undefined) {
                     $scope.profileVisible = value;
                 }
             });
-            $scope.$on('changeState', function(){
-                $scope.profile.openedProfile = false;
+            $scope.$on('changeState', function() {
+                $scope.status.openedProfile = false;
             });
 
             $scope.signOut = function() {
