@@ -1,7 +1,13 @@
-angular.module('codewars').factory('taskService', function($http) {
+angular.module('codewars').factory('taskService', function($http, aceFactory) {
     return {
         getTask : function(id) {
             return $http.get('/task/' + id);
+        },
+        mapSolutions : function(solutions) {
+            return solutions.map(function(item) {
+                item.configuration = aceFactory.getConfiguration(item.solution_text, true, false, "none");
+                return item;
+            })
         },
         addCommit : function(commit) {
             return $http.post('/commit', commit);

@@ -1,4 +1,3 @@
-<ui-codemirror ui-codemirror-opts="editorOptions" ng-model="editorModel"></ui-codemirror>
 <div class="current-task" ng-if="rootLoadingFinish && currentTask">
     <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
         <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-main-panel text-center" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
@@ -80,6 +79,7 @@
             <uib-tab ng-if="authorized && currentTask.solutions" heading="SOLUTIONS" classes="btn-sm">
                 <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
                     <div ng-repeat="solution in currentTask.solutions">
+                        <div id="editor" ui-ace="solution.configuration" > </div>
                         {{solution}}
                     </div>
                 </div>

@@ -8,7 +8,7 @@ var app = angular.module('codewars',
         'angularSpinner',
         'nya.bootstrap.select',
         'ui.checkbox',
-        'ui.codemirror'
+        'ui.ace'
     ]);
 
 app.run(['checkAccessFactory','$rootScope','$http', function(checkAccessFactory, $rootScope) {

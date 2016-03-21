@@ -1,3 +1,10 @@
+.ace_editor {
+    height: 200px;
+    font-size: 14px !important;
+    width:700px;
+    border-radius: 5px;
+    padding : 5px;
+}
 .current-task .task-main-panel, .current-task .task-tabs-panel{
     margin: 15px 0;
     padding : 15px;
