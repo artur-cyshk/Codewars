@@ -96,7 +96,7 @@
 }
 
 .one-task.ng-enter {
-    -webkit-transition: 1s linear all; /* Chrome */
+    -webkit-transition: 0.5s linear all; /* Chrome */
     transition: 0.5s linear all;
     opacity: 0;
 }
@@ -104,10 +104,10 @@
 .one-task.ng-enter,
 .one-task.ng-leave
 {
-    -webkit-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -moz-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -o-transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    transition: 0.3s cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
     position: relative;
     display: block;
 }

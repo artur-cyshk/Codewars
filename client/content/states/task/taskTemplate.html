@@ -1,70 +1,88 @@
 <div class="current-task" ng-if="rootLoadingFinish && currentTask">
     <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
         <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-main-panel text-center" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
-            <span class="name">
-                {{currentTask.name}}
-                <span ng-if="authorized" class="later" ng-click="toDo('later')">
-                    <i class="fa fa-thumb-tack" ng-show="currentTask.canLater"></i>
-                    <i class="fa fa-clock-o" ng-hide="currentTask.canLater"></i>
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3 left-panel">
+                <span ng-class="currentTask.level ? 'level' : 'no-level'" ng-style="{'color':mapColor(currentTask.level).out}" class="level">
+                    {{currentTask.level || 'NO LEVEL'}}
                 </span>
-            </span>
-            <span class="to-do-panel">
-                <span ng-if="authorized" class="like" ng-click="toDo('like')">
-                    <i class="fa fa-thumbs-o-up" ng-show="currentTask.canLike"></i>
-                    <i class="fa fa-thumbs-up" ng-hide="currentTask.canLike"></i>
-                    {{currentTask.likesCount}}
-                </span>
-                <span ng-if="authorized" class="favorite" ng-click="toDo('favorite')">
-                    <i class="fa fa-star-o" ng-show="currentTask.canFavorite"></i>
-                    <i class="fa fa-star" ng-hide="currentTask.canFavorite"></i>
-                </span>
-                <span class="watch">
-                    <i class="fa fa-eye"></i>{{currentTask.watchingCount}}
-                </span>
-            </span>
-            <span class="add-date">{{currentTask.taskAddDate | date : 'dd MMMM yyyy'}}</span>
-            <span class="add-date-time">{{currentTask.taskAddDate | date : 'HH:mm'}}</span>
-            <span class="creator"><i class="fa fa-user"></i> {{currentTask.creator}}</span>
-            <span ng-class="currentTask.level ? 'level' : 'no-level'" ng-style="{'color':mapColor(currentTask.level).out}" class="level">
-                {{currentTask.level || 'NO LEVEL'}}
-            </span>
-            <span class="hidden-xs" ng-class="currentTask.level ? 'language' : 'no-language'" ng-style="{'color':mapColor(currentTask.level).in}">{{currentTask.language}}</span>
+                <span ng-class="currentTask.level ? 'language' : 'no-language'" ng-style="{'color':mapColor(currentTask.level).in}">{{currentTask.language}}</span>
+            </div>
+            <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 center-panel">
+                <span class="name">{{currentTask.name}}</span>
+            </div>
+            <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3 right-panel">
+                <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'dd MMMM yyyy'}}</span>
+                <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'HH:mm'}}</span>
+                <span class="date-and-author"><i class="fa fa-user"></i> {{currentTask.creator}}</span>
+                <a class="train" ng-if="currentTask.level" ui-sref="root.taskSolution({id: currentTask.taskId})"><i class="fa fa-play-circle"></i></a>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 center-block col-lg-12 text-center">
+                <span class="to-do-panel">
+                     <span ng-if="authorized" class="later" ng-click="toDo('later')">
+                        <i class="fa fa-thumb-tack" ng-show="currentTask.canLater"></i>
+                        <i class="fa fa-clock-o" ng-hide="currentTask.canLater"></i>
+                    </span>
 
-            <a ng-if="currentTask.level" ui-sref="root.taskSolution({id: currentTask.taskId})">TRAIN</a>
-
-
+                    <span ng-if="authorized" class="favorite" ng-click="toDo('favorite')">
+                        <i class="fa fa-star-o" ng-show="currentTask.canFavorite"></i>
+                        <i class="fa fa-star" ng-hide="currentTask.canFavorite"></i>
+                    </span>
+                    <span class="watch">
+                        <i class="fa fa-eye"></i>{{currentTask.watchingCount}}
+                    </span>
+                    <span ng-if="authorized" class="like" ng-click="toDo('like')">
+                        <i class="fa fa-thumbs-o-up" ng-show="currentTask.canLike"></i>
+                        <i class="fa fa-thumbs-up" ng-hide="currentTask.canLike"></i>
+                        {{currentTask.likesCount}}
+                    </span>
+                </span>
+            </div>
         </div>
-
-
-
-            <uib-tabset type="pills">
-                <uib-tab heading="DETAILS" classes="btn-sm">
-                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel">
-                        {{currentTask.description}}
-                        {{currentTask.types}}
+        <uib-tabset type="pills" class="description">
+            <uib-tab heading="DETAILS" class="btn-sm">
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel details" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
+                    <uib-accordion>
+                        <uib-accordion-group is-open="status.openSortFilter">
+                            <uib-accordion-heading>
+                                Description <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.openDescription, 'glyphicon-chevron-right': !status.openDescription}"></i>
+                            </uib-accordion-heading>
+                            <div ng-bind-html="currentTask.description | html"></div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                    <i class="fa fa-tags"></i> <span class="tag-name" ng-repeat="type in currentTask.types">{{type.type_name}}</span>
+                </div>
+            </uib-tab>
+            <uib-tab heading="DISCUSS" classes="btn-sm">
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
+                    <div ng-if="authorized" class="comment-add">
+                        <form ng-submit="setComment()">
+                            <input type="text" class="form-control comment-input" ng-model="comment.text" placeholder="Write your comment">
+                        </form>
                     </div>
-                </uib-tab>
-                <uib-tab heading="DISCUSS" classes="btn-sm">
-                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel">
-                        <div ng-if="authorized" class="comment-add">
-                            <form ng-submit="setComment()">
-                                <input type="text" class="form-control comment-input" ng-model="comment.text" placeholder="Write your comment">
-                            </form>
+                    <div class="comment-div col-md-12 col-xs-12 col-sm-12 col-lg-12" ng-repeat="comment in currentTask.comments">
+                        <i ng-if ="comment.userId == currUserId" class="glyphicon close-comment glyphicon-remove" ng-click="removeCommit(comment.commentId)"></i>
+                        <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
+                            <div class="text-left comment-info">
+                                <span class="date-and-author hidden-xs">{{comment.commentAddDate | date : 'dd MMMM yyyy'}}</span>
+                                <span class="date-and-author hidden-xs">{{comment.commentAddDate | date : 'HH:mm'}}</span>
+                                <span class="date-and-author"><i class="fa fa-user"></i> {{comment.commentAuthor}}</span>
+                            </div>
                         </div>
-                        <div ng-repeat="comment in currentTask.comments">
-                            {{comment}}
-                            <button ng-if ="comment.userId == currUserId" ng-click="removeCommit(comment.commentId)">rem</button>
-                        </div>
-                    </div>
-                </uib-tab>
-                <uib-tab ng-if="authorized && currentTask.solutions" heading="SOLUTIONS" classes="btn-sm">
-                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel">
-                        <div ng-repeat="solution in currentTask.solutions">
-                            {{solution}}
+                        <div class="col-md-10 col-xs-12 col-sm-9 col-lg-10">
+                            <span class="comment-text">
+                                {{comment.comment}}
+                            </span>
                         </div>
                     </div>
-                </uib-tab>
-            </uib-tabset>
-        </div>
+                </div>
+            </uib-tab>
+            <uib-tab ng-if="authorized && currentTask.solutions" heading="SOLUTIONS" classes="btn-sm">
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
+                    <div ng-repeat="solution in currentTask.solutions">
+                        {{solution}}
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
     </div>
 </div>

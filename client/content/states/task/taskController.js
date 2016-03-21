@@ -92,6 +92,12 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','taskService'
                     }
                     socket.emit('like', $scope.currentTask[key]);
                 }
+                if(type == 'favorite' || type == 'later'){
+                    if( $scope.currentTask[key] ){
+                        var value = 'removed from ';
+                    }
+                    alertService.alert("task successfully " + (value || 'added to ' ) + type + " list", 'success');
+                }
             })
             .error(function() {
                 alertService.alert('server error, try later', 'error');

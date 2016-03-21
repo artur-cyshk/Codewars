@@ -1,5 +1,6 @@
 .current-task .task-main-panel, .current-task .task-tabs-panel{
     margin: 15px 0;
+    padding : 15px;
     background: #262728;
 }
 
@@ -7,17 +8,123 @@
     border-left : 5px solid transparent;
     position: relative;
     height: 80px;
-    border-left: 5px solid;
-    margin: 5px 0;
     padding: 5px;
 }
 
+.current-task .task-tabs-panel{
+    border-left : 5px solid transparent;
+}
+
+.current-task .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: rgba(82, 82, 82, 0.51);
+}
+
+.current-task .comment-div {
+    background: #2E2E2E;
+    margin-top: 15px;
+    border-radius: 3px;
+    padding: 15px 15px;
+    transition: 0.2s linear background;
+}
+.current-task .comment-div:hover{
+    background: #404040;
+}
+
+.current-task .comment-div .comment-info{
+    width:150px;
+    float:left;
+    text-align: left !important;
+}
+
+.current-task .comment-div .close-comment{
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    cursor: pointer;
+}
+.current-task .comment-div .comment-text{
+    width: 100%;
+    vertical-align: middle;
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+.current-task .task-tabs-panel.details .tag-name{
+    text-transform: capitalize;
+    display: inline-block;
+    padding: 3px;
+    margin-right: 3px;
+    background: #5B1F1D;
+    border-radius: 4px;
+}
+
+
+.description  * {
+    outline: none !important;
+}
+
+.description  .panel *{
+    border : 0 !important;
+}
+
+.description  .panel .panel-heading{
+    color: #D5D5D5 !important;
+    background-color: rgba(91, 31, 29, 0) !important;
+}
+.description  .panel a{
+    font-size: 14px;
+}
+.description .panel{
+    border : none !important;
+    background: rgba(106, 106, 106, 0.43) !important;
+}
+.description .panel .panel-body {
+    border: 0;
+    background: rgba(0, 0, 0, 0.33) !important;
+}
+
+.current-task .comment-div .comment-info .date-and-author{
+    text-align: left;
+}
+
+.comment-div.ng-enter,
+.comment-div.ng-leave
+{
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    position: relative;
+    display: block;
+}
+
+.comment-div.ng-enter.ng-enter-active,
+.comment-div.ng-leave {
+    opacity: 1;
+}
+
+.comment-div.ng-leave.ng-leave-active,
+.comment-div.ng-enter {
+    opacity: 0;
+}
+
+.current-task .nav-pills>li>a{
+    border-radius: 0;
+    color: #A7B0B9;
+    text-decoration: none;
+}
+
+.current-task .nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #2E2C2C;
+}
 .current-task .name{
     display: inline-block;
-    width: 50%;
+    width: 100%;
     text-transform: capitalize;
     padding-left: 5px;
-    line-height: 62px;
+    line-height: 55px;
     font-size: 2em;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -28,16 +135,16 @@
     display: block;
     position: absolute;
     top: 0;
-    line-height: 77px;
+    line-height: 67px;
     left: 3px;
-    overflow: hidden;
     bottom: 0;
     font-size: 6em;
 }
 
 .current-task .no-level{
     position: absolute;
-    top: 23px;
+    top: 20px;
+    white-space: nowrap;
     text-transform: uppercase;
     left: 2px;
     font-size: 2em;
@@ -47,33 +154,77 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -5px;
     margin-left: auto;
     margin-right: auto;
 }
-.current-task .add-date{
-    position: absolute;
-    top:5px;
-    right:5px;
-    color: #8A9393;
+
+.current-task .center-panel{
+    height: 100%;
 }
-.current-task .add-date-time{
-    position: absolute;
-    top:20px;
-    color: #8A9393;
-    right:5px;
+
+.current-task .to-do-panel span{
+    white-space:nowrap;
+    display: inline-block;
+    width : 58px;
+    font-size: 20px;
 }
-.current-task .creator{
+
+
+@media (max-width: 322px) {
+    .current-task .to-do-panel span{
+        width : 39px !important;
+    }
+}
+
+.current-task .to-do-panel .favorite{
+    color: #EFEF30;
+    cursor: pointer;
+}
+
+.current-task .right-panel .train{
     position: absolute;
-    top: 33px;
+    right : 50px;
+    top:30px;
+}
+
+.current-task .to-do-panel .like{
+    color: #BC5353;
+    cursor: pointer;
+}
+
+.current-task .to-do-panel .watch{
+    color: #7E7E7E;
+}
+
+.current-task .to-do-panel .later {
+    cursor: pointer;
+}
+
+
+.current-task .date-and-author{
+    white-space: nowrap;
+    display: block;
+    line-height: 15px;
+    text-align: right;
+    overflow: hidden;
     color: #8A9393;
-    right: 5px;
-    font-size: 15px;
     text-transform: capitalize;
+    text-overflow: ellipsis;
+}
+
+.current-task .right-panel{
+    text-align: right;
+    padding-right: 5px;
+}
+
+.current-task .left-panel{
+    padding-left: 5px;
 }
 
 .current-task .language{
     position: absolute;
+    line-height: 32px;
     top: 0;
     text-transform: uppercase;
     left: 50px;

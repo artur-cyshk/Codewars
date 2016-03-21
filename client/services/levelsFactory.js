@@ -4,7 +4,7 @@ angular.module('codewars').factory('levelsFactory', function() {
             var color = {};
             if(!level) {
                 color.in = "rgb(64, 64, 64)";
-                color.out ="rgb(171, 171, 171)";
+                color.out ="rgba(140, 140, 140, 0.15)";
             }else {
 
                 if(level <= 2) {
