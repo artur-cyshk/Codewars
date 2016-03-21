@@ -1,4 +1,19 @@
 app.controller('TaskCtrl', [ '$scope', '$rootScope','$stateParams','taskService','alertService','socket','levelsFactory', function($scope, $rootScope, $stateParams, taskService, alertService, socket, levelsFactory) {
+
+    $scope.editorOptions = {
+        lineWrapping : true,
+        lineNumbers: true,
+        mode: 'javascript',
+        theme: 'material',
+        focus : true,
+        onLoad : function codemirrorLoaded(editor) {
+            editor.setValue('LAL');
+            editor.on("change", function(){
+                console.log($scope.editorModel);
+            });
+        }
+    };
+
     var self = this;
 
     socket.on('watch',function() {
