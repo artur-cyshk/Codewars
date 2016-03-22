@@ -220,12 +220,24 @@
     cursor: pointer;
 }
 
-.current-task .right-panel .train{
+.current-task .left-panel .train{
     position: absolute;
-    right : 50px;
-    top:30px;
+    left: 50px;
+    z-index: 1;
+    top: 37px;
+}
+.current-task .left-panel .train .btn {
+    background: rgb(34, 37, 35);
+    border: 1px solid #323232;
+    text-decoration: none;
+    outline: none !important;
+    transition: 0.3s linear all;
 }
 
+.current-task .left-panel .train .btn:hover {
+    background: rgb(19, 48, 29);
+    border-color: rgb(19, 48, 29);
+}
 .current-task .to-do-panel .like{
     color: #BC5353;
     cursor: pointer;
