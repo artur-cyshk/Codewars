@@ -1,4 +1,4 @@
-app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','alertService', function($scope, $rootScope, levelsFactory, $http, alertService) {
+app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','leadersService','alertService', function($scope, $rootScope, levelsFactory, leadersService, alertService) {
     var self = this;
 
     self.setInfo = function(leaders, levels) {
@@ -17,7 +17,7 @@ app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','$http','
             $scope.lidersOffset = 0;
         }
         $rootScope.loadingInformation = true;
-        $http.get('/leaders/'+ $scope.lidersOffset)
+        leadersService.getLeaders($scope.lidersOffset)
             .success(function(users) {
 
                 if($scope.lidersOffset == 0) {

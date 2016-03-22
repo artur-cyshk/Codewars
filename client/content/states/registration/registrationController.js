@@ -2,7 +2,7 @@ app.controller('RegistrationCtrl', [ '$scope', '$http','alertService','$state','
 
     $scope.registr = function() {
         if(registrationService.validate($scope.user) ) {
-            $http.post('/registration', $scope.user)
+            registrationService.registrUser($scope.user)
                 .success(function() {
                     alertService.alert('registration success', 'success');
                     $state.go('root.login');

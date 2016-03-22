@@ -1,5 +1,8 @@
-app.factory('registrationService', function (alertService) {
+app.factory('registrationService', function (alertService, $http) {
     return {
+        registrUser : function(user){
+           return $http.post('/registration', user);
+        },
         validate : function(user) {
             if(!user.name || user.name.length < 4) {
                 alertService.alert('username minimal length - 4','error');

@@ -21,7 +21,9 @@
 .leaders-main .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.12);
 }
-
+.leaders-main .table-hover>tbody>tr{
+    transition : 0.3s linear all;
+}
 .leaders-main .table-hover>tbody>tr:hover {
     background-color: rgba(245, 245, 245, 0.05);
 }

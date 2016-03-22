@@ -1,5 +1,5 @@
 'use strict';
-angular.module('codewars').directive('profile', function ($rootScope, $http, alertService, $state, levelsFactory, $stateParams) {
+angular.module('codewars').directive('profile', function ($rootScope, profileService, alertService, $state, levelsFactory, $stateParams) {
     return {
         restrict: 'E',
         scope: false,
@@ -16,7 +16,7 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
             });
 
             $scope.signOut = function() {
-                $http.get('/logout')
+                profileService.logout()
                     .success(function() {
                         delete $scope.currentUser;
                         $rootScope.authorized = false;
@@ -39,7 +39,7 @@ angular.module('codewars').directive('profile', function ($rootScope, $http, ale
             $scope.$watch('authorized', function(value) {
                 if(value) {
                     $scope.userDataLoaded = false;
-                    $http.get('/user')
+                    profileService.getUser()
                         .success(function(user) {
                             $scope.currentUser = user;
                             $scope.levels = levelsFactory.levelObjectMapping(user.honor);

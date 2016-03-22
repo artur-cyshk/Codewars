@@ -3,7 +3,7 @@
     <div ng-if="filter.filterProperties" class="col-md-8 col-lg-8 col-xs-12 col-sm-6 tasks-wrapper">
         <div class="tasks" >
             <div ng-if="loadedTasks">
-                <h1 class="text-center">Tasks</h1>
+                <h1 class="text-center">Tasks <a ui-sref="root.newTask">new Task</a> </h1>
                 <div>
                     <input class="form-control" ng-model="filter.name" type="text" placeholder="search by name">
                 </div>

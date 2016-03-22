@@ -12,8 +12,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-style="{ background: checkYourself(currentUser.name, leader.name) && authorized ? levels[leader.level].color.out : 'auto'}" ng-repeat="leader in leaders">
-                    <td ng-style="{'border-left-color': levels[leader.level].color.out}" ># {{$index + 1}}</td>
+                <tr ng-style="{ background: checkYourself(currentUser.name, leader.name) && authorized ? levels[leader.level].color.in : 'auto'}" ng-repeat="leader in leaders">
+                    <td ng-style="{'border-left-color': levels[leader.level].color.in}" ># {{$index + 1}}</td>
                     <td>{{leader.name}}</td>
                     <td>{{leader.clan}}</td>
                     <td>{{levels[leader.level].levelNum}} </td>

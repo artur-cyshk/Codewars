@@ -1,5 +1,5 @@
 .current-task, .task-tabs-panel, .task-main-panel{
-    min-width: 425px;
+    min-width: 433px;
 }
 .current-task .ace_editor {
     height: 250px;
@@ -10,7 +10,7 @@
 }
 
 .current-task .no-data{
-    color: #AC4747;;
+    color: #AC4747;
 }
 
 .current-task .no-comments{
@@ -233,7 +233,7 @@
 
 .current-task .left-panel .train{
     position: absolute;
-    left: 50px;
+    left: 51px;
     z-index: 1;
     top: 37px;
 }

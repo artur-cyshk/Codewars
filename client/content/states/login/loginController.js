@@ -1,6 +1,6 @@
-app.controller('LoginCtrl', [ '$scope', '$http', 'alertService','$state', function($scope, $http, alertService, $state) {
+app.controller('LoginCtrl', [ '$scope', 'loginService', 'alertService','$state', function($scope, loginService, alertService, $state) {
     $scope.login = function() {
-        $http.post('/login', $scope.user)
+        loginService.login($scope.user)
             .success(function() {
                 alertService.alert('success authorization', 'success');
                 $state.go($state.current.from || 'root.home', $state.current.paramsTo || {});

@@ -29,6 +29,12 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                 controller : 'TasksCtrl',
                 requiredAuthorization : false
             })
+            .state('root.newTask', {
+                url: '/newTask',
+                templateUrl: '../content/states/newTask/newTaskTemplate.html',
+                controller : 'NewTaskCtrl',
+                requiredAuthorization : true
+            })
             .state('root.leaders', {
                 url: '/leaders',
                 templateUrl: '../content/states/leaders/leadersTemplate.html',
