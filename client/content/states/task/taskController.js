@@ -106,6 +106,7 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope', '$stateParams', 'taskServic
                 alertService.alert('server error, try later', 'error');
             })
     };
+
     self.init = function() {
         self.getTaskInformation($stateParams.id);
         $scope.comment = {text : ''};

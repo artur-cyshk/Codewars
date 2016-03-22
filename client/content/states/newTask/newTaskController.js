@@ -4,9 +4,12 @@ app.controller('NewTaskCtrl', [ '$scope', '$rootScope','newTaskService', functio
 
     self.init = function() {
         console.log('task add ctrl');
-        newTaskService.getTypes().success(function(data){
-            console.log(data);
-        })
+        newTaskService.getTypes()
+            .success(
+                function(types){
+                    console.log(data);
+                }
+            )
     };
 
     self.init();
