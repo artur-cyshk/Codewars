@@ -6,7 +6,11 @@
                     {{currentTask.level || 'NO LEVEL'}}
                 </span>
                 <span ng-class="currentTask.level ? 'language' : 'no-language'" ng-style="{'color':mapColor(currentTask.level).in}">{{currentTask.language}}</span>
-                <a ng-if="currentTask.level" class="train" ui-sref="root.taskSolution({id: currentTask.taskId})"><button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm "> <i class="fa fa-play"></i> Train</button></a>
+                <a ng-if="currentTask.level" class="train hidden-xs" ui-sref="root.taskSolution({id: currentTask.taskId})">
+                    <button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm ">
+                        <i class="fa fa-play"></i> Train
+                    </button>
+                </a>
             </div>
             <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 center-panel">
                 <span class="name">{{currentTask.name}}</span>
@@ -15,6 +19,11 @@
                 <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'dd MMMM yyyy'}}</span>
                 <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'HH:mm'}}</span>
                 <span class="date-and-author"><i class="fa fa-user"></i> {{currentTask.creator}}</span>
+                <a ng-if="currentTask.level" class="train train-right hidden-sm hidden-md hidden-lg" ui-sref="root.taskSolution({id: currentTask.taskId})">
+                    <button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm ">
+                        <i class="fa fa-play"></i> Train
+                    </button>
+                </a>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12 center-block col-lg-12 text-center">
                 <span class="to-do-panel">
