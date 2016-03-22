@@ -49,7 +49,9 @@
                             <div ng-bind-html="currentTask.description | html"></div>
                         </uib-accordion-group>
                     </uib-accordion>
-                    <i class="fa fa-tags"></i> <span class="tag-name" ng-repeat="type in currentTask.types">{{type.type_name}}</span>
+                    <i class="fa fa-tags"></i>
+                    <span class="no-data" ng-show="!currentTask.types.length">No types</span>
+                    <span class="tag-name" ng-repeat="type in currentTask.types">{{type.type_name}}</span>
                 </div>
             </uib-tab>
             <uib-tab heading="DISCUSS" classes="btn-sm">
@@ -59,6 +61,7 @@
                             <input type="text" class="form-control comment-input" ng-model="comment.text" placeholder="Write your comment">
                         </form>
                     </div>
+                    <div class="no-data no-comments" ng-show="!currentTask.comments.length">No comments</div>
                     <div class="comment-div col-md-12 col-xs-12 col-sm-12 col-lg-12" ng-repeat="comment in currentTask.comments">
                         <i ng-if ="comment.userId == currUserId" class="glyphicon close-comment glyphicon-remove" ng-click="removeCommit(comment.commentId)"></i>
                         <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">

@@ -74,7 +74,6 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope', '$stateParams', 'taskServic
                 alertService.alert('server error, try later', 'error');
             })
     };
-
     $scope.toDo = function(type){
         if(!type) {
             return;

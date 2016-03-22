@@ -9,6 +9,15 @@
     width: 100%;
 }
 
+.current-task .no-data{
+    color: #AC4747;;
+}
+
+.current-task .no-comments{
+    text-align: center;
+    padding-top: 15px;
+    text-transform: capitalize;
+}
 
 .current-task .solution{
     padding : 15px;
@@ -22,10 +31,12 @@
     top:15px;
     right:15px;
 }
+
 .current-task .solution .solution-author h3{
     margin-top: 3px;
     margin-bottom: 11px;
 }
+
 .current-task .solution.my{
     background: #3E2E2E;
 }
