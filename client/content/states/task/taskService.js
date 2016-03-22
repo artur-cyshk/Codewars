@@ -5,7 +5,7 @@ angular.module('codewars').factory('taskService', function($http, aceFactory) {
         },
         mapSolutions : function(solutions) {
             return solutions.map(function(item) {
-                item.configuration = aceFactory.getConfiguration(item.solution_text, true, false, "none");
+                item.configuration = aceFactory.getConfiguration(item.solution_text, true, false, "none", false);
                 return item;
             })
         },

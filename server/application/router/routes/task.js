@@ -124,7 +124,7 @@ module.exports = function (req, res, next) {
                     req.session.userId + '"';
                 connection.query(query, function(err, data) {
                     if(data.length) {
-                        var query = 'select solutions.solution_text,users.name, solutions.add_date from solutions' +
+                        var query = 'select solutions.user_id as solutionUserId, solutions.solution_text,users.name as author, solutions.add_date from solutions' +
                             ' join users using(user_id) where task_id = ' + req.params.task + ' order by solutions.add_date DESC';
                         connection.query(query, function(err, solutions) {
                             if(solutions){
