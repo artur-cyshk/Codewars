@@ -72,8 +72,8 @@ module.exports = function (req, res, next) {
         return selectOptionsFilter;
     };
     var getTasksQuering = function(filter) {
-        var query = 'SELECT tasks.task_id as taskId, tasks.name as name, level, description, language, add_date as addDate' +
-            ' from tasks' + (filter.join || ' ') +
+        var query = 'SELECT tasks.task_id as taskId, tasks.name as name, level, description, languages.name as language, add_date as addDate' +
+            ' from tasks join languages using (language_id) ' + (filter.join || ' ') +
             (filter.where || ' ') + (filter.sortBy || ' ') + (filter.sort || ' ') +
             ' LIMIT 11 OFFSET ' + (req.body.fromItem || 0) + ' ';
         connection.query(query, function(err,data) {

@@ -1,1 +1,59 @@
-add
+<div ng-show="rootLoadingFinish && authorized && newTask.defaultData">
+    <div class="col-lg-8 col-md-8 col-xs-12 col-sm-8 new-task-wrapper">
+        <form class="new-task-form">
+            <h1 class="text-capitalize">task {{newTask.defaultData.managment}}</h1>
+            <div class="form-group">
+                <input type="text" name="name" ng-model="newTaskModel.name"  autocomplete="off" placeholder="*Task name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="newTaskModel.entryPoint" name="entryPoint" autocomplete="off" placeholder="*Entry function name" class="form-control">
+            </div>
+            <div class="form-group">
+                <ol title="*Types" class="nya-bs-select" requireds actions-box="true" multiple ng-model="newTaskModel.types">
+                    <li nya-bs-option="type in newTask.defaultData.types">
+                        <a>
+                            {{type.name}}
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+            <div class="form-group">
+                <ol title="*Language" class="nya-bs-select" ng-required actions-box="true" ng-model="newTaskModel.language">
+                    <li nya-bs-option="language in newTask.defaultData.languages">
+                        <a>
+                            {{language.name}}
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+            <div class="form-group">
+                Tests*
+                {{newTaskModel}}
+
+                <button ng-click="newTask.addTest(newTask.defaultData.tests.length)">add test</button>
+
+                <div ng-repeat="(testIndex, test) in newTask.defaultData.tests" class="col-md-12 col-xs-12 col-lg-12 col-xs-12">
+                    {{testIndex}}
+                    <button ng-click="newTask.removeTest(testIndex)">del test</button>
+                    <button ng-click="newTask.addVariable(testIndex, test.variables.length)">add variable</button>
+                    <div ng-repeat="(variableIndex, variable) in test.variables track by $index">
+                        <input ng-model="newTask.defaultData.tests[testIndex].variables[variableIndex]"  ng-value="variable.name" type="text" placeholder="variable">
+                        <button ng-click="newTask.removeVariable(testIndex , variableIndex)"> rem Ver</button>
+                    </div>
+                    <input ng-model="newTask.defaultData.tests[testIndex].result" type="text" placeholder="result">
+                </div>
+
+            </div>
+            <div class="form-group">
+                <text-angular ng-model="newTaskModel.description" placeholder="*Description"></text-angular>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger btn-block text-capitalize" ng-click="addNewTask()">{{newTask.defaultData.managment}} task</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

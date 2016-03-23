@@ -245,7 +245,6 @@
     border: 1px solid;
     text-decoration: none;
     outline: none !important;
-    transition: 0.3s linear all;
 }
 
 .current-task .to-do-panel .like{

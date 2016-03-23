@@ -2,14 +2,16 @@ app.controller('NewTaskCtrl', [ '$scope', '$rootScope','newTaskService', functio
 
     var self = this;
 
+    $scope.addNewTask = function () {
+        //validate
+        $scope.newTaskModel.tests = $scope.newTask.defaultData.tests;
+        console.log($scope.newTaskModel);
+    };
+
     self.init = function() {
-        console.log('task add ctrl');
-        newTaskService.getTypes()
-            .success(
-                function(types){
-                    console.log(data);
-                }
-            )
+        $scope.newTaskModel = {};
+        $scope.newTask = new newTaskService.TaskData();
+        $scope.newTask.getInformation();
     };
 
     self.init();
