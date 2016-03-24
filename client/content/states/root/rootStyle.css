@@ -94,6 +94,10 @@
     padding: 9px 10px 0;
     color: #B4B4B5;
     cursor: pointer;
+    transition: 0.2s linear all;
+}
+.root .menu i.fa:hover{
+    color:#934B4B;
 }
 
 .root .alert {

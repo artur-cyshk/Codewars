@@ -5,8 +5,16 @@ app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout', function($scope,
     $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
     };
+
+    self.checkSame = function(alerts, mess){
+        return (alerts.length > 0 && _.last(alerts,1).msg == mess)
+    };
+
     $scope.$on('alert',function(event, info) {
         if($scope.alerts.length < $scope.MAX_ALERTS_COUNT ) {
+            if(self.checkSame($scope.alerts, info.message)) {
+                return;
+            }
             if($scope.timer) {
                 $timeout.cancel($scope.timer);
             }

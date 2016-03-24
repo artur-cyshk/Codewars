@@ -1,0 +1,58 @@
+<div ng-show="rootLoadingFinish && authorized && managementTask.defaultData && managementTask.model">
+    <div class="col-lg-8 col-md-8 col-xs-12 col-sm-8 management-task-wrapper">
+        <form class="management-task-form">
+            <h1 class="text-capitalize">task {{managementTask.defaultData.management}}</h1>
+            <div class="form-group">
+                <input type="text" name="name" ng-model="managementTask.model.name"  autocomplete="off" placeholder="*Task name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="managementTask.model.entryPoint" name="entryPoint" autocomplete="off" placeholder="*Entry function name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="managementTask.model.additionalType.name">
+                <ol title="*Types" class="nya-bs-select" requireds actions-box="true" multiple ng-model="managementTask.model.types">
+                    <li nya-bs-option="type in managementTask.defaultData.types">
+                        <a>
+                            {{type.name}}
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+            <div class="form-group">
+                <ol title="*Language" class="nya-bs-select" ng-required actions-box="true" ng-model="managementTask.model.language">
+                    <li nya-bs-option="language in managementTask.defaultData.languages">
+                        <a>
+                            {{language.name}}
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+            <div class="form-group">
+                Tests*
+                <button ng-click="managementTask.addTest(managementTask.defaultData.tests.length)">add test</button>
+
+                <div ng-repeat="(testIndex, test) in managementTask.defaultData.tests" class="col-md-12 col-xs-12 col-lg-12 col-xs-12">
+                    {{testIndex}}
+                    <button ng-click="managementTask.removeTest(testIndex)">del test</button>
+                    <button ng-click="managementTask.addVariable(testIndex, test.variables.length)">add variable</button>
+                    <div ng-repeat="(variableIndex, variable) in test.variables track by $index">
+                        <input ng-model="managementTask.defaultData.tests[testIndex].variables[variableIndex]"  ng-value="variable.name" type="text" placeholder="variable">
+                        <button ng-click="managementTask.removeVariable(testIndex , variableIndex)"> rem Ver</button>
+                    </div>
+                    <input ng-model="managementTask.defaultData.tests[testIndex].result" type="text" placeholder="result">
+                </div>
+
+            </div>
+            <div class="form-group">
+                <text-angular ng-model="managementTask.model.description" placeholder="*Description"></text-angular>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger btn-block text-capitalize" ng-click="manageTask()">{{managementTask.defaultData.management}} task</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

@@ -9,7 +9,8 @@ var app = angular.module('codewars',
         'nya.bootstrap.select',
         'ui.checkbox',
         'ui.ace',
-        'textAngular'
+        'textAngular',
+        'ngFileUpload'
     ]);
 
 app.run(['checkAccessFactory','$rootScope','$http', function(checkAccessFactory, $rootScope) {

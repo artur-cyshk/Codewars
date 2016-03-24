@@ -1,10 +1,10 @@
-.new-task-wrapper {
+.management-task-wrapper {
     padding: 15px;
     margin : 0 auto;
     float: none;
 }
 
-.new-task-form {
+.management-task-form {
     background: #262728;
     padding: 15px;
     border-left: 4px solid #515151;

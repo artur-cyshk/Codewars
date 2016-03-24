@@ -1,4 +1,4 @@
-app.factory('newTaskService', function ($http, alertService) {
+app.factory('managementTaskService', function ($http, alertService, $rootScope) {
     var selfService = this;
     selfService.getTypes = function() {
         return $http.get('/types');
@@ -9,19 +9,46 @@ app.factory('newTaskService', function ($http, alertService) {
     };
 
     return {
-        TaskData : function () {
+        TaskData : function (managment , taskIdToEdit) {
             var self = this;
 
             this.MIN_TEST_COUNT = 5;
 
+
             this.formatData = function (types, languages) {
                 var defaultData = {};
-                defaultData.managment = 'add';
+                defaultData.management = managment;
                 defaultData.types = types;
                 defaultData.languages = languages;
                 defaultData.tests = [];
                 self.defaultData = defaultData;
                 self.addMinimalTests( self.MIN_TEST_COUNT );
+                if(taskIdToEdit) {
+                    self.getTaskModelInEditMode(self.defaultData.tests);
+                }else{
+                    self.setModel(self.defaultData.tests);
+                }
+            };
+
+            this.getTaskModelInEditMode = function(tests){
+                $http.get('/taskWithTests/' + taskIdToEdit)
+                    .success(function(task){
+                        self.setModel(tests, task);
+                    })
+                    .error(function(err){
+                        alertService.alert( err || 'server error, try later', 'error');
+                        $rootScope.loadingInformation = false;
+                    })
+            };
+
+            this.setModel = function(tests , task){
+                self.model = {};
+                self.model.tests = tests;
+                if (_.isObject(task)) {
+                    self.model = task;
+                    self.defaultData.tests = self.model.tests;
+                }
+                $rootScope.loadingInformation = false;
             };
 
             this.addMinimalTests = function (count) {
@@ -68,6 +95,7 @@ app.factory('newTaskService', function ($http, alertService) {
             };
 
             this.getInformation = function () {
+                $rootScope.loadingInformation = true;
                 selfService.getTypes()
                     .success(
                         function(types){
