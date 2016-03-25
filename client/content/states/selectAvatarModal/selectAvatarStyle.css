@@ -1,0 +1,22 @@
+.select-modal-body .crop-area {
+    background: rgba(228, 228, 228, 0.02);
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.select-modal-body .select{
+    outline: none !important;
+    margin-top: 11px;
+    background: #131E27;
+    border: none;
+    transition: 0.2s linear all;
+}
+
+.select-modal-body .select:hover {
+    outline: none !important;
+    margin-top: 11px;
+    background: #3A3D8A;
+    border: none;
+}

@@ -7,25 +7,10 @@
         Profile
     </h1>
     <div class="col-md-12">
-        <div style="background: white" class="avatar col-lg-6 col-md-12 col-sm-12 col-xs-12">
-            <i class="glyphicon glyphicon-user"></i>
-            <form name="myForm">
-                <div>Crop Image and Upload</div>
-                <button ngf-select ng-model="picFile" accept="image/*">
-                    Select Picture</button>
-                <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
-                     class="cropArea">
-                    <img-crop image="picFile  | ngfDataUrl"
-                              result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
-                    </img-crop>
-                </div>
-                <div>
-                    <img ng-src="{{croppedDataUrl}}" />
-                </div>
-                <button ng-click="upload(croppedDataUrl, picFile.name)">Submit</button>
-            </form>
+        <div class="avatar col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <img ng-src="./content/images/avatars/{{currentUser.avatarUrl}}" ng-click="selectAvatar()">
         </div>
-        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 user-clan">
             <span class="username text-center"
                   ng-style="{'color' : levels[currentUser.level].color.out}"
                   >{{currentUser.name}}</span>

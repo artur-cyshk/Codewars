@@ -9,14 +9,18 @@
     min-width: 225px;
 }
 
-.profile .cropArea {
-    background: #E4E4E4;
-    overflow: hidden;
-    width:500px;
-    height:350px;
+@media(max-width:576px){
+    .profile .avatar img{
+        width : 100% !important;
+        height:100% !important;
+    }
 }
-
-
+.profile .avatar img{
+    width : 154px;
+    height:154px;
+    border-radius: 50%;
+    cursor: pointer;
+}
 .profile .close-profile.fa{
     font-size: 30px;
     padding: 9px 10px 0;
@@ -61,7 +65,9 @@
     float: none;
     margin: 0 auto;
 }
-
+.profile .user-clan{
+    padding: 20px;
+}
 .profile .level{
     background: rgba(59, 59, 59, 0.24);
     padding: 20px 0;
@@ -92,10 +98,6 @@
 .profile .clan{
     font-size: 2em;
 }
-.profile .glyphicon.glyphicon-user{
-    font-size: 122px;
-}
-
 
 .profile .progress-wrapper .progress{
     top: 50%;

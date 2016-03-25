@@ -5,18 +5,18 @@ angular.module('codewars').directive('profile', function ($rootScope, profileSer
         scope: false,
         replace : true,
         templateUrl: './content/states/profile/profileTemplate.html',
-        controller: function ($scope, Upload) {
-            //todo avatar
-            $scope.upload = function (dataUrl, name) {
-                Upload.upload({
-                    url: '/uploadAvatar',
-                    data: {
-                        file: Upload.dataUrltoBlob(dataUrl, name)
-                    }
-                }).then(function (response) {
-                        console.log(response);
-                }, function (response) {
-                    console.log(response);
+        controller: function ($scope) {
+
+            $scope.selectAvatar = function() {
+                var modalInstance = profileService.openSelectAvatarModal();
+                modalInstance.result.then(function (dataUrl, name) {
+                    profileService.uploadAvatar(dataUrl, name)
+                        .then(function (response) {
+                            $scope.currentUser.avatarUrl = response.data;
+                            alertService.alert('avatar successfully loaded', 'success');
+                        }, function () {
+                            alertService.alert('server error, try later', 'error');
+                        });
                 });
             };
 

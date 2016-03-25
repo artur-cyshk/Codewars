@@ -1,0 +1,24 @@
+<div class="remove-modal">
+    <div class="modal-header">
+        <button type="button" ng-click="cancel() " class="close" >&times;</button>
+        <h3 class="modal-title">Avatar</h3>
+    </div>
+    <div class="modal-body select-modal-body">
+        <form>
+            <p class="text-center">Select  or drop picture</p>
+            <div ngf-drop ng-model="avatar.file" ngf-pattern="image/*"
+                 class="crop-area">
+                <img-crop image="avatar.file  | ngfDataUrl"
+                          result-image="avatar.croppedDataUrl" ng-init="avatar.croppedDataUrl=''">
+                </img-crop>
+            </div>
+            <button class="btn select btn-primary btn-block" ngf-select ng-model="avatar.file" accept="image/*">
+                Select from computer
+            </button>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" ng-if="avatar.file" ng-click="setAvatar(avatar.croppedDataUrl, avatar.file.name)">Set</button>
+        <button class="btn btn-danger" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</div>
