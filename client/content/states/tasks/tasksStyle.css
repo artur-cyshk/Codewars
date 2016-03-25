@@ -13,6 +13,7 @@
 
 .tasks h1{
     padding: 5px;
+    padding-left: 30px;
     color : #DB4949;
 }
 .tasks h1 .task-new-plus{
