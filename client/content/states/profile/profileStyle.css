@@ -9,6 +9,14 @@
     min-width: 225px;
 }
 
+.profile .cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:500px;
+    height:350px;
+}
+
+
 .profile .close-profile.fa{
     font-size: 30px;
     padding: 9px 10px 0;
@@ -87,6 +95,7 @@
 .profile .glyphicon.glyphicon-user{
     font-size: 122px;
 }
+
 
 .profile .progress-wrapper .progress{
     top: 50%;

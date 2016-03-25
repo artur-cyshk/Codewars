@@ -9,7 +9,7 @@ var express = require('express'),
     socketRouter = require('./application/socketRouter/router'),
     app = express();
 
-app.use(express.static('client'));
+app.use(express.static('./client'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());

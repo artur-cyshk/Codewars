@@ -10,7 +10,8 @@ var app = angular.module('codewars',
         'ui.checkbox',
         'ui.ace',
         'textAngular',
-        'ngFileUpload'
+        'ngFileUpload',
+        'ngImgCrop'
     ]);
 
 app.run(['checkAccessFactory','$rootScope','$http', function(checkAccessFactory, $rootScope) {

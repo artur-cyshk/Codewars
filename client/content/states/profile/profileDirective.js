@@ -7,17 +7,16 @@ angular.module('codewars').directive('profile', function ($rootScope, profileSer
         templateUrl: './content/states/profile/profileTemplate.html',
         controller: function ($scope, Upload) {
             //todo avatar
-            $scope.upload = function (file) {
+            $scope.upload = function (dataUrl, name) {
                 Upload.upload({
                     url: '/uploadAvatar',
-                    data: {file: file}
-                }).then(function (resp) {
-                    console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-                }, function (resp) {
-                    console.log('Error status: ' + resp.status);
-                }, function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                    data: {
+                        file: Upload.dataUrltoBlob(dataUrl, name)
+                    }
+                }).then(function (response) {
+                        console.log(response);
+                }, function (response) {
+                    console.log(response);
                 });
             };
 
