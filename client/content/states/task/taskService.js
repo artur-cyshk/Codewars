@@ -47,7 +47,6 @@ angular.module('codewars').factory('taskService', function($http, aceFactory, $u
                 default:
                     break;
             }
-            console.log(taskInfo);
             return $http.post('/toDoWithTask', taskInfo);
         },
         blurCommitInput : function(){

@@ -46,7 +46,6 @@ module.exports = function (req, res, next) {
             req.session.userId + '"';
         connection.query(query, function(err) {
             if(err) {
-                console.log(err);
                 if(err.code == "ER_DUP_ENTRY") {
                     next({
                         data: "username already exists"
