@@ -9,6 +9,7 @@ router.get('/languages', require('./routes/languages'));
 router.get('/leaders/:page', require('./routes/leaders'));
 router.get('/task/:task', require('./routes/task'));
 router.get('/taskWithTests/:task', require('./routes/taskWithTests'));
+router.delete('/deleteTask/:task', require('./routes/deleteTask'));
 router.delete('/deleteCommit/:id', require('./routes/deleteCommit'));
 router.post('/tasks', require('./routes/tasks'));
 router.post('/uploadAvatar', require('./routes/uploadAvatar'));

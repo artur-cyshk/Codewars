@@ -13,35 +13,42 @@
                 </a>
             </div>
             <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 center-panel">
-                <span class="name">{{currentTask.name}}</span>
+                <span class="name">
+                    {{currentTask.name}}
+                </span>
+
             </div>
             <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3 right-panel">
                 <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'dd MMMM yyyy'}}</span>
                 <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'HH:mm'}}</span>
                 <span class="date-and-author"><i class="fa fa-user"></i> {{currentTask.creator}}</span>
+                <a class="editing-task" ui-sref="root.editTask({id:currentTask.taskId})">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <span class="editing-task"><i  class="fa fa-trash-o" ng-click="openRemovingTaskModal(currentTask.taskId)"></i></span>
                 <a ng-if="currentTask.level" class="train train-right hidden-sm hidden-md hidden-lg" ui-sref="root.taskSolution({id: currentTask.taskId})">
                     <button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm ">
-                        <i class="fa fa-play"></i> Train
+                        <i class="fa fa-play"></i>
                     </button>
                 </a>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12 center-block col-lg-12 text-center">
                 <span class="to-do-panel">
-                     <span ng-if="authorized" class="later" ng-click="toDo('later')">
-                        <i class="fa fa-thumb-tack" ng-show="currentTask.canLater"></i>
-                        <i class="fa fa-clock-o" ng-hide="currentTask.canLater"></i>
+                     <span ng-if="authorized" class="later" >
+                        <i class="fa fa-thumb-tack" ng-click="toDo('later')"  ng-show="currentTask.canLater"></i>
+                        <i class="fa fa-clock-o" ng-click="toDo('later')" ng-hide="currentTask.canLater"></i>
                     </span>
 
-                    <span ng-if="authorized" class="favorite" ng-click="toDo('favorite')">
-                        <i class="fa fa-star-o" ng-show="currentTask.canFavorite"></i>
-                        <i class="fa fa-star" ng-hide="currentTask.canFavorite"></i>
+                    <span ng-if="authorized" class="favorite">
+                        <i class="fa fa-star-o" ng-click="toDo('favorite')" ng-show="currentTask.canFavorite"></i>
+                        <i class="fa fa-star" ng-click="toDo('favorite')" ng-hide="currentTask.canFavorite"></i>
                     </span>
                     <span class="watch">
                         <i class="fa fa-eye"></i>{{currentTask.watchingCount}}
                     </span>
-                    <span ng-if="authorized" class="like" ng-click="toDo('like')">
-                        <i class="fa fa-thumbs-o-up" ng-show="currentTask.canLike"></i>
-                        <i class="fa fa-thumbs-up" ng-hide="currentTask.canLike"></i>
+                    <span ng-if="authorized" class="like" >
+                        <i class="fa fa-thumbs-o-up" ng-click="toDo('like')" ng-show="currentTask.canLike"></i>
+                        <i class="fa fa-thumbs-up" ng-click="toDo('like')" ng-hide="currentTask.canLike"></i>
                         {{currentTask.likesCount}}
                     </span>
                 </span>

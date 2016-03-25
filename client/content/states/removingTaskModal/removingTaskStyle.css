@@ -1,0 +1,26 @@
+.modal-content{
+    position: relative;
+    background-color: rgb(41, 41, 41);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #2E2E2E;
+    border-radius: 3px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+.modal-content .cant{
+    color: red;
+}
+.remove-modal .modal-footer{
+    border-top: 1px solid #363636;
+}
+
+.remove-modal .modal-header{
+    border-bottom: 1px solid #363636;
+}
+
+.remove-modal .modal-footer .btn{
+    outline: none !important;
+}
+

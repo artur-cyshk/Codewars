@@ -1,5 +1,4 @@
-app.controller('TaskCtrl', [ '$scope', '$rootScope', '$stateParams', 'taskService', 'alertService', 'socket', 'levelsFactory', function($scope, $rootScope, $stateParams, taskService, alertService, socket, levelsFactory) {
-
+app.controller('TaskCtrl', [ '$scope', '$rootScope', '$stateParams', 'taskService', 'alertService', 'socket', 'levelsFactory','$state', function($scope, $rootScope, $stateParams, taskService, alertService, socket, levelsFactory, $state) {
     var self = this;
 
     socket.on('watch',function() {
@@ -36,6 +35,10 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope', '$stateParams', 'taskServic
                 alertService.alert(text, 'error');
                 $rootScope.loadingInformation = false;
             })
+    };
+    
+    $scope.openRemovingTaskModal = function (id) {
+        taskService.openRemoveModal(id);
     };
 
     $scope.setComment = function() {

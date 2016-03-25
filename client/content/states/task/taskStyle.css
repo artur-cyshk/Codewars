@@ -200,7 +200,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -5px;
+    bottom: -1px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -217,13 +217,13 @@
 }
 
 
-@media (max-width: 322px) {
+@media (max-width: 544px) {
     .current-task .to-do-panel span{
-        width : 39px !important;
+        width : 35px !important;
     }
 }
 
-.current-task .to-do-panel .favorite{
+.current-task .to-do-panel .favorite i{
     color: #EFEF30;
     cursor: pointer;
 }
@@ -231,17 +231,35 @@
 .current-task .left-panel .train{
     position: absolute;
     left: 51px;
-    z-index: 1;
     top: 37px;
+}
+
+.current-task .editing-task{
+    font-size: 1.3em;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s linear all;
+}
+
+.current-task .editing-task i{
+}
+
+.current-task .editing-task:hover, .current-task .editing-task:active, .current-task .editing-task:focus{
+    text-decoration: none !important;
+}
+
+.current-task .editing-task:hover{
+    color: #959595 !important;
 }
 
 .current-task .right-panel .train-right{
     position: absolute;
-    top: 19px;
-    right: 0;
+    top: 39px;
+    right: 3px;
+    z-index: 1;
 }
 
-.current-task .left-panel .train .btn {
+.current-task .left-panel .train .btn, .current-task .right-panel .train .btn {
     border: 1px solid;
     text-decoration: none;
     outline: none !important;
@@ -249,6 +267,9 @@
 
 .current-task .to-do-panel .like{
     color: #BC5353;
+}
+
+.current-task .to-do-panel .like i{
     cursor: pointer;
 }
 
@@ -256,7 +277,7 @@
     color: #7E7E7E;
 }
 
-.current-task .to-do-panel .later {
+.current-task .to-do-panel .later i{
     cursor: pointer;
 }
 
@@ -274,11 +295,13 @@
 
 .current-task .right-panel{
     text-align: right;
+    z-index: 1;
     padding-right: 5px;
 }
 
 .current-task .left-panel{
     padding-left: 5px;
+    z-index: 1;
 }
 
 .current-task .language{

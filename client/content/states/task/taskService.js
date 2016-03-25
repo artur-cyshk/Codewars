@@ -1,4 +1,4 @@
-angular.module('codewars').factory('taskService', function($http, aceFactory) {
+angular.module('codewars').factory('taskService', function($http, aceFactory, $uibModal, $templateCache) {
     return {
         getTask : function(id) {
             return $http.get('/task/' + id);
@@ -8,6 +8,19 @@ angular.module('codewars').factory('taskService', function($http, aceFactory) {
                 item.configuration = aceFactory.getConfiguration(item.solution_text, true, false, "none", false);
                 return item;
             })
+        },
+        openRemoveModal : function (id) {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'content/states/removingTaskModal/removingTaskTemplate.html',
+                controller: 'RemovingTaskCtrl',
+                size: 'sm',
+                resolve: {
+                    taskId: function () {
+                        return id;
+                    }
+                }
+            });
         },
         addCommit : function(commit) {
             return $http.post('/commit', commit);

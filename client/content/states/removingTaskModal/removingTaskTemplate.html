@@ -1,0 +1,13 @@
+<div class="remove-modal">
+    <div class="modal-header">
+        <button type="button" ng-click="cancel() " class="close" >&times;</button>
+        <h3 class="modal-title">Are you sure?</h3>
+    </div>
+    <div class="modal-body">
+        This action <span class="cant">CANNOT</span> be undone. This will permanently delete this task with all tests, solutions and other information.
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" type="button" ng-click="deleteTask()">OK</button>
+        <button class="btn btn-success" type="button" ng-click="cancel()">Cancel</button>
+</div>
+</div>
