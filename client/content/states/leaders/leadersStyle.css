@@ -8,6 +8,10 @@
     color: white !important;
 }
 
+.leaders-main .avatar{
+    height: 100%;
+    border-radius: 50%;
+}
 .leaders .btn {
     outline: none !important;
 }
