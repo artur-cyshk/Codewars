@@ -3,7 +3,9 @@ body{
     color: #D5D5D5;
     font-family: "Lato","Helvetica Neue","Helvetica", monospace;
 }
-
+body * {
+    outline: none;
+}
 body.hidden-scroll{
     overflow-x: hidden;
 }
