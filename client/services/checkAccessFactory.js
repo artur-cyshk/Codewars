@@ -33,52 +33,46 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
 
             $http.get('/authorized')
                 .success(function(userData) {
-                    self.setRootScope(true,'authorized');
-                    self.setRootScope(userData.userId, 'currUserId');
-                    self.setRootScope((userData.type == 'admin' ), 'adminRoot');
                     if(!argLength) {
                         self.setRootScope(true, 'firstLoadingFinish');
-                        return;
-                    }
-
-                    self.setRootScope(true, 'rootLoadingFinish');
-
-                    if(toState.requiredRoot) {
-                        if(userData.type != 'admin') {
-                            alertService.alert('no access, need root', 'error');
+                    }else {
+                        self.setRootScope(true, 'rootLoadingFinish');
+                        if(toState.requiredRoot) {
+                            if(userData.type != 'admin') {
+                                alertService.alert('no access, need root', 'error');
+                                $state.go('root.home');
+                            }
+                        }
+                        if(toState.name == 'root.login' || toState.name == 'root.registration') {
                             $state.go('root.home');
                         }
                     }
-
-
-
-                    if(toState.name == 'root.login' || toState.name == 'root.registration') {
-                        $state.go('root.home');
-                    }
+                    self.setRootScope(userData.userId, 'currUserId');
+                    self.setRootScope((userData.type == 'admin' ), 'adminRoot');
+                    self.setRootScope(true,'authorized');
                 })
                 .error(function() {
-
-                    self.setRootScope(false, 'authorized');
-
                     if(!argLength) {
                         self.setRootScope(true, 'firstLoadingFinish');
-                        return;
-                    }
-                    self.setRootScope(true, 'rootLoadingFinish');
-                    if(toState.name == 'root.login') {
-                        var params = self.loginStateFormating(toState, fromState, fromParams, $rootScope.logout);
-                        $rootScope.logout = false;
-                        toState.from = params.from;
-                        toState.paramsTo = params.paramsTo;
-                    }
-
-                    if(toState.requiredAuthorization) {
-                        if(!$rootScope.logout){
-                            alertService.alert('no access, login please', 'error');
+                    }else{
+                        self.setRootScope(true, 'rootLoadingFinish');
+                        if(toState.name == 'root.login') {
+                            var params = self.loginStateFormating(toState, fromState, fromParams, $rootScope.logout);
+                            $rootScope.logout = false;
+                            toState.from = params.from;
+                            toState.paramsTo = params.paramsTo;
                         }
-                        $state.go('root.login');
-                    }
 
+                        if(toState.requiredAuthorization) {
+                            if(!$rootScope.logout){
+                                alertService.alert('no access, login please', 'error');
+                            }
+                            $state.go('root.login');
+                        }
+                    }
+                    self.setRootScope(undefined, 'currUserId');
+                    self.setRootScope(undefined, 'adminRoot');
+                    self.setRootScope(false, 'authorized');
             });
         }
     }

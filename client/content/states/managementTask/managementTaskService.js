@@ -1,4 +1,4 @@
-app.factory('managementTaskService', function ($http, alertService, $rootScope) {
+app.factory('managementTaskService', function ($http, alertService, $rootScope, $state) {
     var selfService = this;
     selfService.getTypes = function() {
         return $http.get('/types');
@@ -35,8 +35,11 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope) 
                     .success(function(task){
                         self.setModel(tests, task);
                     })
-                    .error(function(err){
-                        alertService.alert( err || 'server error, try later', 'error');
+                    .error(function(err, status){
+                        if(status != 401){
+                            alertService.alert( err || 'server error, try later', 'error');
+                            $state.go('root.task', {id: taskIdToEdit});
+                        }
                         $rootScope.loadingInformation = false;
                     })
             };

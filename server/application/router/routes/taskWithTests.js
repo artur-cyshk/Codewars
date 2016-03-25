@@ -2,8 +2,11 @@ var connection = require('../../../configuration/database/connection');
 var async = require('async');
 var _ = require('lodash');
 module.exports = function (req, res, next) {
-    if(!req.params || !req.session.authorized || !req.params.task || isNaN(req.params.task) ){
-        next(true);
+    if(!req.session.authorized){
+        return next({status : 401});
+    }
+    if(!req.params || !req.params.task || isNaN(req.params.task) ) {
+        return next(true);
     }
     async.waterfall([
         function(callback){
@@ -13,7 +16,7 @@ module.exports = function (req, res, next) {
             connection.query(query, function(err, tasks) {
                 if(!tasks.length){
                     err = {};
-                    err.data = {'data' : "a task doesn't exist "};
+                    err.data = {'data' : "no access or task doesn't exist "};
                 }
                 callback(err, tasks[0]);
             })
