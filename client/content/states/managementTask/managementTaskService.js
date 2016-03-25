@@ -38,7 +38,7 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
                     .error(function(err, status){
                         if(status != 401){
                             alertService.alert( err || 'server error, try later', 'error');
-                            $state.go('root.task', {id: taskIdToEdit});
+                            $state.go('root.tasks');
                         }
                         $rootScope.loadingInformation = false;
                     })

@@ -15,6 +15,26 @@
     padding: 5px;
     color : #DB4949;
 }
+.tasks h1 .task-new-plus{
+    float: right;
+    display: inline-block;
+    cursor: default;
+    margin-top: 3px;
+}
+
+
+.tasks h1 .task-new-plus i{
+     float:right;
+     cursor: pointer;
+     color: #BE3A3B;
+    transition: 0.2s linear all;
+ }
+
+.tasks h1 .task-new-plus i:hover{
+    float:right;
+    cursor: pointer;
+    color: #6C2D2D;
+}
 
 .tasks h1.no-tasks{
     margin-bottom: -13px;

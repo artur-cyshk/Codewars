@@ -33,6 +33,7 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope', '$stateParams', 'taskServic
             .error(function(err) {
                 var text = err || 'server error, try later';
                 alertService.alert(text, 'error');
+                $state.go('root.tasks');
                 $rootScope.loadingInformation = false;
             })
     };
