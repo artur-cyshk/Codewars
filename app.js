@@ -2,11 +2,11 @@ var express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
-    router = require('./application/router/router'),
-    errorHandler = require('./configuration/errorHandler'),
-    port = require('./configuration/config').port,
-    sessionMiddleware = require('./configuration/session/session'),
-    socketRouter = require('./application/socketRouter/router'),
+    router = require('./server/application/router/router'),
+    errorHandler = require('./server/configuration/errorHandler'),
+    port = require('./server/configuration/config').port,
+    sessionMiddleware = require('./server/configuration/session/session'),
+    socketRouter = require('./server/application/socketRouter/router'),
     app = express();
 
 app.use(express.static('./client'));
