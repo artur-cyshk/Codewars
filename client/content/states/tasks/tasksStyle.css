@@ -22,14 +22,15 @@
     float: right;
     display: inline-block;
     cursor: default;
-    margin-top: 3px;
+    margin-top: 5px;
 }
 
 
 .tasks h1 .task-new-plus i{
-     float:right;
-     cursor: pointer;
-     color: #BE3A3B;
+    float:right;
+    cursor: pointer;
+    font-size: 0.7em;
+    color: #BE3A3B;
     transition: 0.2s linear all;
  }
 
@@ -145,4 +146,8 @@
 .one-task.ng-enter {
     opacity: 0;
     right: -50px;
+}
+
+.search-tasks{
+    margin-bottom: 10px;
 }

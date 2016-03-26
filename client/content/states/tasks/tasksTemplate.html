@@ -5,7 +5,7 @@
             <div ng-if="loadedTasks">
                 <h1 class="text-center" ng-class="{'padding-left' : authorized}">Tasks <a ng-if="authorized" class="task-new-plus" ui-sref="root.newTask"><i class="fa fa-plus-square"></i></a> </h1>
                 <div>
-                    <input class="form-control" ng-model="filter.name" type="text" placeholder="search by name">
+                    <input class="form-control search-tasks" ng-model="filter.name" type="text" placeholder="search by name">
                 </div>
                 <div class="one-task text-center" ng-style="{'border-left-color':mapColor(task.level).in}" ng-click="openTask(task.taskId)" ng-repeat="task in loadedTasks | filter : filter.name">
                     <span class="name">{{task.name}}</span>

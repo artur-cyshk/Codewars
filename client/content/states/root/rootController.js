@@ -37,6 +37,7 @@ app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout', function($scope,
         $scope.status.levelPanelInHome = true;
         $scope.status.openSortFilter = true;
         $scope.status.openDescription = true;
+        $scope.status.openTestsPanel = true;
     };
 
     self.init();

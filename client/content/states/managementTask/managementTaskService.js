@@ -9,6 +9,9 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
     };
 
     return {
+        checkClosest : function (className) {
+            return (angular.element(event.target).closest(className));
+        },
         TaskData : function (managment , taskIdToEdit) {
             var self = this;
 
@@ -22,7 +25,6 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
                 defaultData.languages = languages;
                 defaultData.tests = [];
                 self.defaultData = defaultData;
-                self.addMinimalTests( self.MIN_TEST_COUNT );
                 if(taskIdToEdit) {
                     self.getTaskModelInEditMode(self.defaultData.tests);
                 }else{
@@ -47,10 +49,13 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
             this.setModel = function(tests , task){
                 self.model = {};
                 self.model.tests = tests;
-                if (_.isObject(task)) {
+                if (task && _.isObject(task)) {
                     self.model = task;
                     self.defaultData.tests = self.model.tests;
+                }else{
+                    self.addMinimalTests( self.MIN_TEST_COUNT );
                 }
+
                 $rootScope.loadingInformation = false;
             };
 

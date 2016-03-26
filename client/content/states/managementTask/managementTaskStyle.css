@@ -13,7 +13,7 @@
 .management-task-form *{
     outline: none !important;
 }
-.description-textbox .btn-group{
+.management-task-form .description-textbox .btn-group{
     z-index: 0;
 }
 
@@ -27,8 +27,8 @@
 }
 
 .management-task-form .panel .panel-heading{
-    color: #D5D5D5 !important;
-    background-color: #273543 !important;
+    color: #FFFFFF !important;
+    background-color: #5F5F5F !important;
 }
 .management-task-form .panel a{
     font-size: 14px;
@@ -43,37 +43,170 @@
 }
 
 .management-task-form .select-div .btn {
-    background: #273543;
-    color: #D5D5D5;
+    background: rgb(255, 255, 255);
+    color: black;
     font-size: 14px;
     height:37px !important;
-    border: none;
+    border: 0;
 }
-.management-task-form .select-div .btn:hover{
-    background: #273543;
-    color: #D5D5D5;
+
+.management-task-form *{
+    text-transform: capitalize;
+}
+
+.management-task-form .select-div .bs-select-all{
+    background: #615E5E;
+    color: white;
+    font-size: 14px;
+    transition: 0.4s linear all;
+    height:20px;
+}
+
+.management-task-form .select-div .bs-select-all:hover{
+    border:0;
+    background: rgba(141, 200, 99, 0.71);
+    z-index: 0;
 }
 
 .management-task-form .select-div .bs-deselect-all{
-    background: rgba(39, 53, 67, 0.71);
+    border:0;
+    font-size: 14px;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: rgb(136, 132, 132);
+    transition: 0.4s linear all;
+    height:20px;
 }
 
 .management-task-form .select-div .bs-deselect-all:hover{
-    background: rgba(39, 53, 67, 0.71);
+    border:0;
+    background: rgba(200, 99, 99, 0.71);
+    z-index: 0;
 }
 .management-task-form .ta-editor.ta-html, .ta-scroll-window.form-control {
     margin-top: 6px;
 }
-.management-task-form .form-control{
-    color: white;
-    background: #393939;
-    border: 0;
+
+
+.management-task-form .test-new-plus{
+    cursor: pointer;
+    padding-left: 5px;
+    color: #7DC07D;
     transition: 0.2s linear all;
 }
-.management-task-form .form-control:focus {
-    border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    border: 0 !important;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+
+.management-task-form .test-new-plus:hover {
+    cursor: pointer;
+    color: #538253;
+}
+
+.management-task-form .new-test-block{
+    background: #242424;
+    border-radius: 5px;
+    padding: 10px 0 15px 0;
+}
+.management-task-form .new-test-block-wrapper{
+    margin-top: 5px;
+    padding: 5px;
+}
+.management-task-form .variables-ul{
+    background-color: #3C3C3C;
+    padding: 5px;
+    border: 0;
+    margin: 0;
+    width : 100%;
+}
+.management-task-form .new-variable-block{
+    position: relative;
+    padding: 5px;
+    border-radius: 3px;
+    background: rgba(15, 4, 4, 0.4);
+    width: 100%;
+    margin-top: 5px;
+}
+
+.management-task-form .new-variable-block input{
+    width: 90%;
+}
+.management-task-form .my-add-variable{
+    padding: 3px 0 4px 10px;
+    cursor: pointer;
+    text-align: center;
+    color: #7DC07D;
+    transition: 0.3s linear all;
+}
+
+.management-task-form .my-add-variable:hover{
+    color: #538253;
+}
+.management-task-form .my-close{
+    position: absolute;
+    top:3px;
+    right:3px;
+    color: #CC2828;
+    cursor: pointer;
+    transition: 0.2s linear all;
+}
+
+.management-task-form .my-close:hover{
+    color: #fd3030;
+}
+.management-task-form .my-drop-group{
+    width: 100%;
+}
+
+.management-task-form .my-drop-group>.btn{
+    width: 100%;
+    min-width: 87px;
+    margin-bottom: 1px;
+}
+
+.management-task-form .margin-top{
+    margin-top : 5px;
+}
+
+.new-test-block-wrapper.ng-enter,
+.new-variable-block.ng-enter{
+    -webkit-transition: 0.5s linear all; /* Chrome */
+    transition: 0.5s linear all;
+    opacity: 0;
+}
+
+.new-test-block-wrapper.ng-enter,
+.new-test-block-wrapper.ng-leave,
+.new-variable-block.ng-enter,
+.new-variable-block.ng-leave
+
+{
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    position: relative;
+    display: block;
+}
+
+.new-test-block-wrapper.ng-enter.ng-enter-active,
+.new-test-block-wrapper.ng-leave{
+    opacity: 1;
+    top: 0;
+}
+
+.new-variable-block.ng-enter.ng-enter-active,
+.new-variable-block.ng-leave{
+    opacity: 1;
+    right: 0;
+}
+
+.new-test-block-wrapper.ng-leave.ng-leave-active,
+.new-test-block-wrapper.ng-enter{
+    opacity: 0;
+    top: -30px;
+}
+
+.new-variable-block.ng-leave.ng-leave-active,
+.new-variable-block.ng-enter{
+    opacity: 0;
+    right: -30px;
 }

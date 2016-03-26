@@ -6,6 +6,12 @@ app.controller('ManagementTaskCtrl', [ '$scope', '$rootScope','managementTaskSer
         console.log($scope.managementTask.model);
     };
 
+    $scope.stopDropdownPropagation = function($event) {
+        if(managementTaskService.checkClosest('.variables-ul')) {
+            $event.stopPropagation();
+        }
+    };
+
     self.init = function() {
         $scope.managementTask = new managementTaskService.TaskData($state.current.role, $stateParams.id);
         $scope.managementTask.getInformation();
