@@ -9,3 +9,71 @@
     padding: 15px;
     border-left: 4px solid #515151;
 }
+
+.management-task-form *{
+    outline: none !important;
+}
+.description-textbox .btn-group{
+    z-index: 0;
+}
+
+.management-task-form .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.management-task-form .panel-group{
+    margin : 0;
+}
+
+.management-task-form .panel .panel-heading{
+    color: #D5D5D5 !important;
+    background-color: #273543 !important;
+}
+.management-task-form .panel a{
+    font-size: 14px;
+}
+.management-task-form .panel{
+    border : 0 !important;
+    background: rgba(106, 106, 106, 0.43) !important;
+}
+.management-task-form .panel .panel-body {
+    border: 0 !important;
+    background: rgba(0, 0, 0, 0.33) !important;
+}
+
+.management-task-form .select-div .btn {
+    background: #273543;
+    color: #D5D5D5;
+    font-size: 14px;
+    height:37px !important;
+    border: none;
+}
+.management-task-form .select-div .btn:hover{
+    background: #273543;
+    color: #D5D5D5;
+}
+
+.management-task-form .select-div .bs-deselect-all{
+    background: rgba(39, 53, 67, 0.71);
+}
+
+.management-task-form .select-div .bs-deselect-all:hover{
+    background: rgba(39, 53, 67, 0.71);
+}
+.management-task-form .ta-editor.ta-html, .ta-scroll-window.form-control {
+    margin-top: 6px;
+}
+.management-task-form .form-control{
+    color: white;
+    background: #393939;
+    border: 0;
+    transition: 0.2s linear all;
+}
+.management-task-form .form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    border: 0 !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}

@@ -2,14 +2,6 @@
     border : none !important;
     background: rgba(106, 106, 106, 0.43) !important;
 }
-.change-profile .change-input{
-    background: rgb(107, 30, 30);
-}
-
-.change-profile .change-input:hover, .change-profile .change-input:focus{
-    color: #DCDADA !important;
-    background: rgb(162, 37, 37) !important;
-}
 
 .change-profile .change-button-div.ng-enter, .change-profile .change-button-div.ng-leave{
     transition: 400ms linear;

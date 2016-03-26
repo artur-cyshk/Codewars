@@ -7,7 +7,7 @@
         <div class="auth-panel text-center">
             <form>
                 <div class="change-button-div form-group col-md-12" ng-if="newUser.currState == 'name' || newUser.currState == 'clan' || newUser.currState == 'password'">
-                    <input class="change-input btn btn-block" ng-click="changeProfile(newUser.currState)" type="submit" ng-value="'Change '+ newUser.currState">
+                    <input class="btn btn-success btn-block" ng-click="changeProfile(newUser.currState)" type="submit" ng-value="'Change '+ newUser.currState">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="username">Username</label>
