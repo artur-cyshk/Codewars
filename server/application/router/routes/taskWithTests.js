@@ -50,11 +50,13 @@ module.exports = function (req, res, next) {
             connection.query(query, function(err, tests) {
                 if(_.isArray(tests)){
                     _.map(tests, function(item){
-                        item.variables = _.map(item.variables.split(','), function(variable) {
-                            return {
-                                value : variable
-                            }
-                        });
+                        item.variables =
+                            (item.variables) ?
+                                _.map(item.variables.split(','), function(variable) {
+                                    return {
+                                        value : variable
+                                    }
+                                }) : [];
                         return item;
                     });
                     task.tests = tests;

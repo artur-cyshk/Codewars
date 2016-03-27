@@ -9,8 +9,52 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
     };
 
     return {
+        isEmpty : function(obj) {
+            return _.isEmpty(obj);
+        },
+        isEmptyResult : function(arr, index) {
+            return _.includes(arr , index);
+        },
+        validate : function(model) {
+            var errors = {};
+            errors.name = !model.name;
+            errors.language = !model.language || !model.language.name;
+            errors.entryPoint = !model.entryPoint;
+            errors.types = ( (!model.additionalType || !model.additionalType.name)  && (!model.types || !model.types.length) );
+            errors.tests = {};
+            errors.tests.length = (!model.tests || model.tests.length < 5);
+            if(errors.tests.length){
+                alertService.alert('Warning! At least five tests', 'error');
+            }
+            errors.tests.results = [];
+            if(model.tests) {
+                errors.tests.results = _.map(model.tests, function(item, index) {
+                        if(!item.result){
+                            return index;
+                        }
+                });
+                errors.tests.results = _.filter(errors.tests.results, function(item) {
+                    return item != undefined;
+                });
+            }
+
+            errors.description = !model.description;
+            errors.no = (!errors.name && !errors.entryPoint && !errors.language && !errors.tests.length && _.isEmpty(errors.tests.results) && !errors.types && !errors.description);
+            return (errors.no) ? false : errors;
+        },
+        errorHandler : function(err, status) {
+            if(status != 401) {
+                alertService.alert(err || 'server error, try later', 'error');
+            }
+        },
         checkClosest : function (className) {
             return (angular.element(event.target).closest(className));
+        },
+        addTask : function (task){
+            return $http.post('/task', task);
+        },
+        editTask : function(id, task){
+            return $http.put('/task/' + id, task);
         },
         TaskData : function (managment , taskIdToEdit) {
             var self = this;
