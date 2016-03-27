@@ -72,8 +72,8 @@
                                                     </button>
                                                     <ul class="variables-ul text-center" ng-click="stopDropdownPropagation($event)" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                                                         <i ng-click="managementTask.addVariable(testIndex, test.variables.length)" class="fa fa-plus-circle my-add-variable">new</i>
-                                                        <li class="new-variable-block" ng-repeat="(variableIndex, variable) in test.variables track by $index" role="menuitem">
-                                                            <input class="form-control" ng-model="managementTask.defaultData.tests[testIndex].variables[variableIndex]"  ng-value="variable.name" type="text">
+                                                        <li class="new-variable-block" ng-repeat="(variableIndex, variable) in test.variables" role="menuitem">
+                                                            <input class="form-control" ng-model="managementTask.defaultData.tests[testIndex].variables[variableIndex].value"  ng-value="variable.value" type="text">
                                                             <i class="fa fa-times-circle my-close" ng-click="managementTask.removeVariable(testIndex , variableIndex)"></i>
                                                         </li>
                                                     </ul>

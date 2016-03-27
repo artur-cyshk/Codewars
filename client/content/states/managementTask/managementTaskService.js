@@ -72,7 +72,7 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
             this.addTest = function (newTestIndex) {
                 self.defaultData.tests[ newTestIndex ] =  {};
                 self.defaultData.tests[ newTestIndex ].variables = [];
-                self.defaultData.tests[ newTestIndex ].variables[0] = null;
+                self.defaultData.tests[ newTestIndex ].variables[0] = {};
             };
 
             this.removeTest = function (index) {
@@ -87,7 +87,7 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
             };
 
             this.addVariable = function (testIndex, newVariableIndex) {
-                self.defaultData.tests[testIndex].variables.length = newVariableIndex + 1;
+                self.defaultData.tests[testIndex].variables[newVariableIndex] = {};
             };
 
             this.getLanguages = function(types) {
