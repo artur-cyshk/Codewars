@@ -20,7 +20,7 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
             errors.name = !model.name;
             errors.language = !model.language || !model.language.name;
             errors.entryPoint = !model.entryPoint;
-            errors.types = ( (!model.additionalType || !model.additionalType.name)  && (!model.types || !model.types.length) );
+            errors.types = !model.types || !model.types.length;
             errors.tests = {};
             errors.tests.length = (!model.tests || model.tests.length < 5);
             if(errors.tests.length){
@@ -46,9 +46,10 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
             if(status != 401) {
                 alertService.alert(err || 'server error, try later', 'error');
             }
+            $rootScope.loadingInformation = false;
         },
-        checkClosest : function (className) {
-            return (angular.element(event.target).closest(className));
+        checkClosest : function ($event, className) {
+            return (angular.element($event.target).closest(className));
         },
         addTask : function (task){
             return $http.post('/task', task);

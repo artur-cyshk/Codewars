@@ -15,9 +15,8 @@
                 </div>
             </div>
             <div class="form-group text-center">
-                <div>
                     <label for="language" class="col-sm-2 control-label " ng-class="{'error-text' : errors.language}">Language*</label>
-                    <div class="col-sm-4 select-div">
+                    <div class="col-sm-4 select-div language-select-div">
                         <ol title="Select language" class="nya-bs-select" id="language" ng-class="{'ol-error-input' : errors.language}" ng-required actions-box="true" ng-model="managementTask.model.language">
                             <li nya-bs-option="language in managementTask.defaultData.languages">
                                 <a>
@@ -27,12 +26,9 @@
                             </li>
                         </ol>
                     </div>
-                </div>
-                <div>
                     <label for="type" class="col-sm-2 control-label " ng-class="{'error-text' : errors.types}">Type*</label>
                     <div class="col-sm-4 select-div">
-                        <input ng-class="{'error-input' : errors.types}" id="type" class="form-control" placeholder="Additional type" type="text" ng-model="managementTask.model.additionalType.name">
-                        <ol  title="Select type" ng-class="{'ol-error-input' : errors.types}" class="nya-bs-select" requireds actions-box="true" multiple ng-model="managementTask.model.types">
+                        <ol id="type"  title="Select type" ng-class="{'ol-error-input' : errors.types}" class="nya-bs-select" requireds actions-box="true" multiple ng-model="managementTask.model.types">
                             <li nya-bs-option="type in managementTask.defaultData.types">
                                 <a>
                                     {{type.name}}
@@ -41,7 +37,6 @@
                             </li>
                         </ol>
                     </div>
-                </div>
             </div>
 
             <div class="form-group text-center">
@@ -80,7 +75,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7 margin-top">
-                                                <input class="form-control" ng-class="{'error-input' : isEmptyResult(errors.tests.results, testIndex)}" ng-model="managementTask.defaultData.tests[testIndex].result" type="text" placeholder="result*">
+                                                <input class="form-control result-input" ng-class="{'error-input' : isEmptyResult(errors.tests.results, testIndex)}" ng-model="managementTask.defaultData.tests[testIndex].result" type="text" placeholder="result*">
                                             </div>
                                         </div>
                                     </div>

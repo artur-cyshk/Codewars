@@ -8,52 +8,68 @@ module.exports = function (req, res, next) {
     if(!req.body) {
         return next(true);
     }
+
     var task = req.body;
+
     async.waterfall([
         function(callback){
-            var query = 'INSERT into tasks (name, description, user_id, language_id, add_date, entry_point) VALUES ("' +
-                task.name + '","' + task.description + '","' + req.session.userId + '","' + task.language.languageId +
-                    '","' + new Date().toLocaleDateString() + '","' + task.entryPoint + '")';
-            connection.query(query, function(err) {
-                console.log(err);
-                callback(err);
+            //validatation
+            var insertTaskObject  = {
+                name : task.name,
+                description : task.description,
+                user_id : req.session.userId,
+                language_id : task.language.languageId,
+                add_date : new Date().toLocaleString(),
+                entry_point : task.entryPoint
+            };
+            var query = 'INSERT into tasks set ?';
+            connection.query(query,insertTaskObject,
+                function(err) {
+                    callback(err);
             })
         },
         function(callback){
             var query = 'select task_id as taskId from tasks' +
                 ' where task_id = LAST_INSERT_ID()';
             connection.query(query, function(err, tasks) {
-                callback(err || _.isEmpty(tasks), tasks[0].taskId);
+                callback(err || !_.isArray(tasks), tasks[0].taskId);
             })
         },
-        function(callback, taskId) {
-            if(task.additionalType) {
-                var query = 'insert into types (type_name) VALUES ("' + task.additionalType.name + '")';
-                connection.query(query, function(err) {
-                    callback(err, taskId, true);
-                })
-            }else {
-                callback(taskId);
-            }
+        function(taskId, callback) {
+            var query = "INSERT INTO tasks_types (type_id, task_id) VALUES ?",
+                values = [];
+            values = _.map(task.types, function(type){
+                return  [type.typeId, taskId];
+            });
+            connection.query(query, [values], function(err) {
+                callback(err, taskId);
+            });
         },
-        function(callback, taskId, wasTypeInserted) {
-            if(wasTypeInserted) {
-                var query = 'select type_id as typeId from types' +
-                    ' where type_id = LAST_INSERT_ID()';
-                connection.query(query, function(err, types) {
-                    callback(err ||  _.isEmpty(types),taskId, types[0].typeId);
-                })
-            }else{
-                callback(taskId);
-            }
-        },
-        function(callback, taskId, typeId) {
-            var query = "insert into tasks_types VALUES"
-        },
+        function(taskId, callback) {
+            var query = "INSERT INTO tests (task_id, parameters, answer) VALUES ?",
+                values = [];
+
+            values = _.map(task.tests, function(test){
+                test.variables =_.map(test.variables, function (variable) {
+                    return variable.value;
+                });
+                test.variables = _.filter(test.variables, function (variable) {
+                    return variable;
+                });
+                return  [taskId, test.variables.join(','), test.result];
+            });
+
+            connection.query(query, [values], function(err) {
+                callback(err);
+            });
+        }
     ], function (err, task) {
         if(err) {
-            return next(err.data || true);
+            if(err.code == "ER_DUP_ENTRY") {
+                err.data = "Task with this name already exists";
+            }
+            return next(err || true);
         }
         res.status(200).send(task);
     });
-}
+};

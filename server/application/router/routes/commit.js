@@ -1,15 +1,19 @@
 var connection = require('../../../configuration/database/connection');
 var async = require('async');
 module.exports = function (req, res, next) {
-    if(!req.session.authorized || !req.body) {
+    if(!req.session.authorized || !req.body || !req.body.task || isNaN(req.body.task)) {
         return next(true);
     }
     async.waterfall([
         function(callback){
-            var query = 'INSERT into comments (user_id, task_id, comment, add_date)' +
-                ' values ("' + req.session.userId + '","' + req.body.task + '","' +
-                req.body.comment + '","' + new Date().toLocaleString() + '")';
-            connection.query(query, function(err) {
+            commentObject = {
+                'user_id' : req.session.userId,
+                'task_id' : req.body.task,
+                'comment' : req.body.comment,
+                'add_date': new Date().toLocaleString()
+            };
+            var query = 'INSERT into comments set ?';
+            connection.query(query,commentObject, function(err) {
                 callback(err);
             })
         },

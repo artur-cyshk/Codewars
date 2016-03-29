@@ -18,12 +18,17 @@
 }
 
 .management-task-form .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-    margin-top: 5px;
     width: 100%;
 }
 
 .management-task-form .panel-group{
     margin : 0;
+}
+
+@media(max-width:767px){
+    .management-task-form .language-select-div{
+        margin-bottom: 15px;
+    }
 }
 
 .management-task-form .panel .panel-heading{
@@ -143,9 +148,16 @@
     margin-top: 5px;
 }
 
-.management-task-form .new-variable-block input{
+.management-task-form .new-variable-block input {
     width: 90%;
 }
+
+.management-task-form input.result-input ,
+.management-task-form .new-variable-block input
+{
+    text-transform: none;
+}
+
 .management-task-form .my-add-variable{
     padding: 3px 0 4px 10px;
     cursor: pointer;

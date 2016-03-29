@@ -4,14 +4,14 @@ module.exports = function (req, res, next) {
 		return next({
 			status: 401
 		})
-	}else {
-		var query = 'select user_id as userId, type from users where user_id = "' + req.session.userId + '"';
-		connection.query(query, function(err, data) {
-			if(err || !data){
-				return next(true);
-			}
-			res.status(200).send(data[0]);
-		})
+	} else {
+		var query = 'select user_id as userId, type from users where user_id=?';
+		connection.query(query, req.session.userId,
+			function(err, data) {
+				if(err || !data){
+					return next(true);
+				}
+				res.status(200).send(data[0]);
+			});
 	}
-
 };

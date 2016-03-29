@@ -5,6 +5,7 @@ app.controller('ManagementTaskCtrl', [ '$scope', '$rootScope','managementTaskSer
     self.editTask = function(id, task) {
         managementTaskService.editTask(id, task)
             .success(function(){
+                $rootScope.loadingInformation = false;
                 alertService.alert('task successfully edited', 'success');
                 $state.go('root.task', {id : id});
             })
@@ -16,11 +17,13 @@ app.controller('ManagementTaskCtrl', [ '$scope', '$rootScope','managementTaskSer
             .success(function() {
                 alertService.alert('task successfully added', 'success');
                 $state.go('root.tasks');
+                $rootScope.loadingInformation = false;
             })
             .error(managementTaskService.errorHandler);
     };
 
     $scope.manageTask = function () {
+        $rootScope.loadingInformation = true;
         var task = $scope.managementTask.model;
         $scope.errors = managementTaskService.validate(task);
         if(!$scope.errors) {
@@ -35,12 +38,13 @@ app.controller('ManagementTaskCtrl', [ '$scope', '$rootScope','managementTaskSer
                     break;
             }
         }else {
+            $rootScope.loadingInformation = false;
             alertService.alert('validation error, fix please', 'error');
         }
     };
 
     $scope.stopDropdownPropagation = function($event) {
-        if(managementTaskService.checkClosest('.variables-ul')) {
+        if(managementTaskService.checkClosest($event, '.variables-ul')) {
             $event.stopPropagation();
         }
     };

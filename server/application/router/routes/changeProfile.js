@@ -42,9 +42,10 @@ module.exports = function (req, res, next) {
             user.value = encrypt(user.value.password);
         }
 
-        var query = 'update users set ' + user.state + '="' + user.value + '" where user_id = "' +
-            req.session.userId + '"';
-        connection.query(query, function(err) {
+        var query = 'update users set  ? where user_id = ?';
+        var updateObj = {};
+        updateObj[user.state] = user.value;
+        connection.query(query,[updateObj, req.session.userId], function(err) {
             if(err) {
                 if(err.code == "ER_DUP_ENTRY") {
                     next({
