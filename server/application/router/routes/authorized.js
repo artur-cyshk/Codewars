@@ -11,6 +11,7 @@ module.exports = function (req, res, next) {
 				if(err || !data){
 					return next(true);
 				}
+				req.session.currUserRole = data[0].type;
 				res.status(200).send(data[0]);
 			});
 	}
