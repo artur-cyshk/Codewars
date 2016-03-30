@@ -9,9 +9,9 @@ var app = angular.module('codewars',
         'nya.bootstrap.select',
         'ui.checkbox',
         'ui.ace',
-        'textAngular',
         'ngFileUpload',
-        'ngImgCrop'
+        'ngImgCrop',
+        'ui.tinymce'
     ]);
 
 app.run(['checkAccessFactory','$rootScope','$http', function(checkAccessFactory, $rootScope) {

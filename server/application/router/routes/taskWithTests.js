@@ -56,7 +56,7 @@ module.exports = function (req, res, next) {
                         _.map(tests, function(item){
                             item.variables =
                                 (item.variables) ?
-                                    _.map(item.variables.split(','), function(variable) {
+                                    _.map(JSON.parse(item.variables), function(variable) {
                                         return {
                                             value : variable
                                         }

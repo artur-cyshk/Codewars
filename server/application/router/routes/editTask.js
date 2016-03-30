@@ -1,6 +1,7 @@
 var connection = require('../../../configuration/database/connection');
 var async = require('async');
 var _ = require('lodash');
+var taskService = require('../../services/taskService');
 module.exports = function (req, res, next) {
     if(!req.session.authorized) {
         return next({status : 401});
@@ -10,18 +11,15 @@ module.exports = function (req, res, next) {
     }
 
     var task = req.body;
-
     async.waterfall([
         function(callback){
-            //validatation
-            var updateTaskObject  = {
-                name : task.name,
-                description : task.description,
-                user_id : req.session.userId,
-                language_id : task.language.languageId,
-                add_date : new Date().toLocaleString(),
-                entry_point : task.entryPoint
-            };
+            if (!taskService.validate(task)) {
+                return callback({
+                    data : 'validation error!',
+                    status : 409
+                });
+            }
+            var updateTaskObject  = taskService.getTaskObject(task, req.session.userId);
             var query = 'UPDATE tasks set ? where task_id = ?';
             connection.query(query,[updateTaskObject, req.params.task],
                 function(err) {
@@ -35,14 +33,13 @@ module.exports = function (req, res, next) {
             });
         },
         function(callback) {
-            var query = "INSERT INTO tasks_types (type_id, task_id) VALUES ?",
-                values = [];
-            values = _.map(task.types, function(type) {
-                return  [type.typeId, req.params.task];
-            });
-            connection.query(query, [values], function(err) {
-                callback(err);
-            });
+            var query = "INSERT INTO tasks_types (type_id, task_id) VALUES ?";
+            connection.query(query,
+                [taskService.mapTypes(task.types, req.params.task)],
+                function(err) {
+                    callback(err);
+                });
+
         },
         function(callback) {
             var query = 'DELETE from tests where task_id = ? ';
@@ -51,22 +48,12 @@ module.exports = function (req, res, next) {
             });
         },
         function(callback) {
-            var query = "INSERT INTO tests (task_id, parameters, answer) VALUES ?",
-                values = [];
-
-            values = _.map(task.tests, function(test){
-                test.variables =_.map(test.variables, function (variable) {
-                    return variable.value;
+            var query = "INSERT INTO tests (task_id, parameters, answer) VALUES ?";
+            connection.query(query,
+                [taskService.mapTests(task.tests, req.params.task)],
+                function(err) {
+                    callback(err);
                 });
-                test.variables = _.filter(test.variables, function (variable) {
-                    return variable;
-                });
-                return  [req.params.task, test.variables.join(','), test.result];
-            });
-
-            connection.query(query, [values], function(err) {
-                callback(err);
-            });
         }
     ], function (err) {
         if(err) {

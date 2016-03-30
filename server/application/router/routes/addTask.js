@@ -1,6 +1,7 @@
 var connection = require('../../../configuration/database/connection');
 var async = require('async');
 var _ = require('lodash');
+var taskService = require('../../services/taskService');
 module.exports = function (req, res, next) {
     if(!req.session.authorized) {
         return next({status : 401});
@@ -13,15 +14,15 @@ module.exports = function (req, res, next) {
 
     async.waterfall([
         function(callback){
-            //validatation
-            var insertTaskObject  = {
-                name : task.name,
-                description : task.description,
-                user_id : req.session.userId,
-                language_id : task.language.languageId,
-                add_date : new Date().toLocaleString(),
-                entry_point : task.entryPoint
-            };
+
+            if (!taskService.validate(task)) {
+                return callback({
+                    data : 'validation error!',
+                    status : 409
+                });
+            }
+
+            var insertTaskObject  = taskService.getTaskObject(task, req.session.userId);
             var query = 'INSERT into tasks set ?';
             connection.query(query,insertTaskObject,
                 function(err) {
@@ -36,32 +37,21 @@ module.exports = function (req, res, next) {
             })
         },
         function(taskId, callback) {
-            var query = "INSERT INTO tasks_types (type_id, task_id) VALUES ?",
-                values = [];
-            values = _.map(task.types, function(type){
-                return  [type.typeId, taskId];
-            });
-            connection.query(query, [values], function(err) {
-                callback(err, taskId);
-            });
+            var query = "INSERT INTO tasks_types (type_id, task_id) VALUES ?";
+            connection.query(query,
+                [taskService.mapTypes(task.types, taskId)],
+                function(err) {
+                    callback(err, taskId);
+                });
         },
         function(taskId, callback) {
-            var query = "INSERT INTO tests (task_id, parameters, answer) VALUES ?",
-                values = [];
+            var query = "INSERT INTO tests (task_id, parameters, answer) VALUES ?";
 
-            values = _.map(task.tests, function(test){
-                test.variables =_.map(test.variables, function (variable) {
-                    return variable.value;
+            connection.query(query,
+                [taskService.mapTests(task.tests, taskId)],
+                function(err) {
+                    callback(err);
                 });
-                test.variables = _.filter(test.variables, function (variable) {
-                    return variable;
-                });
-                return  [taskId, test.variables.join(','), test.result];
-            });
-
-            connection.query(query, [values], function(err) {
-                callback(err);
-            });
         }
     ], function (err, task) {
         if(err) {

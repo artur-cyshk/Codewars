@@ -54,6 +54,7 @@ app.controller('ManagementTaskCtrl', [ '$scope', '$rootScope','managementTaskSer
         $scope.managementTask.getInformation();
         $scope.isEmpty = managementTaskService.isEmpty;
         $scope.isEmptyResult = managementTaskService.isEmptyResult;
+        $scope.tinymceOptions = managementTaskService.getTinymseOptions();
     };
 
     self.init();

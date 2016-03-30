@@ -13,9 +13,6 @@
 .management-task-form *{
     outline: none !important;
 }
-.management-task-form .description-textbox .btn-group{
-    z-index: 0;
-}
 
 .management-task-form .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
     width: 100%;
@@ -116,11 +113,30 @@
     margin-top: 5px;
     padding: 5px;
 }
-.management-task-form .error-input, .management-task-form .ol-error-input>.btn, .management-task-form .error-description-input .ta-scroll-window.form-control{
+
+.management-task-form .mce-tinymce{
+    border-radius: 5px;
+}
+.management-task-form .task-note *{
+    text-transform: none !important;
+}
+.management-task-form .task-note{
+    color: #FFCFCF;
+    background: #2F0404;
+    padding: 6px 0 !important;
+    border: 0;
+    margin: 5px;
+}
+.management-task-form .mce-tinymce .mce-statusbar{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.management-task-form .error-input, .management-task-form .ol-error-input>.btn, .management-task-form .error-description-input .mce-tinymce{
     border:1px solid red !important;
 }
+
 .management-task-form .error-input:focus,
-.management-task-form .error-description-input .ta-scroll-window.form-control:focus{
+.management-task-form .error-description-input .mce-tinymce:focus{
     border-color:red !important;
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 13px rgba(255, 0, 0, 0.6) !important;

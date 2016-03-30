@@ -8,9 +8,35 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
         return $http.get('/languages');
     };
 
+    selfService.desciptionContent = "";
+
     return {
         isEmpty : function(obj) {
             return _.isEmpty(obj);
+        },
+        getTinymseOptions : function () {
+            return {
+                inline: false,
+                setup: function(editor) {
+                    editor.on('change', function () {
+                        selfService.desciptionContent = editor.getContent({'format' : 'text'}).trim();
+                    });
+                },
+                plugins: [
+                    "advlist link image lists charmap print preview hr anchor pagebreak",
+                    "visualblocks visualchars code fullscreen insertdatetime media",
+                    "table contextmenu directionality emoticons paste textcolor colorpicker"
+                ],
+
+                toolbar1: "preview| styleselect fontselect ",
+                toolbar2: "cut copy paste | bullist numlist | outdent indent | undo redo | link unlink anchor image media | code insertdatetime",
+                toolbar3: "table fullscreen| hr removeformat | charmap emoticons | print  | spellchecker | visualchars visualblocks",
+                toolbar4: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | forecolor backcolor",
+
+
+                menubar: false,
+                toolbar_items_size: 'small'
+            }
         },
         isEmptyResult : function(arr, index) {
             return _.includes(arr , index);
@@ -37,8 +63,7 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
                     return item != undefined;
                 });
             }
-
-            errors.description = !model.description;
+            errors.description = !selfService.desciptionContent;
             errors.no = (!errors.name && !errors.entryPoint && !errors.language && !errors.tests.length && _.isEmpty(errors.tests.results) && !errors.types && !errors.description);
             return (errors.no) ? false : errors;
         },
