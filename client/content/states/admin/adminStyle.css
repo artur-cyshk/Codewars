@@ -1,4 +1,6 @@
-.admin{
-    height: 100px;
-    background: black;
+.admin .task-tabs-panel{
+    margin: 15px 0;
+    background: #262728;
+    padding: 15px;
+    border-left: 5px solid #515151;
 }

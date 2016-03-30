@@ -1,5 +1,23 @@
-<div class="admin text-center"
+<div
      ng-show="rootLoadingFinish && authorized && adminRoot"
 >
-
+    <div  class="admin col-md-12 col-xs-12 col-lg-12 col-sm-12">
+        <uib-tabset type="pills">
+            <uib-tab heading="USERS" class="btn-sm">
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel">
+                    USERS
+                </div>
+            </uib-tab>
+            <uib-tab heading="TASKS" class="btn-sm">
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel">
+                    TASKS
+                </div>
+            </uib-tab>
+            <uib-tab heading="TYPES" class="btn-sm">
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel">
+                    TYPES
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
 </div>

@@ -1,9 +1,8 @@
-app.controller('AdminCtrl', [ '$scope', '$rootScope','$http', function($scope, $rootScope, $http) {
+app.controller('AdminCtrl', [ '$scope', function($scope) {
     var self = this;
-
-
+    
     self.init = function() {
-
+    
     };
 
     self.init();
