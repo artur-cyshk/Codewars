@@ -33,7 +33,7 @@ module.exports = function (req, res, next) {
             var query = 'select task_id as taskId from tasks' +
                 ' where task_id = LAST_INSERT_ID()';
             connection.query(query, function(err, tasks) {
-                callback(err || !_.isArray(tasks), tasks[0].taskId);
+                callback(err || !_.isObject(tasks), tasks[0].taskId);
             })
         },
         function(taskId, callback) {

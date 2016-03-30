@@ -29,14 +29,17 @@ module.exports = {
             return (!errors.name && !errors.entryPoint && !errors.language && !errors.tests.length && _.isEmpty(errors.tests.results) && !errors.types && !errors.description);
         },
     getTaskObject : function (task, userId) {
-        return {
+        var taskObject = {
             name : task.name,
             description : task.description,
-            user_id : userId,
             language_id : task.language.languageId,
             add_date : new Date().toLocaleString(),
             entry_point : task.entryPoint
+        };
+        if(userId) {
+            taskObject['user_id'] = userId;
         }
+        return taskObject;
     },
     
     mapTypes : function(types, taskId){

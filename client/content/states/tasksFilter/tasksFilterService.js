@@ -28,6 +28,7 @@ angular.module('codewars').factory('tasksFilterService', function($http , $q, al
                 this.filterModel.sortBy = 'date';
                 this.filterModel.sortOrder = 'Z-A';
                 this.filterModel.group = 'all';
+                this.filterModel.levels = Array.apply(null, {length: 8}).map(function(item, i) {return i + 1 });
                 return this;
             };
             this.setChooseProperties = function() {

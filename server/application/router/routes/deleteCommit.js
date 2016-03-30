@@ -1,8 +1,9 @@
 var connection = require('../../../configuration/database/connection');
 module.exports = function (req, res, next) {
     if(req.session.authorized && req.params) {
-        var query = 'DELETE from comments where user_id = ? and comment_id = ?';
-        connection.query(query,[req.session.userId, req.params.id],
+        var whereEnd = (req.session.currUserRole == 'admin') ? '' : ' and user_id = "' + req.session.userId + '"';
+        var query = 'DELETE from comments where comment_id = ? ' + whereEnd;
+        connection.query(query,[req.params.id],
             function(err) {
                 if(err){
                     return next(true);

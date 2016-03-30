@@ -10,12 +10,13 @@ module.exports = function (req, res, next) {
     }
     async.waterfall([
         function(callback){
+            var whereEnd = (req.session.currUserRole == 'admin') ? '' : ' and tasks.user_id = "' + req.session.userId + '"';
             var query = 'SELECT tasks.task_id as taskId, tasks.name, tasks.description, tasks.entry_point as entryPoint'+
                 ' FROM tasks' +
-                ' where tasks.task_id = ? and tasks.user_id = ?';
-            connection.query(query, [req.params.task, req.session.userId],
+                ' where tasks.task_id = ? ' + whereEnd;
+            connection.query(query, [req.params.task],
                 function(err, tasks) {
-                    if(!tasks.length) {
+                    if(_.isEmpty(tasks)) {
                         err = {};
                         err.data = {'data' : "no access or task doesn't exist "};
                     }
@@ -52,7 +53,7 @@ module.exports = function (req, res, next) {
                 ' where tests.task_id = ?';
             connection.query(query, [task.taskId],
                 function(err, tests) {
-                    if(_.isArray(tests)){
+                    if(_.isObject(tests)){
                         _.map(tests, function(item){
                             item.variables =
                                 (item.variables) ?

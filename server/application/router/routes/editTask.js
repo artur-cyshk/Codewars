@@ -19,8 +19,9 @@ module.exports = function (req, res, next) {
                     status : 409
                 });
             }
-            var updateTaskObject  = taskService.getTaskObject(task, req.session.userId);
-            var query = 'UPDATE tasks set ? where task_id = ?';
+            var updateTaskObject  = taskService.getTaskObject(task);
+            var whereEnd = (req.session.currUserRole == 'admin') ? '' : ' and tasks.user_id = "' + req.session.userId + '"';
+            var query = 'UPDATE tasks set ? where task_id = ? ' + whereEnd;
             connection.query(query,[updateTaskObject, req.params.task],
                 function(err) {
                     callback(err);

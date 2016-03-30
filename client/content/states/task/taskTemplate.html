@@ -22,10 +22,10 @@
                 <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'dd MMMM yyyy'}}</span>
                 <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'HH:mm'}}</span>
                 <span class="date-and-author"><i class="fa fa-user"></i> {{currentTask.creator}}</span>
-                <a ng-if="currUserId == currentTask.creatorId" class="editing-task" ui-sref="root.editTask({id:currentTask.taskId})">
+                <a ng-if="currUserId == currentTask.creatorId || adminRoot" class="editing-task" ui-sref="root.editTask({id:currentTask.taskId})">
                     <i class="fa fa-pencil"></i>
                 </a>
-                <span ng-if="currUserId == currentTask.creatorId" class="editing-task"><i  class="fa fa-trash-o" ng-click="openRemovingTaskModal(currentTask.taskId)"></i></span>
+                <span ng-if="currUserId == currentTask.creatorId || adminRoot" class="editing-task"><i  class="fa fa-trash-o" ng-click="openRemovingTaskModal(currentTask.taskId)"></i></span>
                 <a ng-if="currentTask.level" class="train train-right hidden-sm hidden-md hidden-lg" ui-sref="root.taskSolution({id: currentTask.taskId})">
                     <button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm ">
                         <i class="fa fa-play"></i>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="no-data no-comments" ng-show="!currentTask.comments.length">No comments</div>
                     <div class="comment-div col-md-12 col-xs-12 col-sm-12 col-lg-12" ng-repeat="comment in currentTask.comments">
-                        <i ng-if ="comment.userId == currUserId" class="glyphicon close-comment glyphicon-remove" ng-click="removeCommit(comment.commentId)"></i>
+                        <i ng-if ="comment.userId == currUserId || adminRoot" class="glyphicon close-comment glyphicon-remove" ng-click="removeCommit(comment.commentId)"></i>
                         <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                             <div class="text-left comment-info">
                                 <span class="date-and-author hidden-xs">{{comment.commentAddDate | date : 'dd MMMM yyyy'}}</span>
