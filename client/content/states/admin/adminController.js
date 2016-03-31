@@ -83,9 +83,11 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
                 model: {}
             }
         ];
-        $scope.adminTabs.forEach(function (tab) {
-            $scope.init(tab);
-        })
+        if($rootScope.adminRoot){
+            $scope.adminTabs.forEach(function (tab) {
+                $scope.init(tab);
+            })
+        }
     };
 
     self.init();

@@ -39,8 +39,8 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
                         self.setRootScope(true, 'rootLoadingFinish');
                         if(toState.requiredRoot) {
                             if(userData.type != 'admin') {
-                                alertService.alert('no access, need root', 'error');
                                 $state.go('root.home');
+                                alertService.alert('no access, need root', 'error');
                             }
                         }
                         if(toState.name == 'root.login' || toState.name == 'root.registration') {
