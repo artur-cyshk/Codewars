@@ -1,34 +1,56 @@
 <div
      ng-show="rootLoadingFinish && authorized && adminRoot"
 >
-    {{loadingInformation}}
     <div  class="admin col-md-12 col-xs-12 col-lg-12 col-sm-12">
         <uib-tabset type="pills">
             <uib-tab ng-repeat="tab in adminTabs" heading="{{tab.name}}" class="btn-sm" >
                 <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" >
-                    <div>
-                        <h1>{{tab.name}}</h1>
-                        <button ng-click="init(tab)">update</button>
-
-                        <div ng-if="tab.name =='tasks'">
+                    <h1>{{tab.name}}</h1>
+                    <button ng-click="init(tab)">update</button>
+                    <div ng-switch="tab.name">
+                        <div ng-switch-when="tasks">
                             <div ng-repeat="task in tab.items">
                                 {{task.name}}
-                                {{task.taskId}}
+                                <a ui-sref="root.task({id:task.taskId})">more...</a>
+                                <ol title="Level" class="nya-bs-select" id="level" ng-change="changeLevel(tab.model[task.taskId], task.taskId)" ng-model="tab.model[task.taskId]" ng-required actions-box="true">
+                                    <li nya-bs-option="level in tab.levels">
+                                        <a>
+                                            {{level}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
                             </div>
                         </div>
-                        <div ng-if="tab.name =='types'">
+                        <div ng-switch-when="types">
                             <div ng-repeat="type in tab.items">
                                 {{type.name}}
                                 {{type.typeId}}
                             </div>
+                            <div>
+                                <form ng-submit="addNewType(tab.model.newType)">
+                                    <input type="text" class="form-control" placeholder="New type" ng-model="tab.model.newType">
+                                </form>
+                            </div>
                         </div>
-                        <div ng-if="tab.name=='users'">
+                        <div ng-switch-when="users">
                             <div ng-repeat="user in tab.items">
                                 {{user.name}}
                                 {{user.userId}}
                                 {{user.avatarUrl}}
                                 {{user.type}}
+                                <ol title="Role" class="nya-bs-select" id="role" ng-change="changeRole(tab.model[user.userId], user.userId)" ng-model="tab.model[user.userId]" ng-required actions-box="true">
+                                    <li nya-bs-option="role in tab.roles">
+                                        <a>
+                                            {{role}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
                             </div>
+                        </div>
+                        <div ng-switch-default>
+                            error
                         </div>
                     </div>
                     <button ng-click="loadItems(tab,tab.fromItems, false, $event)" ng-hide="tab.noMoreItems">load more</button>

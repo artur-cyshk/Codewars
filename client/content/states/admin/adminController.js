@@ -6,6 +6,11 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
             tab.items = (init) ? response.items : adminService.concat(tab.items, response.items);
             tab.fromItems = (init) ? response.offset : tab.fromItems + response.offset;
             tab.noMoreItems = response.noMoreItems;
+            if(tab.name == 'users') {
+                _.forEach(tab.items, function (item) {
+                    tab.model[item.userId] = item.type;
+                })
+            }
             $rootScope.loadingInformation = false;
         }
     };
@@ -42,8 +47,42 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
         $scope.loadItems(tab, 0, true);
     };
 
+    $scope.changeLevel = function (selected, id) {
+        console.log(selected, id);
+    };
+
+    $scope.addType = function (newType) {
+        console.log(newType);
+
+    };
+
+    $scope.changeRole = function (role, id) {
+        var text = "ahaha";
+        var modalInstance = adminService.openConfirmModal(text);
+        console.log(role , id);
+        modalInstance.result.then(function (data) {
+            if(data){
+                //todo zapros
+            }
+        });
+    };
+
     self.init = function () {
-        $scope.adminTabs = [{name:'tasks'},{name: 'types'},{name :  'users'}];
+        $scope.adminTabs = [
+            {
+                name:'tasks',
+                levels : [1, 2, 3, 4, 5, 6, 7, 8],
+                model: {}
+            },
+            {
+                name: 'types'
+            },
+            {
+                name :  'users',
+                roles:['admin', 'user'],
+                model: {}
+            }
+        ];
         $scope.adminTabs.forEach(function (tab) {
             $scope.init(tab);
         })

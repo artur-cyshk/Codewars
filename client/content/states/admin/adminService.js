@@ -1,6 +1,19 @@
-app.factory('adminService', function ($q, $http) {
+app.factory('adminService', function ($q, $http, $uibModal, $templateCache) {
     
     return {
+        openConfirmModal : function (text) {
+            return $uibModal.open({
+                animation: true,
+                templateUrl: 'content/states/admin/confirmModal/confirmTemplate.html',
+                controller: 'ConfirmCtrl',
+                size: 'sm',
+                resolve: {
+                    modalText: function () {
+                        return text;
+                    }
+                }
+            });
+        },
         getUsersInfo : function (from) {
             return this.getInfoWithPagination(function () {
                 return $http.get('/users/' + from)
