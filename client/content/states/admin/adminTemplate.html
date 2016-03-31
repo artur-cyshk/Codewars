@@ -1,21 +1,37 @@
 <div
      ng-show="rootLoadingFinish && authorized && adminRoot"
 >
+    {{loadingInformation}}
     <div  class="admin col-md-12 col-xs-12 col-lg-12 col-sm-12">
         <uib-tabset type="pills">
-            <uib-tab heading="USERS" class="btn-sm">
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel">
-                    USERS
-                </div>
-            </uib-tab>
-            <uib-tab heading="TASKS" class="btn-sm">
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel">
-                    TASKS
-                </div>
-            </uib-tab>
-            <uib-tab heading="TYPES" class="btn-sm">
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel">
-                    TYPES
+            <uib-tab ng-repeat="tab in adminTabs" heading="{{tab.name}}" class="btn-sm" >
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" >
+                    <div>
+                        <h1>{{tab.name}}</h1>
+                        <button ng-click="init(tab)">update</button>
+
+                        <div ng-if="tab.name =='tasks'">
+                            <div ng-repeat="task in tab.items">
+                                {{task.name}}
+                                {{task.taskId}}
+                            </div>
+                        </div>
+                        <div ng-if="tab.name =='types'">
+                            <div ng-repeat="type in tab.items">
+                                {{type.name}}
+                                {{type.typeId}}
+                            </div>
+                        </div>
+                        <div ng-if="tab.name=='users'">
+                            <div ng-repeat="user in tab.items">
+                                {{user.name}}
+                                {{user.userId}}
+                                {{user.avatarUrl}}
+                                {{user.type}}
+                            </div>
+                        </div>
+                    </div>
+                    <button ng-click="loadItems(tab,tab.fromItems, false, $event)" ng-hide="tab.noMoreItems">load more</button>
                 </div>
             </uib-tab>
         </uib-tabset>

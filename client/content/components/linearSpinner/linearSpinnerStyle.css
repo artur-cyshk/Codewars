@@ -2,6 +2,7 @@
     height: 4px;
     width: 100%;
     position: absolute;
+    transition: 0.2s linear all;
     overflow: hidden;
 }
 .loader:before{

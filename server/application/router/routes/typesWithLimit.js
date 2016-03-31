@@ -1,5 +1,4 @@
 var connection = require('../../../configuration/database/connection');
-var _ = require('lodash');
 module.exports = function (req, res, next) {
     if(req.session.currUserRole != 'admin'){
         return next({
@@ -11,12 +10,13 @@ module.exports = function (req, res, next) {
         return next(true);
     }
 
-    var query = 'select task_id as taskId,name from tasks where level is NULL order by add_date limit 11 OFFSET ' + req.params.page;
+    var query = 'select types.type_name as name, types.type_id as typeId from types order by type_name limit 11 OFFSET ' + req.params.page;
     connection.query(query,
         function(err, tasks) {
             if(err) {
                 return next(true);
             }
             res.status(200).send(tasks);
-        })
+        });
+
 };
