@@ -3,7 +3,7 @@ var _ = require('lodash');
 module.exports = function (req, res, next) {
     if(req.session.currUserRole != 'admin'){
         return next({
-            'data' : 'No access, need root'
+            status : 409
         })
     }
 
@@ -11,8 +11,9 @@ module.exports = function (req, res, next) {
         return next(true);
     }
 
-    var query = 'select name,user_id as userId, avatar_url as avatarUrl, type from users order by name limit 11 OFFSET ' + req.params.page;
-    connection.query(query,
+    var query = 'select name,user_id as userId, avatar_url as avatarUrl, type from users where user_id != ?' +
+        ' order by name limit 11 OFFSET ' + req.params.page;
+    connection.query(query,[req.session.userId],
         function(err, users) {
             if(err) {
                 return next(true);

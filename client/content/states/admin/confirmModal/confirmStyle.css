@@ -1,0 +1,11 @@
+.confirm-modal .name{
+    color: #a90000;
+}
+
+.confirm-modal .modal-body{
+    font-size: 1.1em;
+}
+
+.confirm-modal *{
+    outline: none !important;
+}

@@ -1,61 +1,78 @@
 <div
-     ng-show="rootLoadingFinish && authorized && adminRoot"
+        ng-show="rootLoadingFinish && authorized && adminRoot"
 >
     <div  class="admin col-md-12 col-xs-12 col-lg-12 col-sm-12">
         <uib-tabset type="pills">
             <uib-tab ng-repeat="tab in adminTabs" heading="{{tab.name}}" class="btn-sm" >
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" >
-                    <h1>{{tab.name}}</h1>
-                    <button ng-click="init(tab)">update</button>
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-if="tab.items">
+                    <h1 class="head">
+                        <i class="fa"
+                           ng-class="{'fa-users': tab.name=='users','fa-tasks': tab.name == 'tasks','fa-tags': tab.name == 'types'}"></i>
+                        {{tab.name}} <i class="fa fa-refresh" ng-click="init(tab)"></i></h1>
                     <div ng-switch="tab.name">
                         <div ng-switch-when="tasks">
-                            <div ng-repeat="task in tab.items">
-                                {{task.name}}
-                                <a ui-sref="root.task({id:task.taskId})">more...</a>
-                                <ol title="Level" class="nya-bs-select" id="level" ng-change="changeLevel(tab.model[task.taskId], task.taskId)" ng-model="tab.model[task.taskId]" ng-required actions-box="true">
-                                    <li nya-bs-option="level in tab.levels">
-                                        <a>
-                                            {{level}}
-                                            <span class="glyphicon glyphicon-ok check-mark"></span>
-                                        </a>
-                                    </li>
-                                </ol>
+                            <div ng-repeat="task in tab.items"  class="col-md-6 col-sm-6 col-lg-4 col-xs-12">
+                                <div ng-class="'admin-' + tab.name"  class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12 task-name-wrap">
+                                        <span class="task-name"><a class="task-link-more" ui-sref="root.task({id:task.taskId})"><i class="fa fa-info-circle"></i></a>{{task.name}}</span>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                        <ol title="Choose level" class="nya-bs-select" id="level" ng-change="changeLevel(tab.model[task.taskId], task.taskId, task.name)" ng-model="tab.model[task.taskId]" ng-required actions-box="true">
+                                            <li nya-bs-option="level in tab.levels">
+                                                <a>
+                                                    {{level}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div ng-switch-when="types">
-                            <div ng-repeat="type in tab.items">
-                                {{type.name}}
-                                {{type.typeId}}
+                            <form class="col-md-12 col-xs-12 col-sm-12 col-lg-12" ng-submit="addType(tab.model.newType)">
+                                <div class="input-group">
+                                    <input type="text" class="form-control new-type-input" placeholder="New type" ng-model="tab.model.newType">
+                                    <span class="input-group-addon"><i class="fa fa-tags tag-icon"></i></span>
+                                </div>
+                            </form>
+                            <div  class="col-md-12 col-xs-12 col-sm-12 col-lg-12 text-center type-list">
+                                <span class="no-data" ng-show="!tab.items.length">No types</span>
+                                <span  class="tag-name" ng-repeat="type in tab.items">
+                                    {{type.name}}
+                                    <i class="fa fa-remove" ng-click="removeType(type.typeId, type.name)"></i>
+                                </span>
                             </div>
-                            <div>
-                                <form ng-submit="addNewType(tab.model.newType)">
-                                    <input type="text" class="form-control" placeholder="New type" ng-model="tab.model.newType">
-                                </form>
+
+                        </div>
+                        <div ng-switch-when="users" >
+                            <div ng-repeat="user in tab.items" class="col-md-6 col-sm-6 col-lg-4 col-xs-12">
+                                <div ng-class="'admin-' + tab.name" class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12 user-name-wrap">
+                                        <span class="user-name"><img class="avatar" ng-src="./content/images/avatars/{{user.avatarUrl}}"> {{user.name}}</span>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                        <ol title="Choose role" class="nya-bs-select" id="role" ng-change="changeRole(tab.model[user.userId], user.userId, user.name)" ng-model="tab.model[user.userId]" ng-required actions-box="true">
+                                            <li nya-bs-option="role in tab.roles">
+                                                <a>
+                                                    {{role}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div ng-switch-when="users">
-                            <div ng-repeat="user in tab.items">
-                                {{user.name}}
-                                {{user.userId}}
-                                {{user.avatarUrl}}
-                                {{user.type}}
-                                <ol title="Role" class="nya-bs-select" id="role" ng-change="changeRole(tab.model[user.userId], user.userId)" ng-model="tab.model[user.userId]" ng-required actions-box="true">
-                                    <li nya-bs-option="role in tab.roles">
-                                        <a>
-                                            {{role}}
-                                            <span class="glyphicon glyphicon-ok check-mark"></span>
-                                        </a>
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div ng-switch-default>
+                        <div ng-switch-default class="no-data text-center">
                             error
                         </div>
                     </div>
-                    <button ng-click="loadItems(tab,tab.fromItems, false, $event)" ng-hide="tab.noMoreItems">load more</button>
+                    <div style="clear:both"></div>
+                    <i class="moreItems fa fa-chevron-down" ng-click="loadItems(tab,tab.fromItems, false, $event)" ng-hide="tab.noMoreItems"></i>
                 </div>
             </uib-tab>
         </uib-tabset>
     </div>
 </div>
+

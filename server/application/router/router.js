@@ -4,9 +4,15 @@ var multipartMiddleware = require('connect-multiparty')({
     uploadDir: '../client/content/images/avatars'
 });
 
+
 router.get('/nullTasks/:page', require('./routes/nullTasks'));
 router.get('/users/:page', require('./routes/users'));
 router.get('/typesWithLimit/:page', require('./routes/typesWithLimit'));
+
+router.put('/user/:id', require('./routes/changeUserRole'));
+router.put('/task/level/:id', require('./routes/changeTaskLevel'));
+router.post('/type', require('./routes/addType'));
+router.delete('/type/:id', require('./routes/deleteType'));
 
 router.get('/logout', require('./routes/logout'));
 router.get('/authorized', require('./routes/authorized'));
@@ -14,6 +20,8 @@ router.get('/user', require('./routes/user'));
 router.get('/languages', require('./routes/languages'));
 router.get('/leaders/:page', require('./routes/leaders'));
 router.get('/types', require('./routes/types'));
+
+
 
 router.get('/task/:task', require('./routes/task'));
 router.put('/task/:task', require('./routes/editTask'));

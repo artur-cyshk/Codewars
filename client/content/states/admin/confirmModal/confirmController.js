@@ -2,7 +2,7 @@ app.controller('ConfirmCtrl', [ '$scope','$uibModalInstance','modalText', functi
     var self = this;
 
     $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
+        $uibModalInstance.close(false);
     };
 
     $scope.confirm = function () {

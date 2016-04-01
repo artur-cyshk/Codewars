@@ -4,3 +4,160 @@
     padding: 15px;
     border-left: 5px solid #515151;
 }
+
+.admin .task-tabs-panel *{
+    outline: none;
+}
+
+.admin .task-tabs-panel .admin-tasks{
+    background: rgb(47, 47, 47);
+    padding: 10px;
+    border: 1px solid transparent;
+    transition: 0.3s linear all;
+    margin-top: 10px;
+}
+.admin .task-tabs-panel .admin-tasks:hover{
+    background: #242323;
+    border: 1px solid #373333;
+}
+
+.admin .task-tabs-panel .head{
+    text-transform: capitalize;
+    padding-left: 15px;
+}
+
+.admin .task-tabs-panel .moreItems{
+    margin: 10px 15px 0;
+
+}
+
+.admin .task-tabs-panel .head .fa-refresh{
+    cursor: pointer;
+    font-size: 0.6em;
+    color: #575757;
+    transition: 0.2s linear all;
+}
+
+
+.admin .task-tabs-panel .head .fa-refresh:hover{
+    color: #8E3232;
+    transform: rotate(196deg);
+}
+
+.admin .task-tabs-panel .admin-tasks .task-name-wrap{
+    overflow: hidden;
+    margin-top: 4px;
+    text-overflow: ellipsis;
+}
+.admin .task-tabs-panel .admin-tasks .task-name-wrap .task-link-more{
+    color: #950505;
+    padding: 5px;
+    transition: 0.3s linear all;
+}
+
+.admin .task-tabs-panel .admin-tasks .task-name-wrap .task-link-more:hover{
+    color: #e90808;
+}
+
+.admin .task-tabs-panel .admin-tasks .task-name-wrap .task-name{
+    text-transform: capitalize;
+    font-size: 1.5em;
+    white-space: nowrap;
+}
+
+.admin .task-tabs-panel .admin-tasks .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 100%;
+    padding-top: 3px;
+}
+
+.admin .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: rgba(82, 82, 82, 0.51);
+}
+
+.admin .nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #2E2C2C;
+}
+
+.admin .nav-pills>li>a {
+    border-radius: 0;
+    text-transform: uppercase;
+    margin-top: 10px;
+    color: #A7B0B9;
+    text-decoration: none;
+}
+
+.admin .task-tabs-panel .admin-tasks .nya-bs-select.btn-group .dropdown-menu li a {
+    cursor: pointer;
+    text-align: center;
+}
+
+
+
+
+.admin .task-tabs-panel .admin-users{
+    background: rgb(47, 47, 47);
+    padding: 17px 10px 10px 10px;
+    border: 1px solid transparent;
+    transition: 0.3s linear all;
+    margin-top: 10px;
+
+}
+.admin .task-tabs-panel .admin-users:hover{
+    background: #242323;
+    border: 1px solid #373333;
+}
+
+
+.admin .task-tabs-panel .admin-users .user-name-wrap{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.admin .task-tabs-panel .admin-users .user-name-wrap .task-link-more{
+    color: #950505;
+    padding: 5px;
+    transition: 0.3s linear all;
+}
+
+.admin .task-tabs-panel .type-list{
+    padding: 10px 0 0 0;
+}
+.admin .task-tabs-panel .tag-icon{
+    color: black;
+}
+.admin .task-tabs-panel .no-data{
+    color: #C35E5E;
+}
+
+.admin .task-tabs-panel .admin-users .user-name-wrap .user-name{
+    text-transform: capitalize;
+    font-size: 1.5em;
+    white-space: nowrap;
+}
+
+.admin .task-tabs-panel .admin-users .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 100%;
+    padding-top: 3px;
+}
+
+.admin .task-tabs-panel .admin-users .nya-bs-select.btn-group .dropdown-menu li a {
+    cursor: pointer;
+    text-align: center;
+}
+
+.admin .task-tabs-panel .admin-users img.avatar{
+    margin-bottom: 8px;
+    width: 39px;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.admin .task-tabs-panel .tag-name{
+    text-transform: capitalize;
+    display: inline-block;
+    padding: 3px;
+    margin: 3px;
+    background: #5B1F1D;
+    border-radius: 4px;
+}

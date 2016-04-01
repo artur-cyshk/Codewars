@@ -28,6 +28,10 @@
     }
 }
 
+.management-task-form .mce-container, .mce-container-body {
+    border-radius: 5px;
+}
+
 .management-task-form .panel .panel-heading{
     color: #FFFFFF !important;
     background-color: #5F5F5F !important;

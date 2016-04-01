@@ -3,7 +3,7 @@ var _ = require('lodash');
 module.exports = function (req, res, next) {
     if(req.session.currUserRole != 'admin'){
         return next({
-            'data' : 'No access, need root'
+            status : 409
         })
     }
 
