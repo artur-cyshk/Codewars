@@ -18,7 +18,7 @@ app.controller('RootCtrl', [ '$scope', '$rootScope','$timeout', function($scope,
             if($scope.timer) {
                 $timeout.cancel($scope.timer);
             }
-            $scope.alerts.push(
+            $scope.alerts.unshift(
                 {
                     msg: info.message,
                     type: info.type

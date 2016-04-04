@@ -1,7 +1,7 @@
 .root .alerts{
     position: fixed;
     z-index: 3;
-    top : 50px;
+    bottom: 5px;
     left: 5px;
     background: transparent;
 }
@@ -10,11 +10,9 @@
     position: relative;
     max-width: 220px;
     min-width: 220px;
-    transition : 0.3s linear all;
     display: block;
     min-height: 38px;
     border-bottom: 2px solid transparent;
-    border-radius: 5px;
     margin-top: 2%;
     color: rgba(255, 255, 255, 0.74);
     text-align: center;

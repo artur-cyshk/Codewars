@@ -7,7 +7,7 @@ module.exports = function (req, res, next) {
         })
     }
 
-    if(!req.params || req.params.page == undefined){
+    if(!req.params || req.params.page == undefined) {
         return next(true);
     }
 
