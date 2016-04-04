@@ -35,15 +35,32 @@
     cursor: pointer;
     font-size: 0.6em;
     color: #575757;
+}
+
+.admin  i.fa.fa-remove{
     transition: 0.2s linear all;
+    cursor: pointer;
+}
+.admin i.fa.fa-remove:hover {
+    color: #767675;
 }
 
-
-.admin .task-tabs-panel .head .fa-refresh:hover{
+.admin .task-tabs-panel .head :hover{
     color: #8E3232;
-    transform: rotate(196deg);
+}
+.refreshing{
+    color: #8E3232;
+    animation: refreshing linear 1s infinite ;
 }
 
+@keyframes refreshing {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
 .admin .task-tabs-panel .admin-tasks .task-name-wrap{
     overflow: hidden;
     margin-top: 4px;

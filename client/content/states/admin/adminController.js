@@ -1,7 +1,7 @@
 app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertService', function($scope, $rootScope, adminService, alertService) {
     var self = this;
 
-    self.successAddingItemsFunction = function (tab, init) {
+    self.successAddingItemsFunction = function (tab, init, firstLoading) {
         return function (response) {
             if(tab.name == 'users') {
                 _.forEach(response.items, function (item) {
@@ -16,6 +16,10 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
             tab.fromItems = (init) ? response.offset : tab.fromItems + response.offset;
             tab.noMoreItems = response.noMoreItems;
             $rootScope.loadingInformation = false;
+            $scope.update = false;
+            if(!firstLoading) {
+                alertService.alert(tab.name + ' data successfully loaded', 'success');
+            }
         }
     };
     
@@ -33,17 +37,18 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
         }
     };
 
-    $scope.loadItems = function (tab, offset, init, $event) {
+    $scope.loadItems = function (tab, offset, init, update,firstLoading, $event) {
         $rootScope.loadingInformation = true;
+        $scope.update = update;
         self.getTabFunction(tab.name, offset)
-            .then(self.successAddingItemsFunction(tab, init), adminService.addErrorHandler);
+            .then(self.successAddingItemsFunction(tab, init, firstLoading), adminService.addErrorHandler);
         if($event) {
             $event.stopPropagation();
         }
     };
 
-    $scope.init = function(tab) {
-        $scope.loadItems(tab, 0, true);
+    $scope.init = function(tab, update, firstLoading) {
+        $scope.loadItems(tab, 0, true, update, firstLoading);
     };
 
     $scope.changeLevel = function (selectedLevel, id, name) {
@@ -54,7 +59,7 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
                 $rootScope.loadingInformation = true;
                 adminService.changeLevel(selectedLevel, id)
                     .success(function () {
-                        $scope.init($scope.adminTabs[0]);
+                        $scope.init($scope.adminTabs[0],false, true);
                         adminService.allDoneHandler('Task level successfully changed');
                     })
                     .error(function (err, status) {
@@ -77,7 +82,7 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
                 $rootScope.loadingInformation = true;
                 adminService.addType(newType)
                     .success(function () {
-                        $scope.init($scope.adminTabs[1]);
+                        $scope.init($scope.adminTabs[1],false, true);
                         adminService.allDoneHandler('Type successfully added');
                         adminService.blurTypeAddInput('.new-type-input');
                     })
@@ -99,13 +104,12 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
                 adminService.removeType(typeId)
                     .success(function () {
                         adminService.allDoneHandler('Type successfully removed');
-                        $scope.init($scope.adminTabs[1]);
+                        $scope.init($scope.adminTabs[1],false, true);
                     })
                     .error(adminService.changeErrorHandler);
             }
         });
     };
-
 
     $scope.changeRole = function (selectedRole, id, name) {
         var text = adminService.getText('role', name, selectedRole);
@@ -142,7 +146,7 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
             }
         ];
             $scope.adminTabs.forEach(function (tab) {
-                $scope.init(tab);
+                $scope.init(tab, false, true);
             })
 
     };

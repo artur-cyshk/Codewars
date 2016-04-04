@@ -42,7 +42,9 @@ app.factory('adminService', function ($q, $http, $uibModal, $templateCache, aler
             if(err.status != 409) {
                 alertService.alert(err.mes, 'error');
             }
+            $scope.update = false;
             $rootScope.loadingInformation = false;
+            alertService.alert('Error while loading data', 'error');
         },
         changeLevelErrorHandler : function (tab, id, err, status) {
             delete tab.model[id];
