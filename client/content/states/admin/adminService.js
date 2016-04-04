@@ -40,9 +40,8 @@ app.factory('adminService', function ($q, $http, $uibModal, $templateCache, aler
         },
         addErrorHandler : function (err) {
             if(err.status != 409) {
-                alertService.alert(err.mes, 'error');
+                alertService.alert(err.mes || 'server error, try later', 'error');
             }
-            $scope.update = false;
             $rootScope.loadingInformation = false;
             alertService.alert('Error while loading data', 'error');
         },

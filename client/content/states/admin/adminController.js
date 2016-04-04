@@ -41,7 +41,13 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
         $rootScope.loadingInformation = true;
         $scope.update = update;
         self.getTabFunction(tab.name, offset)
-            .then(self.successAddingItemsFunction(tab, init, firstLoading), adminService.addErrorHandler);
+            .then(self.successAddingItemsFunction(tab, init, firstLoading),function(err, status){
+                $scope.update = false;
+                adminService.addErrorHandler({
+                    status : status,
+                    err: err
+                });
+            } );
         if($event) {
             $event.stopPropagation();
         }
