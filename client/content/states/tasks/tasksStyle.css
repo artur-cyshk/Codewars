@@ -42,6 +42,7 @@
 
 .tasks h1.no-tasks{
     margin-bottom: -13px;
+    color: #A59A9A;
 }
 .tasks .one-task{
     position: relative;
@@ -53,10 +54,13 @@
     background: rgba(3, 3, 4, 0.24);
     transition: background 0.3s linear ;
 }
+.tasks .one-task .name:first-letter{
+    text-transform: capitalize;
+}
+
 .tasks .one-task .name{
     display: inline-block;
     width: 50%;
-    text-transform: capitalize;
     padding-left: 5px;
     line-height: 62px;
     font-size: 2em;
@@ -120,18 +124,18 @@
 }
 
 .one-task.ng-enter {
-    -webkit-transition: 0.5s linear all; /* Chrome */
-    transition: 0.5s linear all;
+    -webkit-transition: 0.2s linear all; /* Chrome */
+    transition: 0.2s linear all;
     opacity: 0;
 }
 
 .one-task.ng-enter,
 .one-task.ng-leave
 {
-    -webkit-transition: 0.5s linear all;
-    -moz-transition: 0.5s linear all;
-    -o-transition: 0.5s linear all;
-    transition: 0.5s linear all;
+    -webkit-transition: 0.2s linear all;
+    -moz-transition: 0.2s linear all;
+    -o-transition: 0.2s linear all;
+    transition: 0.2s linear all;
     position: relative;
     display: block;
 }
