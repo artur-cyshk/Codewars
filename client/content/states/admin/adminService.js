@@ -40,10 +40,9 @@ app.factory('adminService', function ($q, $http, $uibModal, $templateCache, aler
         },
         addErrorHandler : function (err) {
             if(err.status != 409) {
-                alertService.alert(err.mes || 'server error, try later', 'error');
+                alertService.alert(err.mes || 'Error while loading data', 'error');
             }
             $rootScope.loadingInformation = false;
-            alertService.alert('Error while loading data', 'error');
         },
         changeLevelErrorHandler : function (tab, id, err, status) {
             delete tab.model[id];

@@ -45,7 +45,7 @@
     color: #767675;
 }
 
-.admin .task-tabs-panel .head :hover{
+.admin .task-tabs-panel .head i.fa.fa-refresh:hover{
     color: #8E3232;
 }
 .refreshing{
@@ -144,6 +144,10 @@
     color: black;
 }
 .admin .task-tabs-panel .no-data{
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-size: 1.2em;
     color: #C35E5E;
 }
 

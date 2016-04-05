@@ -11,12 +11,11 @@ body.hidden-scroll{
     overflow-x: hidden;
 }
 
-body .form-control{
-    text-transform: none !important;
+.nya-bs-select.btn-group .dropdown-menu.inner {
+    overflow-y: auto;
+    max-height: 300px;
 }
-body .form-control:first-letter{
-    text-transform: uppercase !important;
-}
+
 .moreItems{
     display: block;
     font-size: 2em;

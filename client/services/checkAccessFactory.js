@@ -3,17 +3,12 @@ angular.module('codewars').factory('checkAccessFactory', function($rootScope, $s
     self.loginStateFormating = function(toState, fromState, fromParams, logout) {
 
         var requireMemory = (
-            !fromState.abstract && fromState.name != 'root.registration' && !(logout)
+            !fromState.abstract && fromState.name != 'root.registration'
         );
 
         if(requireMemory){
             toState.from = fromState.name ;
             toState.paramsTo = fromParams;
-        }else{
-            if(logout) {
-                delete toState.from;
-                delete toState.paramsTo;
-            }
         }
         return {
             from : toState.from,

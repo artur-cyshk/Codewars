@@ -60,9 +60,9 @@
     padding : 20px;
     margin-top: 10px;
     text-align: center;
-    text-transform: capitalize;
     margin-bottom: 10px;
 }
+
 .filter .filter-item * {
     outline: none !important;
     text-align: center !important;
@@ -95,8 +95,8 @@
     background: rgb(162, 37, 37) !important;
 }
 
-.filter .filter-option{
-    text-transform: capitalize;
+.filter .filter-item *:first-letter{
+    text-transform: uppercase;
 }
 .sort-filter, .order-filter{
     margin: 3px 0;

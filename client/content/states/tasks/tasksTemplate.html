@@ -2,7 +2,7 @@
     <tasks-filter> </tasks-filter>
     <div ng-if="filter.filterProperties" class="col-md-8 col-lg-8 col-xs-12 col-sm-6 tasks-wrapper">
         <div class="tasks" >
-            <h1 class="text-center" ng-class="{'padding-left' : authorized}">Tasks <a ng-if="authorized" class="task-new-plus" ui-sref="root.newTask"><i class="fa fa-plus-square"></i></a> </h1>
+            <h1 class="text-center" ng-class="{'padding-left' : authorized}">Tasks <a class="task-new-plus" ui-sref="root.newTask"><i class="fa fa-plus-circle"></i></a> </h1>
             <div ng-if="loadedTasks">
                 <div>
                     <input class="form-control search-tasks" ng-model="filter.name" type="text" placeholder="search by name">

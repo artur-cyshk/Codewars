@@ -6,7 +6,7 @@
 .home .welcome span.app{
     color:rgb(244, 104, 104);
 }
-.home .welcome span.username{
+.home .welcome .username{
     text-transform: capitalize;
 }
 .home .logos p{

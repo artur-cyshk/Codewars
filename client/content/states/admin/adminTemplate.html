@@ -39,7 +39,6 @@
                                 </div>
                             </form>
                             <div  class="col-md-12 col-xs-12 col-sm-12 col-lg-12 text-center type-list">
-                                <span class="no-data" ng-show="!tab.items.length">No types</span>
                                 <span  class="tag-name" ng-repeat="type in tab.items">
                                     {{type.name}}
                                     <i class="fa fa-remove" ng-click="removeType(type.typeId, type.name)"></i>
@@ -71,6 +70,7 @@
                         </div>
                     </div>
                     <div style="clear:both"></div>
+                    <span class="no-data" ng-show="!tab.items.length">No items</span>
                     <i class="moreItems fa fa-chevron-down" ng-click="loadItems(tab,tab.fromItems, false, false, true,  $event)" ng-hide="tab.noMoreItems"></i>
                 </div>
             </uib-tab>

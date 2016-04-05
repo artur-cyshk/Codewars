@@ -92,9 +92,12 @@
     font-size: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-transform: capitalize;
     white-space: nowrap;
 }
+.profile .username:first-letter, .clan:first-letter{
+    text-transform: uppercase;
+}
+
 .profile .clan{
     font-size: 2em;
 }
