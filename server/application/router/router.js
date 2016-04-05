@@ -4,6 +4,7 @@ var multipartMiddleware = require('connect-multiparty')({
     uploadDir: '../client/content/images/avatars'
 });
 
+router.post('/testSolution', require('./routes/testSolution'));
 
 router.get('/nullTasks/:page', require('./routes/nullTasks'));
 router.get('/users/:page', require('./routes/users'));
