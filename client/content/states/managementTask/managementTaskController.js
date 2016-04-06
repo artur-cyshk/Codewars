@@ -7,7 +7,7 @@ app.controller('ManagementTaskCtrl', [ '$scope', '$rootScope','managementTaskSer
             .success(function(){
                 $rootScope.loadingInformation = false;
                 alertService.alert('task successfully edited', 'success');
-                $state.go('root.task', {id : id});
+                $state.go('root.task.information', {id : id});
             })
             .error(managementTaskService.errorHandler);
     };

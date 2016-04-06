@@ -16,7 +16,7 @@
                             <div ng-repeat="task in tab.items"  class="col-md-6 col-sm-6 col-lg-4 col-xs-12">
                                 <div ng-class="'admin-' + tab.name"  class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
                                     <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12 task-name-wrap">
-                                        <span class="task-name"><a class="task-link-more" ui-sref="root.task({id:task.taskId})"><i class="fa fa-info-circle"></i></a>{{task.name}}</span>
+                                        <span class="task-name"><a class="task-link-more" ui-sref="root.task.information({id:task.taskId})"><i class="fa fa-info-circle"></i></a>{{task.name}}</span>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
                                         <ol title="Choose level" class="nya-bs-select" id="level" ng-change="changeLevel(tab.model[task.taskId], task.taskId, task.name)" ng-model="tab.model[task.taskId]" ng-required actions-box="true">
