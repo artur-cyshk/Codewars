@@ -8,9 +8,10 @@ angular.module('codewars').factory('aceFactory', function() {
                 theme : 'monokai',
                 highlightGutterLine : false,
                 onLoad: function (_ace) {
-
                     _ace.$blockScrolling = Infinity;
-                    _ace.insert(insertText);
+                    if(insertText){
+                        _ace.insert(insertText);
+                    }
                     _ace.setHighlightActiveLine(activeLine);
                     _ace.setReadOnly(readOnly);
                     _ace.renderer.$cursorLayer.element.style.display = cursor;
@@ -18,6 +19,7 @@ angular.module('codewars').factory('aceFactory', function() {
                     _ace.resize();
                     _ace.renderer.setPadding( 10 );
                     _ace.renderer.setScrollMargin(10, 10);
+                    _ace.focus();
                 },
                 require: ['ace/ext/language_tools'],
                 advanced: {

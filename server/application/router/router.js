@@ -22,8 +22,6 @@ router.get('/languages', require('./routes/languages'));
 router.get('/leaders/:page', require('./routes/leaders'));
 router.get('/types', require('./routes/types'));
 
-
-
 router.get('/task/:task', require('./routes/task'));
 router.put('/task/:task', require('./routes/editTask'));
 router.delete('/task/:task', require('./routes/deleteTask'));

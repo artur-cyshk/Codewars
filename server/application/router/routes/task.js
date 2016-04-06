@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
     }
     async.waterfall([
         function(callback){
-            var query = 'SELECT tasks.task_id as taskId, tasks.name, tasks.level, tasks.description, languages.name as language, tasks.add_date as taskAddDate,'+
+            var query = 'SELECT tasks.task_id as taskId, tasks.name, tasks.level, tasks.description, languages.name as language,entry_point as entryPoint, tasks.add_date as taskAddDate,'+
                 ' users.name as creator, users.user_id as creatorId' +
                 ' FROM codewars_db.tasks' +
                 ' join languages using (language_id)' +

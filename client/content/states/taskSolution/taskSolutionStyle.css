@@ -5,3 +5,21 @@
     border-radius: 5px;
     width: 100%;
 }
+
+
+.task-solution>div.output-details-tab{
+    padding : 0 15px 0 0 !important;
+}
+.task-solution>div.solution-panel{
+    padding : 0 0 0 15px !important;
+}
+
+@media(max-width:991px){
+    .task-solution>div.output-details-tab, .task-solution>div.solution-panel{
+        padding : 0 0 0 0 !important;
+    }
+}
+
+.task-solution .task-ace-solution-wrapper{
+    margin-top:15px;
+}

@@ -1,5 +1,47 @@
 <div class="task-solution" ng-show="rootLoadingFinish">
-    <div id="editor" ui-ace="taskSolutionConfiguration" ng-model="taskAceSolution"> </div>
-    {{info}}
+    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 output-details-tab description">
+        <uib-tabset type="pills" active="output.index ">
+            <uib-tab heading="DETAILS"  class="btn-sm" >
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel details" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
+                    <uib-accordion>
+                        <uib-accordion-group is-open="status.openSortFilter">
+                            <uib-accordion-heading>
+                                Description <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.openDescription, 'glyphicon-chevron-right': !status.openDescription}"></i>
+                            </uib-accordion-heading>
+                            <div ng-bind-html="currentTask.description | html"></div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                    <i class="fa fa-tags"></i>
+                    <span class="no-data" ng-show="!currentTask.types.length">No types</span>
+                    <span class="tag-name" ng-repeat="type in currentTask.types">{{type.type_name}}</span>
+                </div>
+            </uib-tab>
+            <uib-tab heading="OUTPUT"  class="btn-sm" >
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
+                    <div ng-repeat="item in output.data">
+                        {{item}}
+                        <div ng-if="item.executingError">
+                            {{item.name}}
+                            {{item.message}}
+                        </div>
+                        <div ng-if="item.test">
+                            <span ng-style="{'color': (item.pass) ? 'green' : 'red'}">
+                                    {{item.expected}} AND {{item.result || 'undefined'}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 solution-panel">
+        <uib-tabset type="pills" active="0">
+            <uib-tab heading="SOLUTION"  class="btn-sm" >
+                <div class="task-ace-solution-wrapper">
+                    <div id="editor" ui-ace="taskAceSolution.config" ng-model="taskAceSolution.inner"> </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
     <button ng-click="test()">test</button>
 </div>

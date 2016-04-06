@@ -5,6 +5,9 @@ angular.module('codewars').factory('taskSolutionService', function($http, alertS
                 taskId : taskId,
                 solution : solution
             });
+        },
+        getSolutionEntryText : function (entryPoint) {
+            return 'function ' + entryPoint + '() {\n\n}';
         }
     }
 });

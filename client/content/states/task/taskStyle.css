@@ -10,6 +10,15 @@
     color: #AC4747;
 }
 
+.current-task .name-link{
+    color: inherit;
+    transition: 0.2s linear all;
+}
+
+.current-task .name-link:hover{
+    color: #ffffff;
+}
+
 .current-task .no-comments{
     text-align: center;
     padding: 15px;

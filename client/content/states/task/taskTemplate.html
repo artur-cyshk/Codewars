@@ -6,7 +6,7 @@
                     {{currentTask.level || 'NO LEVEL'}}
                 </span>
                 <span ng-class="currentTask.level ? 'language' : 'no-language'" ng-style="{'color':mapColor(currentTask.level).in}">{{currentTask.language}}</span>
-                <a ng-if="currentTask.level" class="train hidden-xs" ui-sref="root.taskSolution({id: currentTask.taskId})">
+                <a ng-if="currentTask.level" class="train hidden-xs" ui-sref="root.task.taskSolution({id: currentTask.taskId})">
                     <button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm ">
                         <i class="fa fa-play"></i> Train
                     </button>
@@ -14,9 +14,10 @@
             </div>
             <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 center-panel">
                 <span class="name">
-                    {{currentTask.name}}
+                    <a class="name-link" ui-sref="root.task.information(currentTask.task_id)">
+                        {{currentTask.name}}
+                    </a>
                 </span>
-
             </div>
             <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3 right-panel">
                 <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'dd MMMM yyyy'}}</span>
@@ -54,64 +55,6 @@
                 </span>
             </div>
         </div>
-        <uib-tabset type="pills" class="description">
-            <uib-tab heading="DETAILS" class="btn-sm">
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel details" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
-                    <uib-accordion>
-                        <uib-accordion-group is-open="status.openSortFilter">
-                            <uib-accordion-heading>
-                                Description <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.openDescription, 'glyphicon-chevron-right': !status.openDescription}"></i>
-                            </uib-accordion-heading>
-                            <div ng-bind-html="currentTask.description | html"></div>
-                        </uib-accordion-group>
-                    </uib-accordion>
-                    <i class="fa fa-tags"></i>
-                    <span class="no-data" ng-show="!currentTask.types.length">No types</span>
-                    <span class="tag-name" ng-repeat="type in currentTask.types">{{type.type_name}}</span>
-                </div>
-            </uib-tab>
-            <uib-tab heading="DISCUSS" classes="btn-sm">
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
-                    <div ng-if="authorized" class="comment-add">
-                        <form ng-submit="setComment()">
-                            <input type="text" class="form-control comment-input" ng-model="comment.text" placeholder="Write your comment">
-                        </form>
-                    </div>
-                    <div class="no-data no-comments" ng-show="!currentTask.comments.length">No comments</div>
-                    <div class="comment-div col-md-12 col-xs-12 col-sm-12 col-lg-12" ng-repeat="comment in currentTask.comments">
-                        <i ng-if ="comment.userId == currUserId || adminRoot" class="glyphicon close-comment glyphicon-remove" ng-click="removeCommit(comment.commentId)"></i>
-                        <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
-                            <div class="text-left comment-info">
-                                <span class="date-and-author hidden-xs">{{comment.commentAddDate | date : 'dd MMMM yyyy'}}</span>
-                                <span class="date-and-author hidden-xs">{{comment.commentAddDate | date : 'HH:mm'}}</span>
-                                <span class="date-and-author"><i class="fa fa-user"></i> {{comment.commentAuthor}}</span>
-                            </div>
-                        </div>
-                        <div class="col-md-10 col-xs-12 col-sm-9 col-lg-10">
-                            <span class="comment-text">
-                                {{comment.comment}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </uib-tab>
-            <uib-tab ng-if="authorized && currentTask.solutions" heading="SOLUTIONS" classes="btn-sm">
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
-                    <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6 solution-wrapper" ng-repeat="solution in currentTask.solutions">
-                        <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 solution" ng-class="{'my':solution.solutionUserId == currUserId}">
-                            <div class="date-and-author-wrap">
-                            <span class="date-and-author ">{{solution.add_date | date : 'dd MMMM yyyy'}}</span>
-                            <span class="date-and-author ">{{solution.add_date | date : 'HH:mm'}}</span>
-                            </div>
-                            <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 solution-author">
-                                <h3><i class="fa fa-user"></i> {{solution.author}}</h3>
-                            </div>
-                            <div id="editor" ui-ace="solution.configuration" > </div>
-
-                        </div>
-                    </div>
-                </div>
-            </uib-tab>
-        </uib-tabset>
+        <ui-view></ui-view>
     </div>
 </div>

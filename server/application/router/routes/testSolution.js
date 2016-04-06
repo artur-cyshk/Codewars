@@ -3,9 +3,16 @@ var _ = require('lodash');
 var async = require('async');
 var assert = require('assert');
 var _eval = require('eval');
+var tripwire = require('tripwire');
 module.exports = function (req, res, next) {
 
-    if(!req.session.authorized || !req.body.taskId || !req.body.solution) {
+    if(!req.session.authorized) {
+        return next({
+            status : 409
+        })
+    }
+    
+    if(!req.body.taskId || !req.body.solution) {
         return next(true);
     }
 
@@ -20,33 +27,46 @@ module.exports = function (req, res, next) {
         },
         function(tests, callback) {
             if(_.isObject(tests)) {
-                var testsResults = [];
-                for(var i = 0; i < tests.length; i++){
+                var testsResults = [],
+                    REQUEST_TIMEOUT = 6000;
+                tripwire.resetTripwire(REQUEST_TIMEOUT);
+                for(var i = 0; i < tests.length; i++) {
                     var test = tests[i];
-                    try{
-
-                        var res = _eval(req.body.solution + ' ; module.exports = '+ test.entryPoint + '(' + JSON.parse(test.parameters) + ')');
+                    test.parameters = JSON.parse(test.parameters);
+                    try {
+                        var res = _eval(req.body.solution + ' ; module.exports = '+ test.entryPoint + '(' + test.parameters + ')');
                     }
                     catch(e) {
                         testsResults.push({
                             message : e.message,
-                            name : e.name
+                            name : e.name,
+                            executingError: true
                         });
                         callback(null, testsResults);
                         break;
                     }
-
-                    try{
+                    try {
                         assert.deepEqual(res, test.answer);
+                        testsResults.push({
+                            result : test.parameters,
+                            expected : test.answer,
+                            pass : true,
+                            test : true
+                        });
                     }catch (e) {
                         testsResults.push({
                             result : e.actual,
-                            expected : e.expected
+                            expected : e.expected,
+                            pass : false,
+                            test : true
                         });
                     }
                 }
+                callback(null, testsResults);
+            }else{
+                callback(true);
             }
-            callback(null, testsResults);
+
         }
     ], function (err, testsResults) {
         if(err) {

@@ -3,7 +3,7 @@ app.controller('TasksCtrl', [ '$scope', '$rootScope','tasksService','alertServic
     var self = this;
 
     $scope.openTask = function(taskId) {
-        $state.go('root.task',{id:taskId});
+        $state.go('root.task.information',{id:taskId});
     };
 
     $scope.loadTasksFromServer = function(page, filter) {

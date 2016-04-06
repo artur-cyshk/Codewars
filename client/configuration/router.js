@@ -53,10 +53,16 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                 url: '/task/{id}',
                 templateUrl: '../content/states/task/taskTemplate.html',
                 controller : 'TaskCtrl',
+                abstract : true,
                 requiredAuthorization : false
             })
-            .state('root.taskSolution', {
-                url: '/task/{id}/taskSolution',
+            .state('root.task.information', {
+                url: '/information',
+                templateUrl: '../content/states/task/taskInformation.html',
+                requiredAuthorization : false
+            })
+            .state('root.task.taskSolution', {
+                url: '/taskSolution',
                 templateUrl: '../content/states/taskSolution/taskSolutionTemplate.html',
                 controller : 'TaskSolutionCtrl',
                 requiredAuthorization : true
