@@ -19,6 +19,13 @@ app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','aceFactory','taskSo
         $scope.taskAceSolution.config = aceFactory.getConfiguration(false, false, true, true, true);
         $scope.taskAceSolution.inner = taskSolutionService.getSolutionEntryText($scope.currentTask.entryPoint);
     };
+ //todo!!!!!!!!!!!!!!
+    angular.element(window).resize(function (ev) {
+        console.log('z');
+        angular.element('#editor').css({
+            height :angular.element('#editor').width()
+        })
+    })
 
     self.init();
 }]);

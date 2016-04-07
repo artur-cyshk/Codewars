@@ -1,9 +1,14 @@
 .task-solution .ace_editor {
-    height: 250px;
+    max-height: 600px;
+    height: 600px;
     font-size: 14px !important;
     z-index: 0;
-    border-radius: 5px;
     width: 100%;
+}
+
+.task-solution .output-inner{
+    max-height: 600px;
+    height: 600px;
 }
 
 

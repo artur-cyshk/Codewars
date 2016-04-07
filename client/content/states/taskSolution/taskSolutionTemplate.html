@@ -17,7 +17,7 @@
                 </div>
             </uib-tab>
             <uib-tab heading="OUTPUT"  class="btn-sm" >
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel output-inner" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
                     <div ng-repeat="item in output.data">
                         {{item}}
                         <div ng-if="item.executingError">

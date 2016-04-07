@@ -48,7 +48,7 @@ module.exports = function (req, res, next) {
                     try {
                         assert.deepEqual(res, test.answer);
                         testsResults.push({
-                            result : test.parameters,
+                            params : test.parameters,
                             expected : test.answer,
                             pass : true,
                             test : true
@@ -56,6 +56,7 @@ module.exports = function (req, res, next) {
                     }catch (e) {
                         testsResults.push({
                             result : e.actual,
+                            params : test.parameters,
                             expected : e.expected,
                             pass : false,
                             test : true
