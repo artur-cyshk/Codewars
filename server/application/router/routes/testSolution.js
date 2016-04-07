@@ -15,7 +15,7 @@ module.exports = function (req, res, next) {
     if(!req.body.taskId || !req.body.solution) {
         return next(true);
     }
-
+    var finish = req.body.finish;
     async.waterfall([
         function(callback) {
             var query = "SELECT parameters, answer,entry_point as entryPoint FROM tests join tasks using(task_id) where task_id = ?";
@@ -27,42 +27,58 @@ module.exports = function (req, res, next) {
         },
         function(tests, callback) {
             if(_.isObject(tests)) {
-                var testsResults = [],
-                    REQUEST_TIMEOUT = 6000;
+                var testsResults = {};
+                testsResults.tests = [];
+                testsResults.successTests = 0;
+                testsResults.errorTests = 0;
+                var REQUEST_TIMEOUT = 6000;
                 tripwire.resetTripwire(REQUEST_TIMEOUT);
-                for(var i = 0; i < tests.length; i++) {
+                var testsCountToTest = (finish) ? tests.length : tests.length/2;
+                for(var i = 0; i < testsCountToTest; i++) {
                     var test = tests[i];
                     test.parameters = JSON.parse(test.parameters);
                     try {
                         var res = _eval(req.body.solution + ' ; module.exports = '+ test.entryPoint + '(' + test.parameters + ')');
                     }
                     catch(e) {
-                        testsResults.push({
+
+                        testsResults.executingError = {
                             message : e.message,
-                            name : e.name,
-                            executingError: true
-                        });
+                            name : e.name
+                        };
                         callback(null, testsResults);
                         break;
                     }
                     try {
                         assert.deepEqual(res, test.answer);
-                        testsResults.push({
+                        testsResults.tests.push({
                             params : test.parameters,
                             expected : test.answer,
-                            pass : true,
-                            test : true
+                            result : test.answer,
+                            pass : true
                         });
+                        testsResults.successTests++;
                     }catch (e) {
-                        testsResults.push({
+                        testsResults.tests.push({
                             result : e.actual,
-                            params : test.parameters,
                             expected : e.expected,
-                            pass : false,
-                            test : true
+                            pass : false
                         });
+                        testsResults.hasErrorTest = true;
+                        testsResults.errorTests++;
+
+                        if(finish) {
+                            if(testsResults.tests.length < 3){
+                                testsResults.tests[testsResults.tests.length-1].params = test.parameters;
+                            }
+                            callback(null, testsResults);
+                            break;
+                        }else{
+                            testsResults.tests[testsResults.tests.length-1].params = test.parameters;
+                        }
                     }
                 }
+                //todo finish logic
                 callback(null, testsResults);
             }else{
                 callback(true);

@@ -1,17 +1,34 @@
 .task-solution .ace_editor {
-    max-height: 600px;
-    height: 600px;
+    height: 365px !important;
     font-size: 14px !important;
     z-index: 0;
     width: 100%;
 }
 
-.task-solution .output-inner{
-    max-height: 600px;
-    height: 600px;
+.task-solution .output-inner ,.task-solution .details-inner{
+    height: 365px;
 }
 
+.task-solution>div.output-details-tab .error-field{
+    color : red;
+}
 
+.task-solution>div.output-details-tab .success-field{
+    color : green;
+}
+
+.task-solution>div.output-details-tab .code-errors{
+    border-bottom: 1px solid red;
+}
+.task-solution>div.output-details-tab .tests-list{
+    border-bottom: 1px solid;
+}
+.task-solution>div.output-details-tab .tests-list.pass{
+    border-bottom-color:green;
+}
+.task-solution>div.output-details-tab .tests-list.no-pass{
+    border-bottom-color:red;
+}
 .task-solution>div.output-details-tab{
     padding : 0 15px 0 0 !important;
 }

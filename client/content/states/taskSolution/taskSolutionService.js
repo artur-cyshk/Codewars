@@ -1,9 +1,10 @@
 angular.module('codewars').factory('taskSolutionService', function($http, alertService) {
     return {
-        testSolution : function (taskId, solution) {
+        testSolution : function (taskId, solution, finish) {
             return $http.post('/testSolution', {
                 taskId : taskId,
-                solution : solution
+                solution : solution,
+                finish: finish
             });
         },
         getSolutionEntryText : function (entryPoint) {

@@ -1,7 +1,7 @@
 app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','aceFactory','taskSolutionService','$stateParams','alertService', function($scope, $rootScope, aceFactory, taskSolutionService, $stateParams, alertService) {
     var self = this;
-    $scope.test = function () {
-        taskSolutionService.testSolution($stateParams.id, $scope.taskAceSolution.inner)
+    $scope.test = function (finish) {
+        taskSolutionService.testSolution($stateParams.id, $scope.taskAceSolution.inner, finish)
             .success(function (data) {
                 $scope.output = {};
                 $scope.output.data = data;
@@ -19,13 +19,6 @@ app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','aceFactory','taskSo
         $scope.taskAceSolution.config = aceFactory.getConfiguration(false, false, true, true, true);
         $scope.taskAceSolution.inner = taskSolutionService.getSolutionEntryText($scope.currentTask.entryPoint);
     };
- //todo!!!!!!!!!!!!!!
-    angular.element(window).resize(function (ev) {
-        console.log('z');
-        angular.element('#editor').css({
-            height :angular.element('#editor').width()
-        })
-    })
 
     self.init();
 }]);

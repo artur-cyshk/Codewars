@@ -2,7 +2,7 @@
     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 output-details-tab description">
         <uib-tabset type="pills" active="output.index ">
             <uib-tab heading="DETAILS"  class="btn-sm" >
-                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel details" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
+                <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel details details-inner" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
                     <uib-accordion>
                         <uib-accordion-group is-open="status.openSortFilter">
                             <uib-accordion-heading>
@@ -18,30 +18,51 @@
             </uib-tab>
             <uib-tab heading="OUTPUT"  class="btn-sm" >
                 <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel output-inner" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
-                    <div ng-repeat="item in output.data">
-                        {{item}}
-                        <div ng-if="item.executingError">
-                            {{item.name}}
-                            {{item.message}}
-                        </div>
-                        <div ng-if="item.test">
-                            <span ng-style="{'color': (item.pass) ? 'green' : 'red'}">
-                                    {{item.expected}} AND {{item.result || 'undefined'}}
-                            </span>
+                    <div ng-if="output.data.executingError">
+                        Code errors
+                        <div class="code-errors">
+                            {{output.data.executingError.name}} : <span class="error-field">{{output.data.executingError.message}}</span>
                         </div>
                     </div>
+                    <div ng-if="output.data.tests.length" class="tests-list" ng-class="output.data.hasErrorTest ? 'no-pass' : 'pass'">
+                        Tests
+                        <div>
+                            <div ng-repeat="test in output.data.tests">
+                                <span ng-if="test.params">
+                                    Params :
+                                    <span ng-repeat="param in test.params">
+                                        <span class="success-field">{{param}}</span> ,
+                                    </span>
+                                </span>
+                                Expected:
+                                <span ng-class="test.pass ? 'success-field' : 'error-field'">{{test.expected}}</span>,
+                                {{test.pass ? 'and' : 'instead'}} got:
+                                <span ng-class="test.pass ? 'success-field' : 'error-field'">{{test.result || 'undefined'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-count">
+                        Success test<span>{{ output.data.successTests}}</span>
+                        Error test<span>{{ output.data.errorTests}}</span>
+                    </div>
+                    <div ng-if="!output.data.hasErrorTest">Press Finish to submit score</div>
                 </div>
             </uib-tab>
         </uib-tabset>
     </div>
     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 solution-panel">
-        <uib-tabset type="pills" active="0">
-            <uib-tab heading="SOLUTION"  class="btn-sm" >
-                <div class="task-ace-solution-wrapper">
-                    <div id="editor" ui-ace="taskAceSolution.config" ng-model="taskAceSolution.inner"> </div>
-                </div>
-            </uib-tab>
-        </uib-tabset>
+
+        <ul class="nav nav-pills">
+            <li class="btn-sm uib-tab nav-item" heading="TEST">
+                <a href="" ng-click="test(false)">TEST</a>
+            </li>
+            <li class="btn-sm uib-tab nav-item" heading="FINISH">
+                <a href="" ng-click="test(true)" class="nav-link">FINISH</a>
+            </li>
+        </ul>
+        <div class="task-ace-solution-wrapper">
+            <div id="editor" ui-ace="taskAceSolution.config" ng-model="taskAceSolution.inner"> </div>
+        </div>
+
     </div>
-    <button ng-click="test()">test</button>
 </div>
