@@ -5,8 +5,13 @@
             <a href="" ng-click="clearFilter()">clear</a>
         </h1>
         <div class="filter-item group-filter">
-            <div class="btn-group " data-toggle="buttons">
-                <label class="btn btn-default" ng-class="{active: filter.filterModel.group == group}" ng-repeat="group in filter.filterProperties.groups">
+            <div class="btn-group first" data-toggle="buttons">
+                <label class="btn btn-default" ng-if="$index<2" ng-class="{active: filter.filterModel.group == group}" ng-repeat="group in filter.filterProperties.groups">
+                    <input ng-value ="group" ng-change="updateTasksByFilter()" type="radio" ng-model="filter.filterModel.group">{{group}}
+                </label>
+            </div>
+            <div class="btn-group second" data-toggle="buttons">
+                <label class="btn btn-default" ng-if="$index>=2" ng-class="{active: filter.filterModel.group == group}" ng-repeat="group in filter.filterProperties.groups">
                     <input ng-value ="group" ng-change="updateTasksByFilter()" type="radio" ng-model="filter.filterModel.group">{{group}}
                 </label>
             </div>

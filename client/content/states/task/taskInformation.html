@@ -14,7 +14,7 @@
             <span class="tag-name" ng-repeat="type in currentTask.types">{{type.type_name}}</span>
         </div>
     </uib-tab>
-    <uib-tab heading="DISCUSS" classes="btn-sm">
+    <uib-tab heading="DISCUSS {{'(' + currentTask.comments.length + ')'}}" classes="btn-sm">
         <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
             <div ng-if="authorized" class="comment-add">
                 <form ng-submit="setComment()">
@@ -39,7 +39,7 @@
             </div>
         </div>
     </uib-tab>
-    <uib-tab ng-if="authorized && currentTask.solutions" heading="SOLUTIONS" classes="btn-sm">
+    <uib-tab ng-if="authorized && currentTask.solutions" heading="SOLUTIONS {{'(' + currentTask.solutions.length + ')'}}" classes="btn-sm">
         <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
             <div class="col-md-6 col-xs-12 col-lg-6 col-sm-6 solution-wrapper" ng-repeat="solution in currentTask.solutions">
                 <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 solution" ng-class="{'my':solution.solutionUserId == currUserId}">

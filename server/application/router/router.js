@@ -10,6 +10,8 @@ router.get('/nullTasks/:page', require('./routes/nullTasks'));
 router.get('/users/:page', require('./routes/users'));
 router.get('/typesWithLimit/:page', require('./routes/typesWithLimit'));
 
+router.get('/taskDone/:id', require('./routes/taskDone'));
+
 router.put('/user/:id', require('./routes/changeUserRole'));
 router.put('/task/level/:id', require('./routes/changeTaskLevel'));
 router.post('/type', require('./routes/addType'));

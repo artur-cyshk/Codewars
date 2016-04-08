@@ -6,7 +6,8 @@
                     {{currentTask.level || 'NO LEVEL'}}
                 </span>
                 <span ng-class="currentTask.level ? 'language' : 'no-language'" ng-style="{'color':mapColor(currentTask.level).in}">{{currentTask.language}}</span>
-                <a ng-if="currentTask.level" class="train hidden-xs" ui-sref="root.task.taskSolution({id: currentTask.taskId})">
+
+                <a ng-if="currentTask.level && !currentTask.solutions" class="train hidden-xs" ui-sref="root.task.taskSolution({id: currentTask.taskId})">
                     <button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm ">
                         <i class="fa fa-play"></i> Train
                     </button>
@@ -17,7 +18,11 @@
                     <a class="name-link" ui-sref="root.task.information(currentTask.task_id)">
                         {{currentTask.name}}
                     </a>
+                    <span class="done-wrap done-icon-center hidden-xs">
+                     <i ng-if="currentTask.solutions" class="fa fa-check-circle"></i>
+                    </span>
                 </span>
+
             </div>
             <div class="col-md-3 col-xs-3 col-lg-3 col-sm-3 right-panel">
                 <span class="date-and-author hidden-xs">{{currentTask.taskAddDate | date : 'dd MMMM yyyy'}}</span>
@@ -27,11 +32,14 @@
                     <i class="fa fa-pencil"></i>
                 </a>
                 <span ng-if="currUserId == currentTask.creatorId || adminRoot" class="editing-task"><i  class="fa fa-trash-o" ng-click="openRemovingTaskModal(currentTask.taskId)"></i></span>
-                <a ng-if="currentTask.level" class="train train-right hidden-sm hidden-md hidden-lg" ui-sref="root.task.taskSolution({id: currentTask.taskId})">
+                <a ng-if="currentTask.level && !currentTask.solutions" class="train train-right hidden-sm hidden-md hidden-lg" ui-sref="root.task.taskSolution({id: currentTask.taskId})">
                     <button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm ">
                         <i class="fa fa-play"></i>
                     </button>
                 </a>
+                <span class="done-icon-right done-wrap hidden-sm hidden-md hidden-lg">
+                     <i ng-if="currentTask.solutions" class="fa fa-check-circle"></i>
+                </span>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12 center-block col-lg-12 text-center">
                 <span class="to-do-panel">

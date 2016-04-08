@@ -15,17 +15,25 @@
 }
 .filter .group-filter .btn-group{
     width:100%;
+    margin: 2px 0;
 }
 
-.filter .group-filter .btn{
+.filter .group-filter .btn {
     transition : 0.3s linear all;
-    width:25% !important;
     color : rgb(213, 213, 213) !important;
     background: rgba(0, 0, 0, 0);
     margin : 0 auto;
     float:none;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.filter .group-filter .second .btn {
+    width:33.3333% !important;
+}
+
+.filter .group-filter .first .btn {
+    width:50% !important;
 }
 
 .filter .level-filter .btn,.filter .type-filter .btn  {

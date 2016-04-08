@@ -36,7 +36,7 @@ angular.module('codewars').factory('tasksFilterService', function($http , $q, al
                     .then(
                         function success(types) {
                             var filterProperties = {};
-                            filterProperties.groups =(!$rootScope.authorized) ? ['all'] : ['all', 'own', 'later', 'favorite'];
+                            filterProperties.groups =(!$rootScope.authorized) ? ['all'] : ['all','done', 'own', 'later', 'favorite'];
                             filterProperties.types = types;
                             filterProperties.levels = Array.apply(null, {length: 8}).map(function(item, i) {return i + 1 });
                             filterProperties.levels.unshift('without level');

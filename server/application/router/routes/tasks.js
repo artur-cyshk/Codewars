@@ -26,6 +26,10 @@ module.exports = function (req, res, next) {
                     selectOptionsFilter.where.push(' later_tasks.user_id = "' + req.session.userId + '" ');
                     selectOptionsFilter.join.push(' join later_tasks using(task_id) ');
                     break;
+                case 'done':
+                    selectOptionsFilter.where.push(' solutions.user_id = "' + req.session.userId + '" ');
+                    selectOptionsFilter.join.push(' join solutions using(task_id) ');
+                    break;
                 default:
                     break;
             }
@@ -59,7 +63,7 @@ module.exports = function (req, res, next) {
 
         if (filter.sortBy) {
             selectOptionsFilter.sortBy = (filter.sortBy == 'name' || filter.sortBy == 'level') ? filter.sortBy : 'add_date';
-            selectOptionsFilter.sortBy = ' order by ' + selectOptionsFilter.sortBy + ' ';
+            selectOptionsFilter.sortBy = ' order by tasks.' + selectOptionsFilter.sortBy + ' ';
         }
 
         if (filter.sortOrder && filter.sortBy) {
@@ -72,7 +76,7 @@ module.exports = function (req, res, next) {
         return selectOptionsFilter;
     };
     var getTasksQuering = function(filter) {
-        var query = 'SELECT tasks.task_id as taskId, tasks.name as name, level, description, languages.name as language, add_date as addDate' +
+        var query = 'SELECT tasks.task_id as taskId, tasks.name as name, tasks.level, tasks.description, languages.name as language, tasks.add_date as addDate' +
             ' from tasks join languages using (language_id) ' + (filter.join || ' ') +
             (filter.where || ' ') + ' group by tasks.name ' + (filter.sortBy || ' ') + (filter.sort || ' ') +
             ' LIMIT 11 OFFSET ' + (req.body.fromItem || 0) + ' ';

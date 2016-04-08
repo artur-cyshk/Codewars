@@ -7,6 +7,13 @@ angular.module('codewars').directive('profile', function ($rootScope, profileSer
         templateUrl: './content/states/profile/profileTemplate.html',
         controller: function ($scope) {
 
+            var self = this;
+
+            self.setLevel = function (honor) {
+                $scope.levels = levelsFactory.levelObjectMapping(honor);
+                $scope.currentUser.level = levelsFactory.getLevelByHonor($scope.levels, honor);
+            };
+
             $scope.selectAvatar = function() {
                 var modalInstance = profileService.openSelectAvatarModal();
                 modalInstance.result.then(function (dataUrl, name) {
@@ -27,6 +34,11 @@ angular.module('codewars').directive('profile', function ($rootScope, profileSer
             });
             $scope.$on('changeState', function() {
                 $scope.status.openedProfile = false;
+            });
+
+            $scope.$on('changeHonor', function ($event, addedHonor) {
+                $scope.currentUser.honor += addedHonor;
+                self.setLevel($scope.currentUser.honor);
             });
 
             $scope.signOut = function() {
@@ -56,8 +68,7 @@ angular.module('codewars').directive('profile', function ($rootScope, profileSer
                     profileService.getUser()
                         .success(function(user) {
                             $scope.currentUser = user;
-                            $scope.levels = levelsFactory.levelObjectMapping(user.honor);
-                            $scope.currentUser.level = levelsFactory.getLevelByHonor($scope.levels, $scope.currentUser.honor);
+                            self.setLevel(user.honor);
                             $scope.userDataLoaded = true;
                         })
                         .error(function() {

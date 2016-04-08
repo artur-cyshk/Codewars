@@ -1,4 +1,4 @@
-<div class="task-solution" ng-show="rootLoadingFinish">
+<div class="task-solution" ng-show="rootLoadingFinish && userCanDo">
     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 output-details-tab description">
         <uib-tabset type="pills" active="output.index ">
             <uib-tab heading="DETAILS"  class="btn-sm" >
@@ -18,34 +18,41 @@
             </uib-tab>
             <uib-tab heading="OUTPUT"  class="btn-sm" >
                 <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel output-inner" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
-                    <div ng-if="output.data.executingError">
-                        Code errors
-                        <div class="code-errors">
+                    <div class="code-errors" ng-if="output.data.executingError">
+                        <span class="test-name">Code errors</span>
+                        <div class="error-body">
                             {{output.data.executingError.name}} : <span class="error-field">{{output.data.executingError.message}}</span>
                         </div>
                     </div>
                     <div ng-if="output.data.tests.length" class="tests-list" ng-class="output.data.hasErrorTest ? 'no-pass' : 'pass'">
-                        Tests
+                        <span class="test-name">Tests</span>
                         <div>
-                            <div ng-repeat="test in output.data.tests">
+                            <div class="test-body" ng-repeat="test in output.data.tests">
+                                <i class="fa test-result-icon" ng-class="test.pass ? 'fa-check' : 'fa-times'"></i>
                                 <span ng-if="test.params">
                                     Params :
                                     <span ng-repeat="param in test.params">
                                         <span class="success-field">{{param}}</span> ,
                                     </span>
+                                    <span class="error-field" ng-if="!test.params.length"> NO </span>
                                 </span>
-                                Expected:
+                                expected:
                                 <span ng-class="test.pass ? 'success-field' : 'error-field'">{{test.expected}}</span>,
                                 {{test.pass ? 'and' : 'instead'}} got:
                                 <span ng-class="test.pass ? 'success-field' : 'error-field'">{{test.result || 'undefined'}}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="test-count">
-                        Success test<span>{{ output.data.successTests}}</span>
-                        Error test<span>{{ output.data.errorTests}}</span>
+                    <div ng-if="output.data.tests.length" class="test-count">
+                        <div>
+                            <span class="success-field bold">Passed</span>  : <span>{{ output.data.successTests}}</span>
+                        </div>
+                        <div>
+                            <span class="error-field bold">Failed</span> : <span>{{ output.data.errorTests}}</span>
+                        </div>
+
                     </div>
-                    <div ng-if="!output.data.hasErrorTest">Press Finish to submit score</div>
+                    <div class="finish-score" ng-if="!output.data.hasErrorTest && !output.data.executingError && output.data.tests.length">Press FINISH to submit score</div>
                 </div>
             </uib-tab>
         </uib-tabset>
@@ -54,10 +61,10 @@
 
         <ul class="nav nav-pills">
             <li class="btn-sm uib-tab nav-item" heading="TEST">
-                <a href="" ng-click="test(false)">TEST</a>
+                <a href="" ng-click="test(false)" class="test-btn">TEST</a>
             </li>
-            <li class="btn-sm uib-tab nav-item" heading="FINISH">
-                <a href="" ng-click="test(true)" class="nav-link">FINISH</a>
+            <li class="btn-sm uib-tab nav-item" ng-if="output.data.errorTests == 0 && !output.data.executingError" heading="FINISH">
+                <a href="" ng-click="test(true)" class="nav-link finish-btn">FINISH</a>
             </li>
         </ul>
         <div class="task-ace-solution-wrapper">

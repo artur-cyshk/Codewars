@@ -8,7 +8,7 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
                     tab.model[item.userId] = item.type;
                 })
             }else{
-                if(tab.name == 'types'){
+                if(tab.name == 'types') {
                     tab.model = '';
                 }
             }
@@ -41,7 +41,7 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
         $rootScope.loadingInformation = true;
         $scope.update = update;
         self.getTabFunction(tab.name, offset)
-            .then(self.successAddingItemsFunction(tab, init, firstLoading),function(err) {
+            .then(self.successAddingItemsFunction(tab, init, firstLoading), function(err) {
                 $scope.update = false;
                 adminService.addErrorHandler(err);
             } );
@@ -62,7 +62,7 @@ app.controller('AdminCtrl', [ '$scope', '$rootScope', 'adminService', 'alertServ
                 $rootScope.loadingInformation = true;
                 adminService.changeLevel(selectedLevel, id)
                     .success(function () {
-                        $scope.init($scope.adminTabs[0],false, true);
+                        $scope.init($scope.adminTabs[0], false, true);
                         adminService.allDoneHandler('Task level successfully changed');
                     })
                     .error(function (err, status) {

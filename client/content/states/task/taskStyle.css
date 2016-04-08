@@ -200,6 +200,7 @@
     font-size: 6em;
 }
 
+
 .current-task .no-level{
     position: absolute;
     top: 20px;
@@ -247,6 +248,14 @@
     top: 37px;
 }
 
+.current-task .center-panel .done-icon-center i{
+    font-size: 1em;
+}
+.current-task .done-wrap i{
+    font-size: 2.5em;
+    color: #1A731A;
+}
+
 .current-task .editing-task{
     font-size: 1.3em;
     cursor: pointer;
@@ -265,7 +274,7 @@
     color: #959595 !important;
 }
 
-.current-task .right-panel .train-right{
+.current-task .right-panel .train-right, .current-task .right-panel .done-icon-right{
     position: absolute;
     top: 39px;
     right: 3px;

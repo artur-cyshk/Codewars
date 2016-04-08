@@ -3,6 +3,7 @@ var _ = require('lodash');
 var async = require('async');
 var assert = require('assert');
 var _eval = require('eval');
+var honorByLevel = require('../../services/honorByLevel');
 var tripwire = require('tripwire');
 module.exports = function (req, res, next) {
 
@@ -12,13 +13,13 @@ module.exports = function (req, res, next) {
         })
     }
     
-    if(!req.body.taskId || !req.body.solution) {
+    if(req.body.taskId == undefined || !req.body.solution) {
         return next(true);
     }
     var finish = req.body.finish;
     async.waterfall([
         function(callback) {
-            var query = "SELECT parameters, answer,entry_point as entryPoint FROM tests join tasks using(task_id) where task_id = ?";
+            var query = "SELECT parameters, answer,entry_point as entryPoint,level FROM tests join tasks using(task_id) where task_id = ?";
             connection.query(query,
                 [req.body.taskId],
                 function(err, tests) {
@@ -34,6 +35,7 @@ module.exports = function (req, res, next) {
                 var REQUEST_TIMEOUT = 6000;
                 tripwire.resetTripwire(REQUEST_TIMEOUT);
                 var testsCountToTest = (finish) ? tests.length : tests.length/2;
+
                 for(var i = 0; i < testsCountToTest; i++) {
                     var test = tests[i];
                     test.parameters = JSON.parse(test.parameters);
@@ -41,13 +43,11 @@ module.exports = function (req, res, next) {
                         var res = _eval(req.body.solution + ' ; module.exports = '+ test.entryPoint + '(' + test.parameters + ')');
                     }
                     catch(e) {
-
                         testsResults.executingError = {
                             message : e.message,
                             name : e.name
                         };
-                        callback(null, testsResults);
-                        break;
+                        return callback(null, testsResults);
                     }
                     try {
                         assert.deepEqual(res, test.answer);
@@ -58,7 +58,8 @@ module.exports = function (req, res, next) {
                             pass : true
                         });
                         testsResults.successTests++;
-                    }catch (e) {
+                    }
+                    catch (e) {
                         testsResults.tests.push({
                             result : e.actual,
                             expected : e.expected,
@@ -66,21 +67,46 @@ module.exports = function (req, res, next) {
                         });
                         testsResults.hasErrorTest = true;
                         testsResults.errorTests++;
-
                         if(finish) {
-                            if(testsResults.tests.length < 3){
-                                testsResults.tests[testsResults.tests.length-1].params = test.parameters;
+                            if(testsResults.tests.length < tests.length/2) {
+                                testsResults.tests[testsResults.tests.length - 1].params = test.parameters;
                             }
-                            callback(null, testsResults);
-                            break;
-                        }else{
-                            testsResults.tests[testsResults.tests.length-1].params = test.parameters;
+                            return callback(null, testsResults);
+                        }else {
+                            testsResults.tests[testsResults.tests.length - 1].params = test.parameters;
                         }
                     }
                 }
-                //todo finish logic
-                callback(null, testsResults);
-            }else{
+
+                if(finish) {
+                    var query = 'INSERT into solutions set ?';
+                    connection.query(query, {
+                        'user_id' : req.session.userId,
+                        'task_id' : req.body.taskId,
+                        'solution_text' : req.body.solution,
+                        'add_date' : new Date().toLocaleString()
+                    },
+                    function(err) {
+                        if(err) {
+                            return callback(err);
+                        }
+                        var addedHonor = honorByLevel.getHonor(req.body.level);
+                        var query = 'UPDATE users set honor = honor + ' + addedHonor + ' WHERE user_id = ?';
+                        connection.query(query,
+                            req.session.userId
+                        , function (err) {
+                            if(err) {
+                                return callback(err);
+                            }
+                            testsResults.allDone = true;
+                            testsResults.addedHonor = addedHonor;
+                            return callback(null, testsResults);
+                        })
+                    })
+                }else{
+                    callback(null, testsResults);
+                }
+            }else {
                 callback(true);
             }
 

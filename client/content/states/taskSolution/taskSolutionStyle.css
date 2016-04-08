@@ -1,33 +1,62 @@
 .task-solution .ace_editor {
-    height: 365px !important;
     font-size: 14px !important;
     z-index: 0;
+    height: 365px;
     width: 100%;
 }
 
 .task-solution .output-inner ,.task-solution .details-inner{
-    height: 365px;
+    min-height: 365px !important;
 }
 
-.task-solution>div.output-details-tab .error-field{
-    color : red;
+.task-solution .output-inner{
+    font-family: Consolas;
 }
 
-.task-solution>div.output-details-tab .success-field{
-    color : green;
+
+.task-solution .test-body, .error-body{
+    padding: 5px;
+    margin:2px 0;
+    background: rgba(237, 237, 237, 0.03);
+}
+.task-solution .finish-score, .task-solution .test-name{
+    color: #7F7F7F;
+}
+
+.task-solution .test-btn{
+    background: #262728;
+    color: white !important;
+    transition: 0.2s linear all;
+}
+
+.task-solution .finish-btn{
+    background: #2E4F2E;
+    color: white !important;
+    transition: 0.2s linear all;
+}
+
+.task-solution .finish-btn:hover,.task-solution .finish-btn:focus, .task-solution .finish-btn:active{
+    background-color: #2B572B !important;
+}
+.task-solution>div.output-details-tab .error-field, .task-solution .fa.test-result-icon.fa-times{
+    color : #744040;
+}
+
+.task-solution>div.output-details-tab .success-field, .task-solution .fa.test-result-icon.fa-check{
+    color : #347041;
 }
 
 .task-solution>div.output-details-tab .code-errors{
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid #744040;
 }
 .task-solution>div.output-details-tab .tests-list{
     border-bottom: 1px solid;
 }
 .task-solution>div.output-details-tab .tests-list.pass{
-    border-bottom-color:green;
+    border-bottom-color:#347041;
 }
 .task-solution>div.output-details-tab .tests-list.no-pass{
-    border-bottom-color:red;
+    border-bottom-color:#744040;
 }
 .task-solution>div.output-details-tab{
     padding : 0 15px 0 0 !important;
