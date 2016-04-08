@@ -56,10 +56,6 @@
     border: 0;
 }
 
-.management-task-form *{
-    text-transform: capitalize;
-}
-
 .management-task-form .select-div .bs-select-all{
     background: #615E5E;
     color: white;
