@@ -62,7 +62,7 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                 requiredAuthorization : false
             })
             .state('root.task.taskSolution', {
-                url: '/taskSolution',
+                url: '/solution',
                 templateUrl: '../content/states/taskSolution/taskSolutionTemplate.html',
                 controller : 'TaskSolutionCtrl',
                 requiredAuthorization : true

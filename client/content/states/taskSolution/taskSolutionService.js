@@ -13,7 +13,7 @@ angular.module('codewars').factory('taskSolutionService', function($http) {
         },
         getSolutionEntryText : function (entryPoint) {
             var comment = "// entry function name is " + entryPoint + "\n// don't remove it \n";
-            return comment + 'function ' + entryPoint + '() {\n\n}';
+            return comment + 'function ' + entryPoint + '() {\n\t\n}';
         }
     }
 });
