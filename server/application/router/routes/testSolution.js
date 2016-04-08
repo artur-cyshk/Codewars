@@ -39,8 +39,11 @@ module.exports = function (req, res, next) {
                 for(var i = 0; i < testsCountToTest; i++) {
                     var test = tests[i];
                     test.parameters = JSON.parse(test.parameters);
+                    var parametersArray = _.map(test.parameters, function (param) {
+                        return param.value;
+                    });
                     try {
-                        var res = _eval(req.body.solution + ' ; module.exports = '+ test.entryPoint + '(' + test.parameters + ')');
+                        var res = _eval(req.body.solution + ' ; module.exports = '+ test.entryPoint + '(' + parametersArray + ')');
                     }
                     catch(e) {
                         testsResults.executingError = {

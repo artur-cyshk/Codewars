@@ -49,11 +49,8 @@ module.exports = {
     },
     mapTests : function(tests, taskId){
         return _.map(tests, function(test){
-            test.variables =_.map(test.variables, function (variable) {
-                return variable.value;
-            });
             test.variables = _.filter(test.variables, function (variable) {
-                return variable;
+                return variable.value;
             });
             return  [taskId, JSON.stringify(test.variables), test.result];
         });

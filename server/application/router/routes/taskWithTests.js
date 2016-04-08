@@ -55,13 +55,7 @@ module.exports = function (req, res, next) {
                 function(err, tests) {
                     if(_.isObject(tests)){
                         _.map(tests, function(item){
-                            item.variables =
-                                (item.variables) ?
-                                    _.map(JSON.parse(item.variables), function(variable) {
-                                        return {
-                                            value : variable
-                                        }
-                                    }) : [];
+                            item.variables =(item.variables) ? JSON.parse(item.variables) : [];
                             return item;
                         });
                         task.tests = tests;
