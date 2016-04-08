@@ -8,13 +8,8 @@ app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','aceFactory','taskSo
                 $scope.output.index = 1;
                 if(data.allDone) {
                     $rootScope.$broadcast('changeHonor', data.addedHonor);
-                    $state.go('root.task.information', {
-                        id: $stateParams.id
-                    },{
-                        reload: true,
-                        inherit: false,
-                        notify: true
-                    })
+                    alertService.alert('well done, your honor + ' + data.addedHonor, 'success');
+                    $state.go('root.tasks');
                 }
             })
             .error(function (err, status) {
@@ -38,7 +33,7 @@ app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','aceFactory','taskSo
             })
             .error(function (err, status) {
                 if(status != 409) {
-                    alertService.alert('you already done this task or server error', 'error');
+                    alertService.alert(err || 'server error, try later', 'error');
                     $state.go('root.task.information', {
                         id: $stateParams.id
                     });

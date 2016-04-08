@@ -14,6 +14,12 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
         isEmpty : function(obj) {
             return _.isEmpty(obj);
         },
+        addHonor : function (honor, creator) {
+            return $http.put('/userHonor', {
+                honor : honor,
+                creatorId : creator
+            });
+        },
         getTinymseOptions : function () {
             return {
                 inline: false,

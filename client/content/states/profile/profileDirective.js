@@ -51,9 +51,7 @@ angular.module('codewars').directive('profile', function ($rootScope, profileSer
                             $state.current,
                             $stateParams,
                             {
-                                reload: true,
-                                inherit: false,
-                                notify: true
+                                reload: true
                             }
                         );
                     })

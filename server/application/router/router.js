@@ -14,6 +14,9 @@ router.get('/taskDone/:id', require('./routes/taskDone'));
 
 router.put('/user/:id', require('./routes/changeUserRole'));
 router.put('/task/level/:id', require('./routes/changeTaskLevel'));
+
+router.put('/userHonor', require('./routes/changeUserHonor'));
+
 router.post('/type', require('./routes/addType'));
 router.delete('/type/:id', require('./routes/deleteType'));
 

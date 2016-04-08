@@ -9,7 +9,7 @@ angular.module('codewars').factory('taskService', function($http, aceFactory, $u
                 return item;
             })
         },
-        openRemoveModal : function (id) {
+        openRemoveModal : function (id, creatorId) {
             $uibModal.open({
                 animation: true,
                 templateUrl: 'content/states/removingTaskModal/removingTaskTemplate.html',
@@ -18,6 +18,9 @@ angular.module('codewars').factory('taskService', function($http, aceFactory, $u
                 resolve: {
                     taskId: function () {
                         return id;
+                    },
+                    creatorId : function () {
+                        return creatorId
                     }
                 }
             });

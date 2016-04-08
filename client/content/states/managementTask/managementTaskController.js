@@ -16,6 +16,11 @@ app.controller('ManagementTaskCtrl', [ '$scope', '$rootScope','managementTaskSer
         managementTaskService.addTask(task)
             .success(function() {
                 alertService.alert('task successfully added', 'success');
+                managementTaskService.addHonor($scope.HONOR_BY_ADD)
+                    .success(function () {
+                        alertService.alert('honor + ' + $scope.HONOR_BY_ADD, 'success');
+                        $rootScope.$broadcast('changeHonor', $scope.HONOR_BY_ADD);
+                    });
                 $state.go('root.tasks');
                 $rootScope.loadingInformation = false;
             })
@@ -55,6 +60,7 @@ app.controller('ManagementTaskCtrl', [ '$scope', '$rootScope','managementTaskSer
         $scope.isEmpty = managementTaskService.isEmpty;
         $scope.isEmptyResult = managementTaskService.isEmptyResult;
         $scope.tinymceOptions = managementTaskService.getTinymseOptions();
+        $scope.HONOR_BY_ADD = 5;
     };
 
     self.init();

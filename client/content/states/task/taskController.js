@@ -38,8 +38,8 @@ app.controller('TaskCtrl', [ '$scope', '$rootScope', '$stateParams', 'taskServic
             })
     };
     
-    $scope.openRemovingTaskModal = function (id) {
-        taskService.openRemoveModal(id);
+    $scope.openRemovingTaskModal = function (id, creatorId) {
+        taskService.openRemoveModal(id, creatorId);
     };
 
     $scope.setComment = function() {
