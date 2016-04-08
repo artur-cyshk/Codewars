@@ -7,7 +7,7 @@
                 </span>
                 <span ng-class="currentTask.level ? 'language' : 'no-language'" ng-style="{'color':mapColor(currentTask.level).in}">{{currentTask.language}}</span>
 
-                <a ng-if="currentTask.level && !currentTask.solutions" class="train hidden-xs" ui-sref="root.task.taskSolution({id: currentTask.taskId})">
+                <a ng-if="currentTask.level && !currentTask.solutions && currentTask.creatorId != currUserId" class="train hidden-xs" ui-sref="root.task.taskSolution({id: currentTask.taskId})">
                     <button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm ">
                         <i class="fa fa-play"></i> Train
                     </button>
@@ -32,7 +32,7 @@
                     <i class="fa fa-pencil"></i>
                 </a>
                 <span ng-if="currUserId == currentTask.creatorId || adminRoot" class="editing-task"><i  class="fa fa-trash-o" ng-click="openRemovingTaskModal(currentTask.taskId)"></i></span>
-                <a ng-if="currentTask.level && !currentTask.solutions" class="train train-right hidden-sm hidden-md hidden-lg" ui-sref="root.task.taskSolution({id: currentTask.taskId})">
+                <a ng-if="currentTask.level && !currentTask.solutions && currentTask.creatorId != currUserId" class="train train-right hidden-sm hidden-md hidden-lg" ui-sref="root.task.taskSolution({id: currentTask.taskId})">
                     <button  ng-style="{'background':mapColor(currentTask.level).in,'border-color':mapColor(currentTask.level).in}" class="btn btn-primary btn-sm ">
                         <i class="fa fa-play"></i>
                     </button>

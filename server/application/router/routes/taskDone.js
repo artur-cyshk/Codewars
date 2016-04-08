@@ -11,8 +11,8 @@ module.exports = function (req, res, next) {
         return next(true);
     }
 
-    var query = 'select count(*) as count from solutions where user_id = ? and task_id = ?';
-    connection.query(query,[req.session.userId, req.params.id],
+    var query = 'select count(*) as count from solutions join tasks using(task_id) where solutions.user_id = ? and solutions.task_id = ? or tasks.creator = ? or tasks.level IS NULL';
+    connection.query(query,[req.session.userId, req.params.id, req.session.userId],
         function(err, data) {
             if(err || !_.isObject(data) || data[0].count) {
                 return next(true);
