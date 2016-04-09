@@ -40,7 +40,7 @@
 	<script src="services/socketFactory.js"></script>
 	<script src="services/checkAccessFactory.js"></script>
 	<script src="services/levelsFactory.js"></script>
-	<script src="services/aceFactory.js"></script>
+	<script src="services/codeConfigurationFactory.js"></script>
 
 	<script src="content/components/alert/alertService.js"></script>
 
@@ -106,14 +106,20 @@
 	<link href="content/states/selectAvatarModal/selectAvatarStyle.css" rel="stylesheet">
 	<script src="content/states/selectAvatarModal/selectAvatarController.js"></script>
 
-	<script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
-	<script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
-	<script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ext-language_tools.js"></script>
-
 	<script src="bower_components/tinymce-dist/tinymce.min.js"></script>
 	<script src="bower_components/angular-ui-tinymce/dist/tinymce.min.js"></script>
 
-	</head>
+	<link rel="stylesheet" type="text/css" href="bower_components/codemirror/lib/codemirror.css">
+	<script type="text/javascript" src="bower_components/codemirror/lib/codemirror.js"></script>
+	<script type="text/javascript" src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="bower_components/codemirror/theme/material.css">
+	<script src="bower_components/codemirror/mode/javascript/javascript.js"></script>
+	<script src="bower_components/codemirror/addon/edit/matchbrackets.js"></script>
+	<script src="bower_components/codemirror/addon/edit/closebrackets.js"></script>
+	<script src="bower_components/codemirror/addon/display/autorefresh.js"></script>
+
+</head>
 <body>
 	<ui-view></ui-view>
 </body>

@@ -1,11 +1,11 @@
-angular.module('codewars').factory('taskService', function($http, aceFactory, $uibModal, $templateCache) {
+angular.module('codewars').factory('taskService', function($http, codeConfigurationFactory, $uibModal, $templateCache) {
     return {
         getTask : function(id) {
             return $http.get('/task/' + id);
         },
         mapSolutions : function(solutions) {
             return solutions.map(function(item) {
-                item.configuration = aceFactory.getConfiguration(item.solution_text, true, false, "none", false);
+                item.configuration = codeConfigurationFactory.getConfiguration(true);
                 return item;
             })
         },

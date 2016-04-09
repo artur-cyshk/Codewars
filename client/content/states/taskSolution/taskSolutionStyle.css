@@ -1,7 +1,7 @@
-.task-solution .ace_editor {
+.task-solution .CodeMirror {
     font-size: 14px !important;
     z-index: 0;
-    height: 365px;
+    height: 365px !important;
     width: 100%;
 }
 
@@ -13,6 +13,15 @@
     font-family: Consolas;
 }
 
+.task-solution .task-note *{
+    text-transform: none !important;
+}
+.task-solution .task-note{
+    color: #FFCFCF;
+    background: #2F0404;
+    padding: 5px !important;
+    border: 0;
+}
 
 .task-solution .test-body, .error-body{
     padding: 5px;

@@ -3,6 +3,7 @@
         <uib-tabset type="pills" active="output.index ">
             <uib-tab heading="DETAILS"  class="btn-sm" >
                 <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 task-tabs-panel details details-inner" ng-style="{'border-left-color':mapColor(currentTask.level).in}">
+                    <uib-alert type="success" class="task-note">Note, entry function name is {{currentTask.entryPoint}}!</uib-alert>
                     <uib-accordion>
                         <uib-accordion-group is-open="status.openSortFilter">
                             <uib-accordion-heading>
@@ -68,7 +69,7 @@
             </li>
         </ul>
         <div class="task-ace-solution-wrapper">
-            <div id="editor" ui-ace="taskAceSolution.config" ng-model="taskAceSolution.inner"> </div>
+            <textarea ui-codemirror="codeSolution.config" ng-model="codeSolution.inner"></textarea>
         </div>
 
     </div>

@@ -1,7 +1,7 @@
-app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','aceFactory','taskSolutionService','$stateParams','alertService','$state', function($scope, $rootScope, aceFactory, taskSolutionService, $stateParams, alertService, $state) {
+app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','codeConfigurationFactory','taskSolutionService','$stateParams','alertService','$state', function($scope, $rootScope, codeConfigurationFactory, taskSolutionService, $stateParams, alertService, $state) {
     var self = this;
     $scope.test = function (finish) {
-        taskSolutionService.testSolution($scope.currentTask.taskId, $scope.taskAceSolution.inner, finish, $scope.currentTask.level)
+        taskSolutionService.testSolution($scope.currentTask.taskId, $scope.codeSolution.inner, finish, $scope.currentTask.level)
             .success(function (data) {
                 $scope.output = {};
                 $scope.output.data = data;
@@ -20,9 +20,9 @@ app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','aceFactory','taskSo
     };
 
     self.init = function () {
-        $scope.taskAceSolution = {};
-        $scope.taskAceSolution.config = aceFactory.getConfiguration(false, false, true, true, true);
-        $scope.taskAceSolution.inner = taskSolutionService.getSolutionEntryText($scope.currentTask.entryPoint);
+        $scope.codeSolution = {};
+        $scope.codeSolution.config = codeConfigurationFactory.getConfiguration(false);
+        $scope.codeSolution.inner = taskSolutionService.getSolutionEntryText($scope.currentTask.entryPoint);
         $rootScope.loadingInformation = true;
         taskSolutionService.checkDoneTask($scope.currentTask.taskId)
             .success(function () {

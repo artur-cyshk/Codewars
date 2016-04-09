@@ -8,10 +8,10 @@ var app = angular.module('codewars',
         'angularSpinner',
         'nya.bootstrap.select',
         'ui.checkbox',
-        'ui.ace',
         'ngFileUpload',
         'ngImgCrop',
-        'ui.tinymce'
+        'ui.tinymce',
+        'ui.codemirror'
     ]);
 
 app.run(['checkAccessFactory','$rootScope','$http', function(checkAccessFactory, $rootScope) {

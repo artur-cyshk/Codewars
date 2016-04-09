@@ -1,4 +1,4 @@
-.current-task .ace_editor {
+.current-task .CodeMirror {
     height: 250px;
     font-size: 14px !important;
     z-index: 0;
@@ -44,7 +44,7 @@
 }
 
 .current-task .solution.my{
-    background: #3E2E2E;
+    background: #3F6135;
 }
 
 

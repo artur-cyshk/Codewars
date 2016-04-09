@@ -50,8 +50,7 @@
                     <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 solution-author">
                         <h3><i class="fa fa-user"></i> {{solution.author}}</h3>
                     </div>
-                    <div id="editor" ui-ace="solution.configuration" > </div>
-
+                    <textarea ui-codemirror="solution.configuration" ng-model="solution.solution_text"></textarea>
                 </div>
             </div>
         </div>
