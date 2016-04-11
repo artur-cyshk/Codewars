@@ -1,5 +1,5 @@
 'use strict';
-angular.module('codewars').directive('tasksFilter', function () {
+app.directive('tasksFilter', function () {
     return {
         restrict: 'E',
         scope: false,

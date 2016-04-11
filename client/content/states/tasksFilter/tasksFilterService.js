@@ -1,4 +1,4 @@
-angular.module('codewars').factory('tasksFilterService', function($http , $q, alertService, $rootScope) {
+app.factory('tasksFilterService', function($http , $q, alertService, $rootScope) {
     var selfService = this;
     selfService.getTypes = function() {
         return $q(function(resolve, reject) {

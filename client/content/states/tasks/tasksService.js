@@ -1,4 +1,4 @@
-angular.module('codewars').factory('tasksService', function($http , $q) {
+app.factory('tasksService', function($http , $q) {
     return {
         concat : function(before, to) {
             return before.concat(to);

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('codewars').directive('changeProfile', function ($rootScope) {
+app.directive('changeProfile', function ($rootScope) {
     return {
         restrict: 'E',
         scope: false,

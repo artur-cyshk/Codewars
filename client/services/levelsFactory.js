@@ -1,4 +1,4 @@
-angular.module('codewars').factory('levelsFactory', function() {
+app.factory('levelsFactory', function() {
     return {
         mapColors : function(level) {
             var color = {};

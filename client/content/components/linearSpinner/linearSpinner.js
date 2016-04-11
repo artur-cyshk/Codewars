@@ -1,5 +1,5 @@
 'use strict';
-angular.module('codewars').directive('linearSpinner', function () {
+app.directive('linearSpinner', function () {
     return {
         restrict: 'E',
         scope: false,

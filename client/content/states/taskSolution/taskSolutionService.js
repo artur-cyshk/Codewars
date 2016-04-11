@@ -1,4 +1,4 @@
-angular.module('codewars').factory('taskSolutionService', function($http) {
+app.factory('taskSolutionService', function($http) {
     return {
         testSolution : function (taskId, solution, finish, level) {
             return $http.post('/testSolution', {

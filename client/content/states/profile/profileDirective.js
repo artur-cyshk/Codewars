@@ -1,5 +1,5 @@
 'use strict';
-angular.module('codewars').directive('profile', function ($rootScope, profileService, alertService, $state, levelsFactory, $stateParams) {
+app.directive('profile', function ($rootScope, profileService, alertService, $state, levelsFactory, $stateParams) {
     return {
         restrict: 'E',
         scope: false,

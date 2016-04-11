@@ -1,4 +1,4 @@
-angular.module('codewars').factory('codeConfigurationFactory', function($timeout) {
+app.factory('codeConfigurationFactory', function($timeout) {
     return {
         getConfiguration : function(readOnly){
             return {

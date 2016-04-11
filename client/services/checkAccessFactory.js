@@ -1,4 +1,4 @@
-angular.module('codewars').factory('checkAccessFactory', function($rootScope, $state, $http, alertService) {
+app.factory('checkAccessFactory', function($rootScope, $state, $http, alertService) {
     var self = this;
     self.loginStateFormating = function(toState, fromState, fromParams, logout) {
 

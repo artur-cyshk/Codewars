@@ -17,11 +17,11 @@ app.factory('adminService', function ($q, $http, $uibModal, $templateCache, aler
         getText : function (tab, name, selected) {
             switch (tab){
                 case 'level':
-                    return "Selected task : <span class='name'>" + _.capitalize(name) + "</span><br> Selected level : <span class='name'>" + selected +
+                    return "Selected task : <span class='name'>" + name + "</span><br> Selected level : <span class='name'>" + selected +
                     "<span class='name'>" ;
                     break;
                 case 'role':
-                    return "Selected user : <span class='name'>" + _.capitalize(name) + "</span><br> Selected role : <span class='name'>" + selected +
+                    return "Selected user : <span class='name'>" + name + "</span><br> Selected role : <span class='name'>" + selected +
                     "<span class='name'>" ;
                     break;
                 case 'newType':

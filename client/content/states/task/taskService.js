@@ -1,4 +1,4 @@
-angular.module('codewars').factory('taskService', function($http, codeConfigurationFactory, $uibModal, $templateCache) {
+app.factory('taskService', function($http, codeConfigurationFactory, $uibModal, $templateCache) {
     return {
         getTask : function(id) {
             return $http.get('/task/' + id);
