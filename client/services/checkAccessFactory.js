@@ -31,7 +31,6 @@ app.factory('checkAccessFactory', function($rootScope, $state, $http, alertServi
                     if(!argLength) {
                         self.setRootScope(true, 'firstLoadingFinish');
                     }else {
-                        self.setRootScope(true, 'rootLoadingFinish');
                         if(toState.requiredRoot) {
                             if(userData.type != 'admin') {
                                 $state.go('root.home');
@@ -41,6 +40,7 @@ app.factory('checkAccessFactory', function($rootScope, $state, $http, alertServi
                         if(toState.name == 'root.login' || toState.name == 'root.registration') {
                             $state.go('root.home');
                         }
+                        self.setRootScope(true, 'rootLoadingFinish');
                     }
                     self.setRootScope(userData.userId, 'currUserId');
                     self.setRootScope((userData.type == 'admin' ), 'adminRoot');
@@ -50,7 +50,6 @@ app.factory('checkAccessFactory', function($rootScope, $state, $http, alertServi
                     if(!argLength) {
                         self.setRootScope(true, 'firstLoadingFinish');
                     }else{
-                        self.setRootScope(true, 'rootLoadingFinish');
                         if(toState.name == 'root.login') {
                             var params = self.loginStateFormating(toState, fromState, fromParams, $rootScope.logout);
                             $rootScope.logout = false;
@@ -64,6 +63,7 @@ app.factory('checkAccessFactory', function($rootScope, $state, $http, alertServi
                             }
                             $state.go('root.login');
                         }
+                        self.setRootScope(true, 'rootLoadingFinish');
                     }
                     self.setRootScope(undefined, 'currUserId');
                     self.setRootScope(undefined, 'adminRoot');

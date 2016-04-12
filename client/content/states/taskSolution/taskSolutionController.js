@@ -1,6 +1,7 @@
 app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','codeConfigurationFactory','taskSolutionService','$stateParams','alertService','$state', function($scope, $rootScope, codeConfigurationFactory, taskSolutionService, $stateParams, alertService, $state) {
     var self = this;
     $scope.test = function (finish) {
+        $rootScope.loadingInformation = true;
         taskSolutionService.testSolution($scope.currentTask.taskId, $scope.codeSolution.inner, finish, $scope.currentTask.level)
             .success(function (data) {
                 $scope.output = {};
@@ -11,11 +12,13 @@ app.controller('TaskSolutionCtrl', [ '$scope', '$rootScope','codeConfigurationFa
                     alertService.alert('well done, your honor + ' + data.addedHonor, 'success');
                     $state.go('root.tasks');
                 }
+                $rootScope.loadingInformation = false;
             })
             .error(function (err, status) {
                 if(status != 409) {
                     alertService.alert('server error, try later', 'error');
                 }
+                $rootScope.loadingInformation = false;
             })
     };
 

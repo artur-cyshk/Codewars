@@ -8,7 +8,7 @@
     </h1>
     <div class="col-md-12">
         <div class="avatar col-lg-6 col-md-12 col-sm-12 col-xs-12">
-            <img ng-src="./content/images/avatars/{{currentUser.avatarUrl}}" ng-click="selectAvatar()">
+            <img ng-src="./content/images/avatars/{{currentUser.avatarUrl || 'noAvatar.png'}}  " ng-click="selectAvatar()">
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 user-clan">
             <span class="username text-center"
@@ -27,7 +27,7 @@
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12  text-center">
             <div class="progress-wrapper">
-                <div class="progress ng-cloak">{{ levels[currentUser.level].currHonor }}/{{ levels[currentUser.level].diffHonor }}</div>
+                <div class="progress">{{ levels[currentUser.level].currHonor }}/{{ levels[currentUser.level].diffHonor }}</div>
                 <div
                         round-progress
                         max="levels[currentUser.level].diffHonor"
