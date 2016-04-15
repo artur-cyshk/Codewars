@@ -24,9 +24,13 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
             return {
                 inline: false,
                 setup: function(editor) {
+                    var self = this;
                     editor.on('change', function () {
-                        selfService.desciptionContent = editor.getContent({'format' : 'text'}).trim();
+                        self.setDescriptionContent(editor.getContent({'format' : 'text'}).trim() );
                     });
+                },
+                setDescriptionContent : function (content) {
+                    selfService.desciptionContent = content;
                 },
                 plugins: [
                     "advlist link image lists charmap print preview hr anchor pagebreak",
