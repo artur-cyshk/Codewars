@@ -45,6 +45,7 @@ app.factory('checkAccessFactory', function($rootScope, $state, $http, alertServi
                     self.setRootScope(userData.userId, 'currUserId');
                     self.setRootScope((userData.type == 'admin' ), 'adminRoot');
                     self.setRootScope(true,'authorized');
+                    self.setRootScope(false,'loadingInformation');
                 })
                 .error(function() {
                     if(!argLength) {
@@ -58,7 +59,7 @@ app.factory('checkAccessFactory', function($rootScope, $state, $http, alertServi
                         }
 
                         if(toState.requiredAuthorization) {
-                            if(!$rootScope.logout){
+                            if(!$rootScope.logout) {
                                 alertService.alert('no access, login please', 'error');
                             }
                             $state.go('root.login');
@@ -68,6 +69,7 @@ app.factory('checkAccessFactory', function($rootScope, $state, $http, alertServi
                     self.setRootScope(undefined, 'currUserId');
                     self.setRootScope(undefined, 'adminRoot');
                     self.setRootScope(false, 'authorized');
+                    self.setRootScope(false,'loadingInformation');
             });
         }
     }
