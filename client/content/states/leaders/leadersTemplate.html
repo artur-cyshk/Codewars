@@ -14,9 +14,9 @@
             <tbody>
                 <tr ng-style="{ background: checkYourself(currentUser.name, leader.name) && authorized ? levels[leader.level].color.in : 'auto'}" ng-repeat="leader in leaders">
                     <td ng-style="{'border-left-color': levels[leader.level].color.in}" ># {{$index + 1}}</td>
-                    <td><img ng-if="leader.avatarUrl" class="avatar" ng-src="./content/images/avatars/{{leader.avatarUrl}}" alt=""> </td>
-                    <td>{{leader.name}}</td>
-                    <td>{{leader.clan}}</td>
+                    <td><img class="avatar" ng-src="./content/images/avatars/{{leader.avatarUrl || 'noAvatar.png'}}" alt=""> </td>
+                    <td class="leader-name">{{leader.name}}</td>
+                    <td class="leader-clan">{{leader.clan}}</td>
                     <td>{{levels[leader.level].levelNum}} </td>
                     <td>{{leader.honor}}</td>
                 </tr>

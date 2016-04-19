@@ -7,7 +7,10 @@
 .leaders-main .table{
     color: white !important;
 }
-
+.leaders .leader-name:first-letter,
+.leaders .leader-clan:first-letter{
+    text-transform: uppercase;
+}
 .leaders-main .avatar{
     height: 100%;
     border-radius: 50%;

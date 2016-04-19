@@ -64,8 +64,8 @@ module.exports = function (req, res, next) {
                     }
                     catch (e) {
                         testsResults.tests.push({
-                            result : e.actual,
-                            expected : e.expected,
+                            result : String ( e.actual ),
+                            expected : String( e.expected ),
                             pass : false
                         });
                         testsResults.hasErrorTest = true;

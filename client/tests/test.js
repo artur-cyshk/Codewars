@@ -1,13 +1,18 @@
 var adminService,
 	changeProfileService,
-	managementTaskService;
+	managementTaskService,
+	leadersService,
+	httpMock;
 
 beforeEach(function () {
 	module('codewars');
-	inject(function ($injector) {
+	inject(function ($injector,$httpBackend) {
 		adminService = $injector.get('adminService');
 		changeProfileService = $injector.get('changeProfileService');
 		managementTaskService = $injector.get('managementTaskService');
+		leadersService = $injector.get('leadersService');
+		httpMock = $httpBackend;
+
 	});
 
 });
@@ -194,6 +199,21 @@ describe("managementTaskService.validate errors", function () {
 			tests: Object({ length: false, results: [ 3 ] }),
 			description: false,
 			no: false });
+	});
+});
+//todo
+describe('cDashboard', function(){
+	it("should get 'pig' from '/data'", function () {
+		httpMock.whenGET("/leaders/0").respond([{name:'artur', clan:'bsuir', honor:'11',avatarUrl : 'test'}]);
+		leadersService.getLeaders(0)
+			.success(function (err, data) {
+				expect(data).toEqual({name:'arturlkoadkoad', clan:'bsuir', honor:'11',avatarUrl : 'test'});
+				httpMock.flush();
+			})
+			.error(function (err, data) {
+				httpMock.flush();
+				console.log(err,data);
+			});
 	});
 });
 
