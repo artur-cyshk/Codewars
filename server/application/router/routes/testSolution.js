@@ -34,16 +34,16 @@ module.exports = function (req, res, next) {
                 testsResults.errorTests = 0;
                 var REQUEST_TIMEOUT = 6000;
                 tripwire.resetTripwire(REQUEST_TIMEOUT);
-                var testsCountToTest = (finish) ? tests.length : tests.length/2;
+                var testsCountToTest = (finish) ? tests.length : tests.length/1.3;
 
                 for(var i = 0; i < testsCountToTest; i++) {
                     var test = tests[i];
                     test.parameters = JSON.parse(test.parameters);
                     var parametersArray = _.map(test.parameters, function (param) {
-                        return param.value;
+                        return param.value
                     });
                     try {
-                        var res = _eval(req.body.solution + ' ; module.exports = '+ test.entryPoint + '(' + parametersArray + ')');
+                        var res = _eval(req.body.solution + ' ; module.exports = '+ test.entryPoint + '(' + parametersArray.join(',') + ')');
                     }
                     catch(e) {
                         testsResults.executingError = {
@@ -53,7 +53,9 @@ module.exports = function (req, res, next) {
                         return callback(null, testsResults);
                     }
                     try {
-                        assert.deepEqual(res, test.answer);
+                        test.answer = (test.answer == 'undefined') ? undefined : JSON.parse(test.answer);
+                        //todo deep obj
+                        assert.deepStrictEqual(res, test.answer);
                         testsResults.tests.push({
                             params : test.parameters,
                             expected : test.answer,
@@ -64,8 +66,8 @@ module.exports = function (req, res, next) {
                     }
                     catch (e) {
                         testsResults.tests.push({
-                            result : String ( e.actual ),
-                            expected : String( e.expected ),
+                            result :  e.actual,
+                            expected :e.expected,
                             pass : false
                         });
                         testsResults.hasErrorTest = true;
