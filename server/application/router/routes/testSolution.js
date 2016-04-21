@@ -1,7 +1,8 @@
 var connection = require('../../../configuration/database/connection');
 var _ = require('lodash');
 var async = require('async');
-var assert = require('assert');
+var chai = require('chai');
+var expect = chai.expect;
 var _eval = require('eval');
 var honorByLevel = require('../../services/honorByLevel');
 var tripwire = require('tripwire');
@@ -53,9 +54,8 @@ module.exports = function (req, res, next) {
                         return callback(null, testsResults);
                     }
                     try {
-                        test.answer = (test.answer == 'undefined') ? undefined : JSON.parse(test.answer);
-                        //todo deep obj
-                        assert.deepStrictEqual(res, test.answer);
+                        test.answer = (test.answer === 'undefined') ? undefined : JSON.parse(test.answer);
+                        expect(res).to.deep.equal(test.answer);
                         testsResults.tests.push({
                             params : test.parameters,
                             expected : test.answer,
