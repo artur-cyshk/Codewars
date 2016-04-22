@@ -51,8 +51,19 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
         isEmptyResult : function(arr, index) {
             return _.includes(arr , index);
         },
+        jsonErrorParse : function(value) {
+            try{
+                if(value !== 'undefined') {
+                    JSON.parse(value);
+                }
+                return false;
+            }catch(e){
+                return true;
+            }
+        },
         validate : function(model) {
-            var errors = {};
+            var errors = {},
+                self = this;
             errors.name = !model.name;
             errors.language = !model.language || !model.language.name;
             errors.entryPoint = !model.entryPoint;
@@ -64,13 +75,19 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
             }
             errors.tests.results = [];
             if(model.tests) {
-                errors.tests.results = _.map(model.tests, function(item, index) {
-                        if(!item.result){
-                            return index;
+                errors.tests.results = _.map(model.tests, function(item) {
+                    var testIndex = {};
+                    testIndex.result = !item.result;
+                    testIndex.variables = _.filter(
+                        _.map(item.variables, function (variable, index) {
+                            return (self.jsonErrorParse(variable.value)) ? index : undefined;
+                        }),
+                        function(item) {
+                            return item !=undefined;
                         }
-                });
-                errors.tests.results = _.filter(errors.tests.results, function(item) {
-                    return item != undefined;
+                    );
+                    testIndex.result = self.jsonErrorParse(item.result);
+                    return testIndex;
                 });
             }
             errors.description = !selfService.desciptionContent;

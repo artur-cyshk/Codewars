@@ -54,13 +54,13 @@
                                     Settings <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.openTestsPanel, 'glyphicon-chevron-right': !status.openTestsPanel}"></i>
                                 </uib-accordion-heading>
                                     <div>
-                                        <uib-alert type="success" class="task-note">Note! Put string variables in quotes!</uib-alert>
+                                        <uib-alert type="success" class="task-note">Note! Put string object keys variables in quotes!</uib-alert>
                                     </div>
                                     <i ng-click="managementTask.addTest(managementTask.defaultData.tests.length)" class="fa fa-plus-square test-new-plus">new</i>
                                     <div style="clear:both"></div>
 
                                     <div ng-repeat="(testIndex, test) in managementTask.defaultData.tests"  class="col-md-6 col-sm-6 col-lg-6 col-xs-12 new-test-block-wrapper">
-                                        <div class="new-test-block col-md-12 col-xs-12 col-lg-12 col-xs-12" ng-class="{'error-input' : isEmptyResult(errors.tests.results, testIndex)}">
+                                        <div class="new-test-block col-md-12 col-xs-12 col-lg-12 col-xs-12" ng-class="{'error-input' : errors.tests.results[testIndex].result || !isEmpty(errors.tests.results[testIndex].variables)}">
 
                                             <i class="fa fa-times-circle my-close" ng-click="managementTask.removeTest(testIndex)"></i>
 
@@ -71,15 +71,15 @@
                                                     </button>
                                                     <ul class="variables-ul text-center" ng-click="stopDropdownPropagation($event)" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                                                         <i ng-click="managementTask.addVariable(testIndex, test.variables.length)" class="fa fa-plus-circle my-add-variable">new</i>
-                                                        <li class="new-variable-block" ng-repeat="(variableIndex, variable) in test.variables" role="menuitem">
-                                                            <input class="form-control" ng-model="managementTask.defaultData.tests[testIndex].variables[variableIndex].value"  ng-value="variable.value" type="text">
+                                                        <li class="new-variable-block" ng-repeat="(variableIndex, variable) in test.variables" ng-class="{'error-input' : isEmptyResult(errors.tests.results[testIndex].variables, variableIndex)}"  role="menuitem">
+                                                            <input class="form-control" placeholder="value*" ng-model="managementTask.defaultData.tests[testIndex].variables[variableIndex].value"  ng-value="variable.value" type="text">
                                                             <i class="fa fa-times-circle my-close" ng-click="managementTask.removeVariable(testIndex , variableIndex)"></i>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="col-md-7 margin-top">
-                                                <input class="form-control result-input" ng-class="{'error-input' : isEmptyResult(errors.tests.results, testIndex)}" ng-model="managementTask.defaultData.tests[testIndex].result" type="text" placeholder="result*">
+                                                <input class="form-control result-input" ng-class="{'error-input' : errors.tests.results[testIndex].result}" ng-model="managementTask.defaultData.tests[testIndex].result" type="text" placeholder="result*">
                                             </div>
                                         </div>
                                     </div>
