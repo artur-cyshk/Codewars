@@ -88,31 +88,36 @@ describe("managementTaskService.validate errors", function () {
 			language : {'name' : 'test'},
 			entryPoint : 'test',
 			types : ['type1','type2'],
-			tests : [{result : 'test1'},
-					{result : 'test2'},
-					{result : 'test3'},
-					{result : 'test4'},
-					{result : 'test5'}]
+			tests : [{"result" : 1},
+				{"result" : 2},
+				{"result" : 3},
+				{"result" : 4},
+				{"result" : 5}]
 		})).not.toBeTruthy();
 	});
 
-	it("error validation, types undefined", function() {
+	it("error validation, types undefined and last test bad variable", function() {
 		var opt = managementTaskService.getTinymseOptions();
 		opt.setDescriptionContent ('test');
 		expect(managementTaskService.validate({
 			name : 'testTaks',
 			language : {'name' : 'test'},
 			entryPoint : 'test',
-			tests : [{result : 'test1'},
-				{result : 'test2'},
-				{result : 'test3'},
-				{result : 'test4'},
-				{result : 'test5'}]
+			tests : [{"result" : 3},
+				{"result" : 1},
+				{"result" : 2},
+				{"result" : 'test4'},
+				{"result" : {'1' : 2}, variables : [{"0"  : '22'}]}]
 		})).toEqual({ name: false,
 			language: false,
 			entryPoint: false,
 			types: true,
-			tests: Object({ length: false, results: [] }),
+			tests: Object({ length: false, results: [{result : false, variables : []},
+						{result : false, variables : []},
+						{result : false, variables : []},
+						{result : true, variables : []},
+						{result : true, variables : [0]}] }
+			),
 			description: false,
 			no: false });
 	});
@@ -125,16 +130,21 @@ describe("managementTaskService.validate errors", function () {
 			language : {'name' : 'test'},
 			entryPoint : 'test',
 			types : 'test',
-			tests : [{result : 'test1'},
-				{result : 'test2'},
-				{result : 'test3'},
-				{result : 'test4'},
-				{result : 'test5'}]
+			tests : [{result : 1},
+				{result : 2},
+				{result : 3},
+				{result : 4},
+				{result : 5}]
 		})).toEqual({ name: false,
 			language: false,
 			entryPoint: false,
 			types: false,
-			tests: Object({ length: false, results: [  ] }),
+			tests: Object({ length: false, results: [{result : false, variables : []},
+						{result : false, variables : []},
+						{result : false, variables : []},
+						{result : false, variables : []},
+						{result : false, variables : []}] }
+			),
 			description: true,
 			no: false });
 	});
@@ -146,16 +156,21 @@ describe("managementTaskService.validate errors", function () {
 			language : '',
 			entryPoint : 'test',
 			types : 'test',
-			tests : [{result : 'test1'},
-				{result : 'test2'},
-				{result : 'test3'},
-				{result : 'test4'},
-				{result : 'test5'}]
+			tests : [{result : 1},
+				{result : 2},
+				{result : 3},
+				{result : 4},
+				{result : 5}]
 		})).toEqual({ name: true,
 			language: true,
 			entryPoint: false,
 			types: false,
-			tests: Object({ length: false, results: [  ] }),
+			tests: Object({ length: false, results: [{result : false, variables : []},
+						 {result : false, variables : []},
+						 {result : false, variables : []},
+						 {result : false, variables : []},
+						 {result : false, variables : []}] }
+			),
 			description: true,
 			no: false });
 	});
@@ -167,10 +182,10 @@ describe("managementTaskService.validate errors", function () {
 			language : '',
 			entryPoint : 'test',
 			types : 'test',
-			tests : [{result : 'test1'},
-				{result : 'test2'},
-				{result : 'test3'},
-				{result : 'test4'}]
+			tests : [{result : 1},
+				{result : 2},
+				{result : 3},
+				{result : 4}]
 		})).toEqual({ name: true,
 			language: true,
 			entryPoint: false,
@@ -187,20 +202,26 @@ describe("managementTaskService.validate errors", function () {
 			language : '',
 			entryPoint : 'test',
 			types : 'test',
-			tests : [{result : 'test1'},
-				{result : 'test2'},
-				{result : 'test3'},
-				{variable : 'test4'},
-				{result : 'test4'}]
+			tests : [{result : 1},
+				{result : 2},
+				{result : 3},
+				{result : 5},
+				{res : 55}]
 		})).toEqual({ name: true,
 			language: true,
 			entryPoint: false,
 			types: false,
-			tests: Object({ length: false, results: [ 3 ] }),
+			tests: Object({ length: false, results: [{result : false, variables : []},
+				{result : false, variables : []},
+				{result : false, variables : []},
+				{result : false, variables : []},
+				{result : true, variables : []}] }
+			),
 			description: false,
 			no: false });
 	});
 });
+
 //todo
 describe('cDashboard', function(){
 	it("should get 'pig' from '/data'", function () {

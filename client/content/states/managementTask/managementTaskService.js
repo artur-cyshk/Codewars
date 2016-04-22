@@ -74,16 +74,17 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
                 alertService.alert('Warning! At least five tests', 'error');
             }
             errors.tests.results = [];
-            if(model.tests) {
+            if(model.tests && !errors.tests.length) {
                 errors.tests.results = _.map(model.tests, function(item) {
                     var testIndex = {};
-                    testIndex.result = !item.result;
+                    testIndex.result = (item.result == undefined);
+
                     testIndex.variables = _.filter(
                         _.map(item.variables, function (variable, index) {
                             return (self.jsonErrorParse(variable.value)) ? index : undefined;
                         }),
                         function(item) {
-                            return item !=undefined;
+                            return item != undefined;
                         }
                     );
                     testIndex.result = self.jsonErrorParse(item.result);
@@ -91,8 +92,15 @@ app.factory('managementTaskService', function ($http, alertService, $rootScope, 
                 });
             }
             errors.description = !selfService.desciptionContent;
-            errors.no = (!errors.name && !errors.entryPoint && !errors.language && !errors.tests.length && _.isEmpty(errors.tests.results) && !errors.types && !errors.description);
+            errors.no = (!errors.name && !errors.entryPoint && !errors.language && !errors.tests.length && self.isEmptyResults(errors.tests.results) && !errors.types && !errors.description);
             return (errors.no) ? false : errors;
+        },
+        isEmptyResults : function(obj) {
+            return _.isEmpty(
+                    _.filter(obj, function(item) {
+                        return item.result || !_.isEmpty(item.variables);
+                    })
+                )
         },
         errorHandler : function(err, status) {
             if(status != 401) {
