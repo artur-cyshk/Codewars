@@ -55,6 +55,9 @@
     color : #347041;
 }
 
+.task-solution .breakWord{
+    word-wrap: break-word;
+}
 .task-solution>div.output-details-tab .code-errors{
     border-bottom: 1px solid #744040;
 }

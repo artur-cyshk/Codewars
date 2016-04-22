@@ -38,9 +38,9 @@
                                     <span class="error-field" ng-if="!test.params.length"> NO </span>
                                 </span>
                                 expected:
-                                <span ng-class="test.pass ? 'success-field' : 'error-field'">{{test.expected | testOutputFilter }}</span>,
+                                <span class="breakWord" ng-class="test.pass ? 'success-field' : 'error-field'">{{test.expected | testOutputFilter }}</span>,
                                 {{test.pass ? 'and' : 'instead'}} got:
-                                <span ng-class="test.pass ? 'success-field' : 'error-field'">{{test.result | testOutputFilter }}</span>
+                                <span class="breakWord" ng-class="test.pass ? 'success-field' : 'error-field'">{{test.result | testOutputFilter }}</span>
                             </div>
                         </div>
                     </div>
