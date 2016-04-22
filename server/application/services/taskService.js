@@ -1,10 +1,26 @@
 var _ = require('lodash');
+
 module.exports = {
-    validate : function(model) {
-            var errors = {};
-            if( !_.isObject(model) ){
-                return true;
+    isEmptyResults : function(obj) {
+        return _.isEmpty(
+            _.filter(obj, function(item) {
+                return item.result || !_.isEmpty(item.variables);
+            })
+        )
+    },
+    jsonErrorParse : function(value) {
+        try{
+            if(value !== 'undefined') {
+                JSON.parse(value);
             }
+            return false;
+        }catch(e){
+            return true;
+        }
+    },
+    validate : function(model) {
+            var errors = {},
+                self = this;
             errors.name = !model.name;
             errors.language = !model.language || !model.language.name;
             errors.entryPoint = !model.entryPoint;
@@ -12,21 +28,25 @@ module.exports = {
             errors.tests = {};
             errors.tests.length = (!model.tests || model.tests.length < 5);
             errors.tests.results = [];
-            if(_.isObject(model.tests)) {
-                errors.tests.results = _.map(model.tests, function(item, index) {
-                    if(!item.result){
-                        return index;
-                    }
+            if(model.tests && !errors.tests.length) {
+                errors.tests.results = _.map(model.tests, function(item) {
+                    var testIndex = {};
+                    testIndex.result = (item.result == undefined);
+
+                    testIndex.variables = _.filter(
+                        _.map(item.variables, function (variable, index) {
+                            return (self.jsonErrorParse(variable.value)) ? index : undefined;
+                        }),
+                        function(item) {
+                            return item != undefined;
+                        }
+                    );
+                    testIndex.result = self.jsonErrorParse(item.result);
+                    return testIndex;
                 });
-                errors.tests.results = _.filter(errors.tests.results, function(item) {
-                    return item != undefined;
-                });
-            }else{
-                return true;
             }
             errors.description = !model.description;
-           
-            return (!errors.name && !errors.entryPoint && !errors.language && !errors.tests.length && _.isEmpty(errors.tests.results) && !errors.types && !errors.description);
+            return (!errors.name && !errors.entryPoint && !errors.language && !errors.tests.length && self.isEmptyResults(errors.tests.results) && !errors.types && !errors.description);
         },
     getTaskObject : function (task, userId) {
         var taskObject = {
