@@ -55,8 +55,9 @@
 .root .menu .sign{
     display: inline-block;
     width: 50px;
+    white-space: nowrap;
     margin-top: 12px;
-    margin-right: 12px;
+    margin-right: 18px;
     color: #FFFFFF;
     float: right;
     font-size: 16px;
