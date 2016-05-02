@@ -6,7 +6,14 @@
 .home .welcome span.app{
     color:rgb(244, 104, 104);
 }
+.home .welcome .username-par{
+    vertical-align: middle;
+}
 .home .welcome .username{
+    max-width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
     text-transform: capitalize;
 }
 .home .logos p{
