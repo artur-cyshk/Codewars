@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
     }
     async.waterfall([
         function(callback){
-            commentObject = {
+            var commentObject = {
                 'user_id' : req.session.userId,
                 'task_id' : req.body.task,
                 'comment' : req.body.comment,
