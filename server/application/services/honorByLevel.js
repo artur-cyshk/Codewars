@@ -1,5 +1,5 @@
 module.exports = {
     getHonor : function (level) {
-        return 10 * level;
+        return 10 * (level || 0);
     }
 };

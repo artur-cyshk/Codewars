@@ -2,17 +2,16 @@ var adminService,
 	changeProfileService,
 	managementTaskService,
 	leadersService,
-	httpMock;
+	taskSolutionService;
 
 beforeEach(function () {
 	module('codewars');
-	inject(function ($injector,$httpBackend) {
+	inject(function ($injector) {
 		adminService = $injector.get('adminService');
 		changeProfileService = $injector.get('changeProfileService');
 		managementTaskService = $injector.get('managementTaskService');
 		leadersService = $injector.get('leadersService');
-		httpMock = $httpBackend;
-
+		taskSolutionService = $injector.get('taskSolutionService');
 	});
 
 });
@@ -222,20 +221,14 @@ describe("managementTaskService.validate errors", function () {
 	});
 });
 
-//todo
-describe('cDashboard', function(){
-	it("should get 'pig' from '/data'", function () {
-		httpMock.whenGET("/leaders/0").respond([{name:'artur', clan:'bsuir', honor:'11',avatarUrl : 'test'}]);
-		leadersService.getLeaders(0)
-			.success(function (err, data) {
-				expect(data).toEqual({name:'arturlkoadkoad', clan:'bsuir', honor:'11',avatarUrl : 'test'});
-				httpMock.flush();
-			})
-			.error(function (err, data) {
-				httpMock.flush();
-				console.log(err,data);
-			});
+describe("taskSolutionService.getFunctionText", function () {
+	it('sum function name', function(){
+		expect(taskSolutionService.getSolutionEntryText('sum')).toEqual('function sum() {\n\t\n}');
+	});
+	it('getAllNames function name', function(){
+		expect(taskSolutionService.getSolutionEntryText('getAllNames')).toEqual('function getAllNames() {\n\t\n}');
+	});
+	it('getInfo function name', function(){
+		expect(taskSolutionService.getSolutionEntryText('getInfo')).toEqual('function getInfo() {\n\t\n}');
 	});
 });
-
-
