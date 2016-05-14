@@ -1,7 +1,6 @@
 var adminService,
 	changeProfileService,
 	managementTaskService,
-	leadersService,
 	taskSolutionService;
 
 beforeEach(function () {
@@ -10,7 +9,6 @@ beforeEach(function () {
 		adminService = $injector.get('adminService');
 		changeProfileService = $injector.get('changeProfileService');
 		managementTaskService = $injector.get('managementTaskService');
-		leadersService = $injector.get('leadersService');
 		taskSolutionService = $injector.get('taskSolutionService');
 	});
 

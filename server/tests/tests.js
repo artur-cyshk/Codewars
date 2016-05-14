@@ -57,14 +57,53 @@ describe('taskService.mapTypes', function() {
 
 });
 
+describe('taskService.mapTests', function() {
+    it('two tests with variables and result', function() {
+        expect(taskService.mapTests([
+            {
+                result : 1,
+                variables:[{"value" : 1}, {"value" : 2}]
+            },
+            {
+                result : 1,
+                variables:[{"value" : 1}, {"value" : 3}]
+            }
+        ], 2)).to.deep.equal( [
+            [2, '[{"value":1},{"value":2}]', 1],
+            [2, '[{"value":1},{"value":3}]', 1]
+        ] );
+    });
+    it('three tests with variables and result', function() {
+        expect(taskService.mapTests([
+            {
+                result : 22,
+                variables:[{"value" : 5}, {"value" : 7}]
+            },
+            {
+                result : 11,
+                variables:[{"value" : 13}, {"value" : 11}]
+            },
+            {
+                result : 15,
+                variables:[{"value" : 1}, {"value" : 11}]
+            }
+        ], 3)).to.deep.equal( [
+            [3, '[{"value":5},{"value":7}]', 22],
+            [3, '[{"value":13},{"value":11}]', 11],
+            [3, '[{"value":1},{"value":11}]', 15]
+        ] );
+    });
+
+});
+
 describe('tasksService.checkFilter', function() {
-    it('filter with sortBy, levels and types without authorized', function() {
+    it('filter with sortBy, levels and types without auhorized', function() {
         expect(tasksService.checkFilter(
             { sortBy: 'date',
                 sortOrder: 'Z-A',
                 group: 'all',
                 levels: [ 1, 2, 3, 5, 6, 7, 8, 'without level' ],
-                types: [ 'Algebra' ] 
+                types: [ 'Algebra' ]
             },
             undefined,
             undefined
