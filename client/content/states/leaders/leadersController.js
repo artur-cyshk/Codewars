@@ -1,4 +1,4 @@
-app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','leadersService','alertService', function($scope, $rootScope, levelsFactory, leadersService, alertService) {
+app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','leadersService','alertService','$document', function($scope, $rootScope, levelsFactory, leadersService, alertService, $document) {
     var self = this;
 
     self.setInfo = function(leaders, levels) {
@@ -51,12 +51,14 @@ app.controller('LeadersCtrl', [ '$scope', '$rootScope','levelsFactory','leadersS
         $scope.levels = levelsFactory.levelObjectMapping();
     };
 
+    $document.bind('scroll', function(){
+        if(angular.element(window).scrollTop() + angular.element(window).height() == angular.element(document).height() && $scope.moreUsers) {
+            self.getLeadersHandler();
+        }
+    });
+
     $scope.checkYourself = function(currentName, nameInTop) {
         return currentName == nameInTop;
-    };
-
-    $scope.loadMoreUsers = function() {
-        self.getLeadersHandler();
     };
 
     self.init();

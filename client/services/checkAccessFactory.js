@@ -1,6 +1,6 @@
 app.factory('checkAccessFactory', function($rootScope, $state, $http, alertService) {
     var self = this;
-    self.loginStateFormating = function(toState, fromState, fromParams, logout) {
+    self.loginStateFormating = function(toState, fromState, fromParams) {
 
         var requireMemory = (
             !fromState.abstract && fromState.name != 'root.registration'
